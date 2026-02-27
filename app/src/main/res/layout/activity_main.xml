@@ -18,12 +18,12 @@
 
 
     <Button
-        android:text="Goober! :D"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="128dp"
         android:height="40dp"
+        android:text="The fitness gram pacer test is a multi-stage areobic capacity test that progressively gets more difficult as it continues."
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="ExtraText"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="494dp"/>
+        tools:layout_editor_absoluteX="91dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
