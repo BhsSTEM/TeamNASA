@@ -11,11 +11,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="-256dp"
         android:width="128dp"
         android:height="40dp"
         android:text="Log"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="ExtraText"
-        tools:layout_editor_absoluteX="141dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ExtraText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
