@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".Login_Page_V2_Fresh">
 
+    <!-- Login Button -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
         app:layout_constraintVertical_bias="0.548"
         tools:ignore="ExtraText" />
 
+    <!-- Forgot Password Button -->
     <Button
         android:id="@+id/button"
         android:layout_width="194dp"
@@ -39,6 +41,7 @@
         app:layout_constraintVertical_bias="0.608"
         tools:ignore="ExtraText" />
 
+    <!-- Register Button -->
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -55,6 +58,7 @@
         app:layout_constraintVertical_bias="0.548"
         tools:ignore="ExtraText" />
 
+    <!-- Title Text -->
     <EditText
         android:id="@+id/editTextText"
         android:layout_width="wrap_content"
@@ -71,6 +75,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.059" />
 
+    <!-- Username Title Text -->
     <EditText
         android:id="@+id/editTextText2"
         android:layout_width="wrap_content"
@@ -87,6 +92,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.338" />
 
+    <!-- Password Title Text -->
     <EditText
         android:id="@+id/editTextText3"
         android:layout_width="wrap_content"
@@ -103,6 +109,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.513" />
 
+    <!-- Password Text Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="329dp"
@@ -113,6 +120,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.602" />
 
+    <!-- Username Text Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="321dp"
         android:layout_height="52dp"
