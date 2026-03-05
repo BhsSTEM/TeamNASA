@@ -16,7 +16,7 @@
             android:exported="false" />
         <activity
             android:name=".Login_Page_V2_Fresh"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
