@@ -10,6 +10,7 @@
     <!-- Title text -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Login_Page_V2_Fresh"
@@ -125,14 +126,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register Account"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="127dp"
+            tools:layout_editor_absoluteY="597dp" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register Account"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="581dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
