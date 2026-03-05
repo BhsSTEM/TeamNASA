@@ -1,6 +1,7 @@
 package com.example.nasa_taskmaster;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +21,9 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void opRegPg(View view) {
+        System.out.println("Hello World");
     }
 }
