@@ -8,16 +8,6 @@
     tools:context=".HomeScreen">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/TaskFragmentConainterView"
-        android:name="com.example.nasa_taskmaster.TaskFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/NavigationFragmentView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/NavigationFragmentView"
         android:name="com.example.nasa_taskmaster.NavigationBar"
         android:layout_width="wrap_content"
@@ -35,6 +25,61 @@
         android:text="Add Task"
         app:layout_constraintBottom_toTopOf="@+id/NavigationFragmentView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/accordianLayout"
+        android:layout_width="414dp"
+        android:layout_height="301dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/addTaskbtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TaskFragmentConainterView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/TaskFragmentConainterView"
+            android:name="com.example.nasa_taskmaster.TaskFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/TaskFragmentConainterView2"
+            android:name="com.example.nasa_taskmaster.TaskFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/TaskFragmentContainer3"
+            android:name="com.example.nasa_taskmaster.TaskFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/accordian1Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="View"
+        app:layout_constraintBottom_toTopOf="@+id/accordianLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/accordianText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="My Tasks"
+        app:layout_constraintBottom_toTopOf="@+id/accordianLayout"
+        app:layout_constraintEnd_toStartOf="@+id/accordian1Btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

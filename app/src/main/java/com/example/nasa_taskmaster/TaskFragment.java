@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,26 @@ public class TaskFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_task, container, false);
+
+        View view =  inflater.inflate(R.layout.fragment_task, container, false);
+        // Get reference to the TextView using the inflated view
+       TextView textView = view.findViewById(R.id.taskNameView);
+
+        // Set the text
+        if(task != null) {
+            textView.setText(task.getTaskName());
+        }else{
+            textView.setText("No task assigned");
+        }
+
+        // Return the inflated view
+        return view;
     }
 }
