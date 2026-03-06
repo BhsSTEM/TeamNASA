@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
         <activity
+            android:name=".AddNewEquipment"
+            android:exported="false" />
+        <activity
             android:name=".EquipmentMainActivity"
             android:exported="true" />
         <activity
