@@ -20,7 +20,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
-    ArrayList<Task> taskArray = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,8 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         if (savedInstanceState == null) {
-            taskArray = getIntent().getParcelableArrayListExtra("SAVED_TASK");
+
+            ArrayList<Task> taskArray = new ArrayList<>();
             String taskName = getIntent().getStringExtra("NEW_TASK_NAME");
             String taskDescript = getIntent().getStringExtra("NEW_TASK_DESCRIPTION");
             String taskLocation = getIntent().getStringExtra("NEW_TASK_LOCATION");
@@ -37,10 +38,10 @@ public class HomeScreen extends AppCompatActivity {
             for(int i = 0; i < 3; i++) {
 
 
-                if (taskName != null && taskDescript != null && taskLocation != null) {
-                    Log.d("ADDTASK","" + (taskArray[i]  == null ) );
-                    if(taskArray[i] == null && !addedTask ){
-                        taskArray[i] = task;
+                if (taskName != null && taskDescript != null && taskLocation != null && taskArray != null) {
+                    Log.d("ADDTASK","" + (taskArray.get(i)  == null ) );
+                    if(taskArray.get(i) == null && !addedTask ){
+                        taskArray.add(task);
                         addedTask =  true;
                     }
                     addFrag(i,task);
@@ -58,8 +59,7 @@ public class HomeScreen extends AppCompatActivity {
         addTaskBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                SharedPreferences preferences =
-                        getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
 
                 Intent intent = new Intent(HomeScreen.this, AddTaskScreen.class);
                 startActivity(intent);

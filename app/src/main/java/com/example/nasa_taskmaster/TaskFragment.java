@@ -1,5 +1,6 @@
 package com.example.nasa_taskmaster;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -62,6 +64,8 @@ public class TaskFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
     }
 
     @Override
@@ -72,6 +76,18 @@ public class TaskFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_task, container, false);
         // Get reference to the TextView using the inflated view
        TextView textView = view.findViewById(R.id.taskNameView);
+        Button viewMoreButton =view.findViewById(R.id.ViewMoreButton);
+
+        viewMoreButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+
+                Intent intent = new Intent(TaskDetailScreen.class);
+                startActivity(intent);
+            }
+
+        });
 
         // Set the text
         if(task != null) {

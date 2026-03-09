@@ -35,6 +35,9 @@ public class AddTaskScreen extends AppCompatActivity {
                 intent.putExtra("NEW_TASK_NAME", newTaskName.getText().toString());
                 intent.putExtra("NEW_TASK_DESCRIPTION", newTaskDescription.getText().toString());
                 intent.putExtra("NEW_TASK_LOCATION", newTaskLocation.getText().toString());
+                Task newTask = new Task(newTaskName.getText().toString(),
+                        newTaskDescription.getText().toString(),
+                        newTaskLocation.getText().toString());
                 startActivity(intent);
             }
 

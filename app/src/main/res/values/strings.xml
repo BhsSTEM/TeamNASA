@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">NASA - Task Master</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="task_name"> Task placeholder</string>
+    <string name="task_name">ADD Name</string>
+    <string name="task_description" translatable="false">ADD Description</string>
+    <string name="task_loaction"> ADD Location</string>
+
 </resources>
