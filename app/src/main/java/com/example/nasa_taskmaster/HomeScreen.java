@@ -1,6 +1,7 @@
 package com.example.nasa_taskmaster;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +16,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class HomeScreen extends AppCompatActivity {
-    boolean[] taskArray = new boolean[3];
+    ArrayList<Task> taskArray = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,7 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         if (savedInstanceState == null) {
+            taskArray = getIntent().getParcelableArrayListExtra("SAVED_TASK");
             String taskName = getIntent().getStringExtra("NEW_TASK_NAME");
             String taskDescript = getIntent().getStringExtra("NEW_TASK_DESCRIPTION");
             String taskLocation = getIntent().getStringExtra("NEW_TASK_LOCATION");
@@ -33,23 +38,15 @@ public class HomeScreen extends AppCompatActivity {
 
 
                 if (taskName != null && taskDescript != null && taskLocation != null) {
-                    Log.d("ADDTASK","" + (taskArray[i]) );
-                    if(!taskArray[i] && !addedTask ){
-                        addFrag(i,task);
-                        taskArray[i] = true;
+                    Log.d("ADDTASK","" + (taskArray[i]  == null ) );
+                    if(taskArray[i] == null && !addedTask ){
+                        taskArray[i] = task;
                         addedTask =  true;
-                    }else{
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.TaskFragmentConainterView, new TaskFragment())
-                                .commit();
                     }
+                    addFrag(i,task);
 
                 } else {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.TaskFragmentConainterView, new TaskFragment())
-                            .commit();
+                    addFrag(i,task);
                 }
             }
         }
@@ -61,6 +58,9 @@ public class HomeScreen extends AppCompatActivity {
         addTaskBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                SharedPreferences preferences =
+                        getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
                 Intent intent = new Intent(HomeScreen.this, AddTaskScreen.class);
                 startActivity(intent);
             }
@@ -93,6 +93,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private void addFrag(int index, Task task){
         Log.d("ADDFRAG", "" + index);
+
 
         TaskFragment fragment = new TaskFragment();
         fragment.setTask(task);
