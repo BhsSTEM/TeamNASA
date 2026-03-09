@@ -30,6 +30,7 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            mAuth = FirebaseAuth.getInstance(); // ← This line is the fix
             return insets;
         });
     }
@@ -38,9 +39,19 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            currentUser.reload();
+        ///
+        if (mAuth.getCurrentUser() != null) {
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+            currentUser.reload().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    // User data refreshed successfully
+                    // Put any logic that depends on the refreshed user here
+                } else {
+                    // Handle failure (e.g., user no longer exists, no network)
+                    Log.e("Auth", "reload failed: ", task.getException());
+                }
+            });
         }
     }
     private void createAccount(String email, String password) {
