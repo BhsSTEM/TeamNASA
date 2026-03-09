@@ -34,7 +34,7 @@ public class Equipment {
         return year;
     }
 
-    public void setYear(int year) {
+       public void setYear(int year) {
         this.year = year;
     }
 
@@ -56,7 +56,7 @@ public class Equipment {
 
     @Override
     public String toString() {
-        return name; // This tells the dropdown to display the name field
+        return name;
     }
 
 }

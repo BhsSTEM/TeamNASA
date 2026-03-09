@@ -9,6 +9,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.ArrayList;
 
 public class AddNewEquipment extends AppCompatActivity {
@@ -27,19 +29,26 @@ public class AddNewEquipment extends AppCompatActivity {
         findViewById(R.id.addNewEquipmentButton).setOnClickListener(v -> {
 
             String equipmentName = null;
-            if (!((com.google.android.material.textfield.TextInputEditText) findViewById(R.id.equipmentNameInputBox)).getText().toString().isEmpty()) {
-                equipmentName = ((com.google.android.material.textfield.TextInputEditText) findViewById(R.id.equipmentNameInputBox)).getText().toString();
+            TextInputEditText equipmentNameInput = findViewById(R.id.equipmentNameInputBoxBox);
+            if (!(equipmentNameInput).getText().toString().isEmpty()) {
+                equipmentName = equipmentNameInput.getText().toString().trim();
+                System.out.println("name worked");
             }
 
             String equipmentYear = null;
-            if (!((com.google.android.material.textfield.TextInputEditText) findViewById(R.id.equipmentYearInputBoxtextInputLayout)).getText().toString().isEmpty()) {
-                equipmentYear = ((com.google.android.material.textfield.TextInputEditText) findViewById(R.id.equipmentYearInputBoxtextInputLayout)).getText().toString();
+            TextInputEditText equipmentYearInput = findViewById(R.id.equipmentYearInputBoxBox);
+            if (!(equipmentYearInput).getText().toString().isEmpty()) {
+                equipmentYear = equipmentYearInput.getText().toString().trim();
+                System.out.println("year worked");
             }
 
             Equipment equipment = new Equipment(equipmentName, Integer.parseInt(equipmentYear));
 
             EquipmentMainActivity equipmentMainActivity = new EquipmentMainActivity();
+
             ArrayList<Equipment> equipmentList = equipmentMainActivity.getEquipmentList();
+
+            //adding new item
             equipmentList.add(equipment);
             equipmentMainActivity.setEquipmentList(equipmentList);
 

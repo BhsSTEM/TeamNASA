@@ -2,21 +2,20 @@ package com.example.nasa_taskmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class EquipmentMainActivity extends AppCompatActivity {
 
-    private ArrayList<Equipment> equipmentList = new ArrayList<>();;
+    private static ArrayList<Equipment> equipmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,8 @@ public class EquipmentMainActivity extends AppCompatActivity {
         equipmentList.add(new Equipment("3D Printer", 2021, "Maintenance", "FDM Printer"));
         equipmentList.add(new Equipment("Oscilloscope", 2024, "New", "Digital Storage"));
 
-        //Code for Equipment dropdown
-        AutoCompleteTextView equipmentDropdown = findViewById(R.id.categoryDropdown);
+        //Code for Equipment dropdown - this will be for filters
+        /**AutoCompleteTextView equipmentDropdown = findViewById(R.id.categoryDropdown);
 
         ArrayAdapter<Equipment> adapter = new ArrayAdapter<>(
                 this,
@@ -49,16 +48,32 @@ public class EquipmentMainActivity extends AppCompatActivity {
         equipmentDropdown.setOnItemClickListener((parent, view, position, id) -> {
             String selected = parent.getItemAtPosition(position).toString();
             Toast.makeText(this, "Selected: " + selected, Toast.LENGTH_SHORT).show();
-        });
+        });*/
 
         //Clicking Add Equipment Button
         findViewById(R.id.addNewEquipmentButtonOnEquipmentPage).setOnClickListener(v -> {
             Intent intent = new Intent(this, AddNewEquipment.class);
             startActivity(intent);
         });
+
+        //recyclerView - scrollable list of equipment
+        RecyclerView recyclerView = findViewById(R.id.equipmentRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Adapter adapter = new Adapter(equipmentList, this);
+        recyclerView.setAdapter(adapter);
+
+
     }
 
     public ArrayList<Equipment> getEquipmentList() {
+
+        /**System.out.println("This is from the EquipmentMainActivity Start");
+
+        for (int i = 0; i < equipmentList.size(); i++) {
+            System.out.println(equipmentList.get(i).getName());
+        }
+        System.out.println("This is from the EquipmentMainActivity End");*/
+
         return equipmentList;
     }
 
