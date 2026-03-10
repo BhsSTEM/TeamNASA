@@ -22,8 +22,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
-    private static  ArrayList<TaskFragment> taskFragments =new ArrayList<>();
-    private static  ArrayList<TaskFragment> dataList =new ArrayList<>();
+    private static  ArrayList<Task> taskFragments =new ArrayList<>();
+    private static  ArrayList<Task> dataList =new ArrayList<>();
 
     private  RecyclerView accordian;
     private HomeScreenAdapter adapter;
@@ -88,9 +88,7 @@ public class HomeScreen extends AppCompatActivity {
 
     public static void addTasktoList(Task task){
         Log.d("TASK LIST BEFORE","" +  taskFragments.size());
-        TaskFragment taskFrag = new TaskFragment();
-        taskFrag.setTask(task);
-        taskFragments.add(taskFrag);
+        taskFragments.add(task);
         Log.d("TASK LIST AFTER","" + taskFragments.size());
     }
 
