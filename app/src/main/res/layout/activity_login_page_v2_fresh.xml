@@ -56,7 +56,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.548"
-        tools:ignore="ExtraText" />
+        tools:ignore="ExtraText,OnClick"
+        android:onClick="bringToRegistry" />
 
     <!-- Title Text -->
 

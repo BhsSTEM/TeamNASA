@@ -2,6 +2,7 @@ package com.example.nasa_taskmaster;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -81,5 +82,9 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
 
+    }
+    public void bringToRegistry() {
+        Intent intent = new Intent(Login_Page_V2_Fresh.this, RegisterAccountPage.class);
+        startActivity(intent);
     }
     }
