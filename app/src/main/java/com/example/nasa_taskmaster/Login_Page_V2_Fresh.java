@@ -24,13 +24,14 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance(); // ← This line is the fix
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page_v2_fresh);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            mAuth = FirebaseAuth.getInstance(); // ← This line is the fix
+
             return insets;
         });
     }
