@@ -32,17 +32,26 @@ public class AddNewEquipment extends AppCompatActivity {
             TextInputEditText equipmentNameInput = findViewById(R.id.equipmentNameInputBoxBox);
             if (!(equipmentNameInput).getText().toString().isEmpty()) {
                 equipmentName = equipmentNameInput.getText().toString().trim();
-                System.out.println("name worked");
+                //System.out.println("name worked");
             }
 
+            //ADD CODE FOR INPUT VALIDATION SO USERS CAN ONLY PUT IN NORMAL YEAR
             String equipmentYear = null;
             TextInputEditText equipmentYearInput = findViewById(R.id.equipmentYearInputBoxBox);
             if (!(equipmentYearInput).getText().toString().isEmpty()) {
                 equipmentYear = equipmentYearInput.getText().toString().trim();
-                System.out.println("year worked");
+                //System.out.println("year worked");
             }
 
-            Equipment equipment = new Equipment(equipmentName, Integer.parseInt(equipmentYear));
+
+            String status = null;
+            TextInputEditText statusInput = findViewById(R.id.equipmentStatusInputBoxBox);
+            if (!(statusInput).getText().toString().isEmpty()) {
+                status = statusInput.getText().toString().trim();
+                //System.out.println("status worked");
+            }
+
+            Equipment equipment = new Equipment(equipmentName, Integer.parseInt(equipmentYear), status);
 
             EquipmentMainActivity equipmentMainActivity = new EquipmentMainActivity();
 

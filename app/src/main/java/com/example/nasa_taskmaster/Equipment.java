@@ -14,10 +14,10 @@ public class Equipment {
     }
 
     //will remove later js to test how input works
-    public Equipment(String name, int year) {
+    public Equipment(String name, int year, String status) {
         this.name = name;
         this.year = year;
-        this.status = "Available";
+        this.status = status;
         this.description = "No Description";
     }
 
