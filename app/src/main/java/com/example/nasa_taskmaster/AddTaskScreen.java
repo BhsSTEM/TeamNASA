@@ -38,6 +38,7 @@ public class AddTaskScreen extends AppCompatActivity {
                 Task newTask = new Task(newTaskName.getText().toString(),
                         newTaskDescription.getText().toString(),
                         newTaskLocation.getText().toString());
+                HomeScreen.addTasktoList(newTask);
                 startActivity(intent);
             }
 

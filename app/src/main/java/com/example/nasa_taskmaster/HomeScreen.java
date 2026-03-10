@@ -15,12 +15,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
+    private static  ArrayList<TaskFragment> taskFragments =new ArrayList<>();
+    private static  ArrayList<TaskFragment> dataList =new ArrayList<>();
 
+    private  RecyclerView accordian;
+    private HomeScreenAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,38 +35,27 @@ public class HomeScreen extends AppCompatActivity {
 
         if (savedInstanceState == null) {
 
-            ArrayList<Task> taskArray = new ArrayList<>();
             String taskName = getIntent().getStringExtra("NEW_TASK_NAME");
             String taskDescript = getIntent().getStringExtra("NEW_TASK_DESCRIPTION");
             String taskLocation = getIntent().getStringExtra("NEW_TASK_LOCATION");
-            Task task = new Task(taskName, taskDescript, taskLocation);
             boolean addedTask = false;
-            for(int i = 0; i < 3; i++) {
-
-
-                if (taskName != null && taskDescript != null && taskLocation != null && taskArray != null) {
-                    Log.d("ADDTASK","" + (taskArray.get(i)  == null ) );
-                    if(taskArray.get(i) == null && !addedTask ){
-                        taskArray.add(task);
-                        addedTask =  true;
-                    }
-                    addFrag(i,task);
-
-                } else {
-                    addFrag(i,task);
-                }
-            }
         }
+
+
 
 
         Button addTaskBtn = findViewById(R.id.addTaskbtn);
         Button accordian1Btn = findViewById(R.id.accordian1Btn);
+        accordian = findViewById(R.id.accordianLayout);
+        accordian.setLayoutManager(new LinearLayoutManager(this));
+        dataList = taskFragments;
+        adapter = new HomeScreenAdapter(dataList);
+        accordian.setAdapter(adapter);
+
 
         addTaskBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
-
                 Intent intent = new Intent(HomeScreen.this, AddTaskScreen.class);
                 startActivity(intent);
             }
@@ -91,27 +86,12 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    private void addFrag(int index, Task task){
-        Log.d("ADDFRAG", "" + index);
-
-
-        TaskFragment fragment = new TaskFragment();
-        fragment.setTask(task);
-        if(index == 0) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.TaskFragmentConainterView, fragment)
-                    .commit();
-        }else if(index == 1) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.TaskFragmentConainterView2, fragment)
-                    .commit();
-        }else{
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.TaskFragmentContainer3, fragment)
-                        .commit();
-        }
+    public static void addTasktoList(Task task){
+        Log.d("TASK LIST BEFORE","" +  taskFragments.size());
+        TaskFragment taskFrag = new TaskFragment();
+        taskFrag.setTask(task);
+        taskFragments.add(taskFrag);
+        Log.d("TASK LIST AFTER","" + taskFragments.size());
     }
+
 }
