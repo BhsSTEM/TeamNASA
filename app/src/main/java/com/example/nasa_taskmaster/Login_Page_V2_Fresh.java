@@ -83,8 +83,8 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
 
     }
-    public void bringToRegistry() {
-        Intent intent = new Intent(Login_Page_V2_Fresh.this, RegisterAccountPage.class);
+    public void bringToRegistry(View view) {
+        Intent intent = new Intent(this, RegisterAccountPage.class);
         startActivity(intent);
     }
     }
