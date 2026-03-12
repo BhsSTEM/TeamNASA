@@ -92,9 +92,10 @@ public class TaskFragment extends Fragment {
         viewMoreButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d("VIew More", "works");
+                Log.d("View More", "works");
                 Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
                 intent.putExtra("TaskInfo", task.getTaskInfo());
+                intent.putExtra("TaskName", task.getTaskName());
                 startActivity(intent);
             }
 

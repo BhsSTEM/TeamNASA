@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.time.LocalDate;
+
 public class AddTaskScreen extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,7 @@ public class AddTaskScreen extends AppCompatActivity {
         EditText newTaskName = findViewById(R.id.taskName);
         EditText newTaskDescription = findViewById(R.id.taskName);
         EditText newTaskLocation = findViewById(R.id.taskName);
+        EditText dueDate = findViewById(R.id.dueDateView);
 
         addTaskbtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -38,10 +41,31 @@ public class AddTaskScreen extends AppCompatActivity {
                 intent.putExtra("NEW_TASK_LOCATION", newTaskLocation.getText().toString());
 
                  */
+
+
                 Intent intent = new Intent(AddTaskScreen.this, HomeScreen.class);
-                Task newTask = new Task(newTaskName.getText().toString(),
-                        newTaskDescription.getText().toString(),
-                        newTaskLocation.getText().toString());
+                String  taskName = newTaskName.getText().toString();
+                String  taskDescription = newTaskDescription.getText().toString();
+                String  taskLocation = newTaskLocation.getText().toString();
+                String  taskDeadLine = dueDate.getText().toString();
+                LocalDate localDate = LocalDate.now();
+                String  taskstartDate = "";
+                int dayNum = localDate.getDayOfMonth();
+                if(dayNum%10 == 1 && dayNum != 11 ){
+                    taskstartDate ="" +  localDate.getMonth() + " " +dayNum + "st, " + localDate.getYear() ;
+                }else if(dayNum%10  == 2 && dayNum != 12){
+                    taskstartDate ="" +  localDate.getMonth() + " " +dayNum + "nd, " + localDate.getYear() ;
+                }else if(dayNum%10  == 3 && dayNum != 13){
+                    taskstartDate ="" +  localDate.getMonth() + " " +dayNum+ "rd, " + localDate.getYear() ;
+                }else{
+                    taskstartDate ="" +  localDate.getMonth() + " " +dayNum+ "th, " + localDate.getYear() ;
+                }
+                Task newTask = new Task(taskName,
+                        taskDescription,
+                        "User 1",
+                        taskLocation,
+                        taskDeadLine,
+                        taskstartDate);
                 HomeScreen.addTasktoList(newTask);
 
                 startActivity(intent);

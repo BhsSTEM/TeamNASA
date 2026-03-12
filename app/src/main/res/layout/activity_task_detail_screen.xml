@@ -24,7 +24,11 @@
     <TextView
         android:id="@+id/taskView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginBottom="128dp"
+        android:scaleX="1"
+        android:scaleY="1"
         android:text="Task Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

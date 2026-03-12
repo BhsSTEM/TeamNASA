@@ -1,7 +1,9 @@
 package com.example.nasa_taskmaster;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +27,13 @@ public class taskMoreAdapter extends RecyclerView.Adapter<taskMoreAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView taskName;
+        public Button viewMoreBtn;
 
 
         public MyViewHolder(View itemView){
             super(itemView);
             taskName = itemView.findViewById(R.id.taskNameView);
+            viewMoreBtn = itemView.findViewById(R.id.ViewMoreButton);
         }
     }
 
@@ -37,13 +41,23 @@ public class taskMoreAdapter extends RecyclerView.Adapter<taskMoreAdapter.MyView
     @Override
     public taskMoreAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_task, parent, false);
-        return new MyViewHolder(itemView);
+        return new taskMoreAdapter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull taskMoreAdapter.MyViewHolder holder, int position) {
         TaskFragment taskItem = taskFragmentList.get(position);
-        taskItem.setTask(TestTaskData.testTask1);
+        holder.taskName.setText(taskItem.getTask().getTaskName());
+        holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("VIew More", "works");
+                Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
+                intent.putExtra("TaskInfo", taskItem.getTask().getTaskInfo());
+                v.getContext().startActivity(intent);
+            }
+        });
+        Log.d("TaskFrag pos", "" + position);
     }
 
     @Override

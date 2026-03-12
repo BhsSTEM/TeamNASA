@@ -21,9 +21,12 @@ public class TaskDetailScreen extends AppCompatActivity {
         setContentView(R.layout.activity_task_detail_screen);
 
         TextView taskText = findViewById(R.id.taskView);
+        TextView taskHEader = findViewById(R.id.taskHeader);
         String taskInfo = getIntent().getStringExtra("TaskInfo");
+        String taskName = getIntent().getStringExtra("TaskName");
         if(taskInfo != null){
             taskText.setText(taskInfo);
+            taskHEader.setText(taskName);
         }
         Button homeBtn = findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(new View.OnClickListener() {
