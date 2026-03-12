@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#40B0B0B0"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/SettingsButton"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:contentDescription="Settings Button"
+        android:src="@drawable/settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/HomeButton"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/HomeButton"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:contentDescription="Home Button"
+        android:filterTouchesWhenObscured="true"
+        android:orientation="horizontal"
+        android:src="@drawable/home"
+        app:iconPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/EquipmentButton"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/SettingsButton" />
+
+    <ImageButton
+        android:id="@+id/EquipmentButton"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:contentDescription="settings button"
+        android:src="@android:drawable/ic_menu_manage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/MapButton"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/HomeButton"
+        app:tint="#000000" />
+
+    <ImageButton
+        android:id="@+id/MapButton"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:contentDescription="map"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/EquipmentButton"
+        app:tint="#000000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
