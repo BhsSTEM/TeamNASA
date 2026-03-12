@@ -30,15 +30,20 @@ public class AddTaskScreen extends AppCompatActivity {
         addTaskbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                /*
                 Log.d("DEBUG_ADD_TASK_BTN", "button works" );
                 Intent intent = new Intent(AddTaskScreen.this, HomeScreen.class);
                 intent.putExtra("NEW_TASK_NAME", newTaskName.getText().toString());
                 intent.putExtra("NEW_TASK_DESCRIPTION", newTaskDescription.getText().toString());
                 intent.putExtra("NEW_TASK_LOCATION", newTaskLocation.getText().toString());
+
+                 */
+                Intent intent = new Intent(AddTaskScreen.this, HomeScreen.class);
                 Task newTask = new Task(newTaskName.getText().toString(),
                         newTaskDescription.getText().toString(),
                         newTaskLocation.getText().toString());
                 HomeScreen.addTasktoList(newTask);
+
                 startActivity(intent);
             }
 

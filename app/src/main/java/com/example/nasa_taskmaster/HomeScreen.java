@@ -22,8 +22,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
-    private static  ArrayList<Task> taskFragments =new ArrayList<>();
-    private static  ArrayList<Task> dataList =new ArrayList<>();
+    public static  ArrayList<TaskFragment> taskFragments = new ArrayList<>();
+    private static  ArrayList<TaskFragment> dataList = new ArrayList<>();
 
     private  RecyclerView accordian;
     private HomeScreenAdapter adapter;
@@ -33,12 +33,22 @@ public class HomeScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_screen);
 
-        if (savedInstanceState == null) {
 
+        if (savedInstanceState == null) {
+            /*
             String taskName = getIntent().getStringExtra("NEW_TASK_NAME");
             String taskDescript = getIntent().getStringExtra("NEW_TASK_DESCRIPTION");
             String taskLocation = getIntent().getStringExtra("NEW_TASK_LOCATION");
+            if(taskName != null &&
+                    taskDescript != null &&
+                    taskLocation != null){
+                TaskFragment newFrag = new TaskFragment();
+                newFrag.setTask(new Task(taskName, taskDescript, taskLocation));
+                taskFragments.add(newFrag);
+            }
             boolean addedTask = false;
+
+             */
         }
 
 
@@ -46,8 +56,10 @@ public class HomeScreen extends AppCompatActivity {
 
         Button addTaskBtn = findViewById(R.id.addTaskbtn);
         Button accordian1Btn = findViewById(R.id.accordian1Btn);
+        Log.d("WORKS at", "" + 65);
         accordian = findViewById(R.id.accordianLayout);
         accordian.setLayoutManager(new LinearLayoutManager(this));
+
         dataList = taskFragments;
         adapter = new HomeScreenAdapter(dataList);
         accordian.setAdapter(adapter);
@@ -65,12 +77,8 @@ public class HomeScreen extends AppCompatActivity {
         accordian1Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                LinearLayout accordian = findViewById(R.id.accordianLayout);
-                if(accordian.getVisibility() == View.VISIBLE){
-                    accordian.setVisibility(View.GONE);
-                }else{
-                    accordian.setVisibility(View.VISIBLE);
-                }
+                Intent intent = new Intent(HomeScreen.this, TaskMoreScreen.class);
+                startActivity(intent);
             }
 
         });
@@ -88,7 +96,9 @@ public class HomeScreen extends AppCompatActivity {
 
     public static void addTasktoList(Task task){
         Log.d("TASK LIST BEFORE","" +  taskFragments.size());
-        taskFragments.add(task);
+        TaskFragment newtask = new TaskFragment();
+        newtask.setTask(task);
+        taskFragments.add(newtask);
         Log.d("TASK LIST AFTER","" + taskFragments.size());
     }
 

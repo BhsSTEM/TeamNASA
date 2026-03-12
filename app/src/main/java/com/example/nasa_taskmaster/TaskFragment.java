@@ -40,8 +40,10 @@ public class TaskFragment extends Fragment {
 
     public void setTask(Task task){
         this.task = task;
-        TextView textView = screen.findViewById(R.id.taskNameView);
-        textView.setText(task.getTaskName());
+    }
+
+    public Task getTask(){
+        return task;
     }
 
 
@@ -90,8 +92,9 @@ public class TaskFragment extends Fragment {
         viewMoreButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
-                Intent intent = new Intent();
+                Log.d("VIew More", "works");
+                Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
+                intent.putExtra("TaskInfo", task.getTaskInfo());
                 startActivity(intent);
             }
 

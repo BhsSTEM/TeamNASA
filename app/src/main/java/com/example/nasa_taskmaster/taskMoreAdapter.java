@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,10 +24,12 @@ public class taskMoreAdapter extends RecyclerView.Adapter<taskMoreAdapter.MyView
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        public TaskFragment taskFrag;
+        public TextView taskName;
+
 
         public MyViewHolder(View itemView){
             super(itemView);
+            taskName = itemView.findViewById(R.id.taskNameView);
         }
     }
 
