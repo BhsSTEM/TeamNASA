@@ -49,6 +49,10 @@ public class HomeScreen extends AppCompatActivity {
             boolean addedTask = false;
 
              */
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.navigationBar4, new Navigation_Bar())
+                    .commit();
         }
 
 

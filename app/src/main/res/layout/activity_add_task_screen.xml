@@ -7,6 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".AddTaskScreen">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/topNavBar5"
+        android:name="com.example.nasa_taskmaster.TopNavBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_top_nav_bar" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationBar5"
+        android:name="com.example.nasa_taskmaster.Navigation_Bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_navigation__bar" />
+
     <EditText
         android:id="@+id/textlocation"
         android:layout_width="wrap_content"
@@ -25,7 +46,7 @@
         android:id="@+id/taskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="Enter Task Name"
         android:inputType="text"
@@ -50,14 +71,18 @@
 
     <Button
         android:id="@+id/addTaskBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="128dp"
         android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textlocation" />
+        app:layout_constraintTop_toBottomOf="@+id/textlocation"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/dueDateView"

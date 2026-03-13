@@ -21,6 +21,15 @@
             android:name=".AddTaskScreen"
             android:exported="false" />
         <activity
+            android:name=".EquipmentMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddNewEquipment"
+            android:exported="false" />
+        <activity
+            android:name=".EquipmentDetails"
+            android:exported="false" />
+        <activity
             android:name=".HomeScreen"
             android:exported="true">
             <intent-filter>
