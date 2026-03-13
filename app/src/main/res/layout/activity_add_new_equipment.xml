@@ -116,8 +116,7 @@
         android:layout_marginEnd="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/equipmentStatusLabel"
-        app:layout_constraintBottom_toTopOf="@id/imageView">
+        app:layout_constraintTop_toBottomOf="@id/equipmentStatusLabel">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/equipmentStatusInputBoxBox"
@@ -127,7 +126,7 @@
             tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Placeholder TextInput next to image -->
+    <!-- Placeholder TextInput next to image
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="151dp"
@@ -139,7 +138,19 @@
         app:layout_constraintBottom_toTopOf="@id/addNewEquipmentButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/equipmentStatusInputBox"
-        app:srcCompat="@android:drawable/ic_menu_crop" />
+        app:srcCompat="@android:drawable/ic_menu_crop" /> -->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/AddNewEquipmentMapFragment"
+        android:name="com.example.nasa_taskmaster.MapFragment"
+        android:layout_width="151dp"
+        android:layout_height="171dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/addNewEquipmentButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equipmentStatusInputBox" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/locationInputBox"
@@ -148,17 +159,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toEndOf="@id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageView"
-        app:layout_constraintBottom_toBottomOf="@id/imageView">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/locationInputBoxBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter location"
-            tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -170,5 +172,19 @@
         app:layout_constraintBottom_toTopOf="@id/navigationBar2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/locationInputBoxBox"
+        android:layout_width="178dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="26dp"
+        android:hint="Enter location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AddNewEquipmentMapFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

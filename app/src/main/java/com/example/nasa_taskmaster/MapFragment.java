@@ -44,8 +44,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
      * @return A new instance of fragment SupportMapFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SupportMapFragment newInstance(String param1, String param2) {
-        SupportMapFragment fragment = new SupportMapFragment();
+    public static MapFragment newInstance(String param1, String param2) {
+        MapFragment fragment = new MapFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,7 +74,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
             Log.d("MapFragment", "Map fragment is not null");
+            System.out.println("Map is not null and work");
         } else {
+            System.out.println("Map is null");
             Log.d("MapFragment", "Map fragment is null");
         }
 
