@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import android.widget.Button;
 import android.widget.Toast;
 
 public class Login_Page_V2_Fresh extends AppCompatActivity {
@@ -33,6 +35,14 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             //Wow
+            Button button2 = findViewById(R.id.button2);
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View ve) {
+                    Intent intent = new Intent(Login_Page_V2_Fresh.this, RegisterAccountPage.class);
+                    startActivity(intent);
+                }
+            });
             return insets;
         });
     }

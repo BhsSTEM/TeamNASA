@@ -56,8 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.548"
-        tools:ignore="ExtraText,OnClick"
-        android:onClick="bringToRegistry" />
+        tools:ignore="ExtraText,OnClick" />
 
     <!-- Title Text -->
 
@@ -67,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="ExampleUsername"
         android:inputType="text"
         android:minHeight="48dp"
         android:text=""
@@ -84,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="A safe password"
         android:inputType="text"
         android:minHeight="48dp"
         android:text=""
