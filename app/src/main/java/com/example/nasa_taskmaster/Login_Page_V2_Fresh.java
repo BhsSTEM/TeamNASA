@@ -27,22 +27,26 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance(); // ← This line is the fix
+        mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page_v2_fresh);
+
+        // Initialize button2 and set its click listener here
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View ve) {
+                Log.d("DEBUG", "Register button clicked!");
+                Toast.makeText(Login_Page_V2_Fresh.this, "Switching to Register Screen", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Login_Page_V2_Fresh.this, RegisterAccountPage.class);
+                startActivity(intent);
+            }
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            //Wow
-            Button button2 = findViewById(R.id.button2);
-            button2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View ve) {
-                    Intent intent = new Intent(Login_Page_V2_Fresh.this, RegisterAccountPage.class);
-                    startActivity(intent);
-                }
-            });
             return insets;
         });
     }
@@ -50,51 +54,43 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        ///
         if (mAuth.getCurrentUser() != null) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
 
             currentUser.reload().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     // User data refreshed successfully
-                    // Put any logic that depends on the refreshed user here
                 } else {
-                    // Handle failure (e.g., user no longer exists, no network)
                     Log.e("Auth", "reload failed: ", task.getException());
                 }
             });
         }
     }
+
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-        @Override
-        public void onComplete(@NonNull Task<AuthResult> task) {
-            if (task.isSuccessful()) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "createUserWithEmail:success");
-                FirebaseUser user = mAuth.getCurrentUser();
-                updateUI(user);
-            } else {
-                // If sign in fails, display a message to the user.
-                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                Toast.makeText(Login_Page_V2_Fresh.this, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show();
-                updateUI(null);
-            }
-        }
-    });
-
-
-
-}
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(Login_Page_V2_Fresh.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
 
     private void updateUI(FirebaseUser user) {
-
     }
+
     public void bringToRegistry(View view) {
         Intent intent = new Intent(this, RegisterAccountPage.class);
         startActivity(intent);
     }
-    }
+}
