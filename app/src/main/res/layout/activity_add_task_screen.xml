@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollIndicators="right"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
     tools:context=".AddTaskScreen">
 
     <androidx.fragment.app.FragmentContainerView
@@ -84,18 +86,29 @@
         app:layout_constraintTop_toBottomOf="@+id/textlocation"
         app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/dueDateView"
+    <Button
+        android:id="@+id/dueDateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Enter Due Date"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="64dp"
+        android:text="Set Due Date"
+        app:layout_constraintBottom_toTopOf="@+id/addTaskBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textlocation"
         app:layout_constraintVertical_bias="0.0" />
+
+    <CalendarView
+        android:id="@+id/calendarView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/addTaskBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dueDateBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

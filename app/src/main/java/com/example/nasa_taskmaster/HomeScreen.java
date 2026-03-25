@@ -53,6 +53,11 @@ public class HomeScreen extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.navigationBar4, new Navigation_Bar())
                     .commit();
+           /* getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.topNavBar6, new TopNavBar())
+                    .commit();
+
+            */
         }
 
 
@@ -60,6 +65,7 @@ public class HomeScreen extends AppCompatActivity {
 
         Button addTaskBtn = findViewById(R.id.addTaskbtn);
         Button accordian1Btn = findViewById(R.id.accordian1Btn);
+        Button calenderBtn = findViewById(R.id.calendarBtn);
         Log.d("WORKS at", "" + 65);
         accordian = findViewById(R.id.accordianLayout);
         accordian.setLayoutManager(new LinearLayoutManager(this));
@@ -87,6 +93,16 @@ public class HomeScreen extends AppCompatActivity {
 
         });
 
+        calenderBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(HomeScreen.this, CalenderScreen.class);
+                startActivity(intent);
+            }
+
+        });
+
+
 
 
 
@@ -104,6 +120,11 @@ public class HomeScreen extends AppCompatActivity {
         newtask.setTask(task);
         taskFragments.add(newtask);
         Log.d("TASK LIST AFTER","" + taskFragments.size());
+    }
+
+    public static ArrayList<TaskFragment> getTaskFragments(){
+        Log.d("TASK LIST AFTER","" + taskFragments.size());
+        return taskFragments;
     }
 
 }

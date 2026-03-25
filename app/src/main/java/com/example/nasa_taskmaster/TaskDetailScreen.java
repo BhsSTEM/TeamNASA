@@ -28,14 +28,7 @@ public class TaskDetailScreen extends AppCompatActivity {
             taskText.setText(taskInfo);
             taskHeader.setText(taskName);
         }
-        Button homeBtn = findViewById(R.id.homeBtn);
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TaskDetailScreen.this, HomeScreen.class );
-                startActivity(intent);
-            }
-        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

@@ -47,7 +47,7 @@
         android:id="@+id/accordian1Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="64dp"
         android:text="View All Tasks"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,11 +56,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/calendarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accordian1Btn"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/accordianText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="72dp"
         android:scaleX="2"
         android:scaleY="2"
         android:text="My Tasks"
@@ -75,12 +87,12 @@
         android:id="@+id/accordianLayout"
         android:layout_width="350dp"
         android:layout_height="400dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accordian1Btn"
+        app:layout_constraintTop_toBottomOf="@+id/calendarBtn"
         tools:itemCount="2"
         tools:listitem="@layout/fragment_task" />
 

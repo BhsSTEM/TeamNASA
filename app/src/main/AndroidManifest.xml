@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
         <activity
+            android:name=".CalendarDayView"
+            android:exported="false" />
+        <activity
+            android:name=".CalenderScreen"
+            android:exported="false" />
+        <activity
             android:name=".TaskMoreScreen"
             android:exported="false" />
         <activity

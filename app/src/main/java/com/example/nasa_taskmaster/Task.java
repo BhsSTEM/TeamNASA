@@ -1,6 +1,9 @@
 package com.example.nasa_taskmaster;
 
 
+import static java.lang.Integer.parseInt;
+
+import android.util.Log;
 
 public class Task {
     private String taskName = "None";
@@ -56,6 +59,16 @@ public class Task {
         info +=  "\n";
         info += "Created by :   " +  ownerName;
         return info;
+    }
+    public boolean compareDate(String targetDate){
+        boolean theSameDate = true;
+        for(int i = 0; i < taskDeadline.length(); i++){
+            theSameDate = (theSameDate) && (taskDeadline.charAt(i) == targetDate.charAt(i));
+        }
+        Log.d("Task dates deadline: ", ""+ taskDeadline);
+        Log.d("Target Task dates deadline: ", ""+ targetDate);
+        Log.d("Task dates the same: ", ""+ theSameDate);
+        return theSameDate;
     }
 
 
