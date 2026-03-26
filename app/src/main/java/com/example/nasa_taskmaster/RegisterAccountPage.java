@@ -1,7 +1,9 @@
 package com.example.nasa_taskmaster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,5 +29,9 @@ public class RegisterAccountPage extends AppCompatActivity {
 
             return insets;
         });
+    }
+    public void bringToLogin(View view) {
+        Intent intent = new Intent(this, Login_Page_V2_Fresh.class);
+        startActivity(intent);
     }
 }
