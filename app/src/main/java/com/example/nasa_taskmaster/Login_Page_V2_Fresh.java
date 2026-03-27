@@ -2,6 +2,7 @@ package com.example.nasa_taskmaster;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class Login_Page_V2_Fresh extends AppCompatActivity {
@@ -31,7 +33,8 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page_v2_fresh);
-
+        @SuppressLint("WrongViewCast") EditText logb = findViewById(R.id.logb);
+        final String userInput = logb.getText().toString().trim();
         // Initialize button2 and set its click listener here
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +46,21 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        logb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 3. Get the text and convert it to a String
 
+                // Optional: Trim any leading or trailing whitespace
+
+                // 4. Use the retrieved string (e.g., display it in a Toast)
+                if (!userInput.isEmpty()) {
+                    Toast.makeText(Login_Page_V2_Fresh.this, "Text entered: " + userInput, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Login_Page_V2_Fresh.this, "Please enter some text", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

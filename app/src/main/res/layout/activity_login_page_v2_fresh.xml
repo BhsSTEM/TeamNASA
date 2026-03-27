@@ -10,6 +10,7 @@
 
     <!-- Login Button -->
     <Button
+        android:id="@+id/logb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-256dp"
