@@ -2,7 +2,6 @@ package com.example.nasa_taskmaster;
 
 import static android.content.ContentValues.TAG;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,8 +32,7 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page_v2_fresh);
-        @SuppressLint("WrongViewCast") EditText logb = findViewById(R.id.logb);
-        final String userInput = logb.getText().toString().trim();
+
         // Initialize button2 and set its click listener here
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -46,19 +44,16 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        logb.setOnClickListener(new View.OnClickListener() {
+        EditText usernameEditText = findViewById(R.id.editTextText2);
+        EditText passwordEditText = findViewById(R.id.editTextText3);
+        Button loginButton = findViewById(R.id.logb);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 3. Get the text and convert it to a String
-
-                // Optional: Trim any leading or trailing whitespace
-
-                // 4. Use the retrieved string (e.g., display it in a Toast)
-                if (!userInput.isEmpty()) {
-                    Toast.makeText(Login_Page_V2_Fresh.this, "Text entered: " + userInput, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Login_Page_V2_Fresh.this, "Please enter some text", Toast.LENGTH_SHORT).show();
-                }
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                login(username, password);
             }
         });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -96,6 +91,26 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                             updateUI(user);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(Login_Page_V2_Fresh.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+    private void login(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(Login_Page_V2_Fresh.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
