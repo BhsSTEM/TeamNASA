@@ -49,6 +49,12 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLoginClick();
+            }
+        });
         EditText usernameEditText = findViewById(R.id.editTextText2);
         EditText passwordEditText = findViewById(R.id.editTextText3);
         Button loginButton = findViewById(R.id.logb);
