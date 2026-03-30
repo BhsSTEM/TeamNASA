@@ -26,13 +26,18 @@ import android.widget.Toast;
 
 public class Login_Page_V2_Fresh extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    EditText emailEditText;
+    EditText passwordEditText;
+    Button loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page_v2_fresh);
-
+        emailEditText = findViewById(R.id.editTextText2); // Replace with your actual EditText ID
+        passwordEditText = findViewById(R.id.editTextText3); // Replace with your actual EditText ID
+        loginButton = findViewById(R.id.logb); // Replace with your actual Button ID
         // Initialize button2 and set its click listener here
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -47,15 +52,6 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         EditText usernameEditText = findViewById(R.id.editTextText2);
         EditText passwordEditText = findViewById(R.id.editTextText3);
         Button loginButton = findViewById(R.id.logb);
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                login(username, password);
-            }
-        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -118,7 +114,20 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                     }
                 });
     }
+    private void handleLoginClick() {
+        // Get text from the EditText fields
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString(); // Using username as password
 
+        // Basic validation
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Call your login function
+        login(email, password);
+    }
     private void updateUI(FirebaseUser user) {
     }
 
