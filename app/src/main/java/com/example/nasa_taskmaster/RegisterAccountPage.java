@@ -26,9 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterAccountPage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    EditText emailEditText;
-    EditText passwordEditText;
-    Button regButton;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private Button regButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
