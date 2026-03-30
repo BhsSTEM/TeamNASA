@@ -1,8 +1,13 @@
 package com.example.nasa_taskmaster;
 
+import static android.opengl.ETC1.getWidth;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +16,7 @@ import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.autofill.AutofillValue;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,16 +31,14 @@ import com.google.rpc.context.AttributeContext;
 import java.util.ArrayList;
 
 public class CalenderScreen extends AppCompatActivity {
-    ArrayList<View> calendarChild = new ArrayList<>();
-    Drawable icon;
-    Drawable calendarForeground;
-    Bitmap combinedBitmap;
-    Canvas canvas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_calender_screen);
+
+
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.navigationBar6, new Navigation_Bar())
@@ -42,18 +46,27 @@ public class CalenderScreen extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.topNavBar8, new TopNavBar())
                     .commit();
+
         }
-        icon = ResourcesCompat.getDrawable(this.getResources(), R.drawable.baseline_radio_button_checked_24, getTheme());
 
         CalendarView calendarView = findViewById(R.id.calendarView);
+        ImageView imageView = findViewById(R.id.imageView2);
 
+        Paint paint = new Paint();
+        paint.setColor(Color.RED); // Set dot color
+        paint.setStyle(Paint.Style.FILL); // Fill the circle
+        paint.setAntiAlias(true); // Smooth the edges
+
+        Log.d("CalendarWdth: ", "" + imageView.getWidth());
+        Bitmap bitmap = Bitmap.createBitmap(500, 500, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawIcons(canvas, calendarView, paint);
+        imageView.setImageBitmap(bitmap);
 
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-
-                Log.d("Child Count: ","" +  view.getForeground().getIntrinsicHeight());
                 ArrayList<TaskFragment> tasksFrags = new ArrayList<>();
                 String targetDate = "" + month + " - " + dayOfMonth + " - " + year;
                 if( HomeScreen.getTaskFragments().size() > 0) {
@@ -79,5 +92,16 @@ public class CalenderScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
     }
+
+    private void drawIcons(Canvas  canvas, CalendarView calendarView, Paint paint){
+        for(int i = 0; i < 7; i++){
+            canvas.drawCircle((float)((canvas.getWidth()/7) * i), 50, 10, paint);
+        }
+    }
+
+
+
 }
