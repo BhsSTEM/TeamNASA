@@ -50,8 +50,7 @@ public class CalenderScreen extends AppCompatActivity {
         paint.setStyle(Paint.Style.FILL); // Fill the circle
         paint.setAntiAlias(true); // Smooth the edges
 
-        Log.d("CalendarWdth: ", "" + imageView.getWidth());
-        Bitmap bitmap = Bitmap.createBitmap(500, 500, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(300, 190, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         drawIcons(canvas, calendarView, paint);
         imageView.setImageBitmap(bitmap);
@@ -95,10 +94,14 @@ public class CalenderScreen extends AppCompatActivity {
         int firstDayofMonth = 3;
         int weeksInMonth = 4;
 
-        canvas.drawLine((float)(0.0), (float)(0.0), (float)(canvas.getWidth()), (float)(canvas.getHeight()), paint);
-        for(int i = 0; i < 7- firstDayofMonth; i++){
+        for(int i = 0; i < 7 - firstDayofMonth; i++){
+            canvas.drawCircle((float)((canvas.getWidth()/7) * (i + firstDayofMonth + 0.6)), ((float)((canvas.getHeight() - 1)/weeksInMonth)), 5, paint);
+        }
+        for(int j = 1; j < weeksInMonth; j++){
+            for(int i = 0; i < 7; i++){
+                canvas.drawCircle((float)((canvas.getWidth()/7) * (i + 0.6)), ((float)((canvas.getHeight() - 1)/weeksInMonth)), 5, paint);
 
-            canvas.drawCircle((float)((canvas.getWidth()/7) * (i + firstDayofMonth + 1)), ((float)((canvas.getHeight() - 1)/weeksInMonth)), 10, paint);
+            }
         }
     }
 
