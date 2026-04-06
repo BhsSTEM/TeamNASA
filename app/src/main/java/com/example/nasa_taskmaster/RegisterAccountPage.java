@@ -35,10 +35,13 @@ public class RegisterAccountPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         Log.d("DEBUG", "RegisterAccountPage loaded!");
+        setContentView(R.layout.activity_register_account_page);
         emailEditText = findViewById(R.id.editTextText21); // Replace with your actual EditText ID
         passwordEditText = findViewById(R.id.editTextText31); // Replace with your actual EditText ID
         regButton = findViewById(R.id.button21); // Replace with your actual Button ID
-        setContentView(R.layout.activity_register_account_page);
+        if (regButton == null) {
+            Log.e("DEBUG", "regButton is null! Check setContentView layout.");
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
