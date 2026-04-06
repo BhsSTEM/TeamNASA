@@ -1,34 +1,27 @@
 package com.example.nasa_taskmaster;
 
-import static android.opengl.ETC1.getWidth;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewPropertyAnimator;
-import android.view.autofill.AutofillValue;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.rpc.context.AttributeContext;
-
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CalenderScreen extends AppCompatActivity {
 
@@ -53,7 +46,7 @@ public class CalenderScreen extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageView2);
 
         Paint paint = new Paint();
-        paint.setColor(Color.RED); // Set dot color
+        paint.setColor(Color.DKGRAY); // Set dot color
         paint.setStyle(Paint.Style.FILL); // Fill the circle
         paint.setAntiAlias(true); // Smooth the edges
 
@@ -97,8 +90,15 @@ public class CalenderScreen extends AppCompatActivity {
     }
 
     private void drawIcons(Canvas  canvas, CalendarView calendarView, Paint paint){
-        for(int i = 0; i < 7; i++){
-            canvas.drawCircle((float)((canvas.getWidth()/7) * i), 50, 10, paint);
+        LocalDate localDate = LocalDate.now();
+
+        int firstDayofMonth = 3;
+        int weeksInMonth = 4;
+
+        canvas.drawLine((float)(0.0), (float)(0.0), (float)(canvas.getWidth()), (float)(canvas.getHeight()), paint);
+        for(int i = 0; i < 7- firstDayofMonth; i++){
+
+            canvas.drawCircle((float)((canvas.getWidth()/7) * (i + firstDayofMonth + 1)), ((float)((canvas.getHeight() - 1)/weeksInMonth)), 10, paint);
         }
     }
 
