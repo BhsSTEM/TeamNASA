@@ -178,8 +178,9 @@ public class CalenderScreen extends AppCompatActivity {
                 float y = ((float) ((canvasHeight * 0.6 / weeksInMonth) * (j) + canvasHeight * 0.4));
                 for (int i = 0; i < 7; i++) {
                     float x = (float) ((canvasWidth * 0.88 / 7) * (i) + canvasWidth * 0.12);
-
-                    canvas.drawCircle(x, y, 10, paint);
+                    if(fillDot(i,j, calendarView.getDate(), paint, tasksFrags)) {
+                        canvas.drawCircle(x, y, 10, paint);
+                    }
                 }
             }
         }
@@ -226,6 +227,16 @@ public class CalenderScreen extends AppCompatActivity {
 
         return out;
     }
+    private int getLastDayofMonthWeek(long date){
+        LocalDate localDate = LocalDate.ofEpochDay((long)(date/1000/60/60/24));
+        localDate = localDate.minusDays(localDate.getDayOfMonth());
+        int out = localDate.getDayOfWeek().getValue();
+        out += 1;
+        out %= 7;
+        Log.d("day of year: ", out + "" );
+
+        return out;
+    }
 
 
     private int geMonthLength(long date){
@@ -233,5 +244,41 @@ public class CalenderScreen extends AppCompatActivity {
         return localDate.getMonth().length(localDate.isLeapYear());
     }
 
+    private long changeDate(long date, int days){
+        LocalDate localDate = LocalDate.ofEpochDay((long)(date/1000/60/60/24));
+        localDate.plusDays(days);
+        return localDate.toEpochDay() * 24 *60 * 60 * 1000;
+    }
+
+
+    private boolean fillDot(int dayNum, int weekNum, long date, Paint paint, ArrayList<TaskFragment> taskFrags){
+        int weekDayFirst = getFirstDayofWeek(date);
+        int weekDayLast = getLastDayofMonthWeek(date);
+        LocalDate localDate = LocalDate.ofEpochDay((long)(date/1000/60/60/24));
+
+        if(weekNum <= 0){
+            if(dayNum < weekDayFirst){
+                return false;
+            }
+            return checktaskOnDate(convertToDate(changeDate(date, -convertToDate(date)[1] + (dayNum - weekDayFirst))) , taskFrags);
+        }else if(weekNum >= 4){
+            if(dayNum > weekDayFirst){
+                return false;
+            }
+            return checktaskOnDate(convertToDate(changeDate(date, localDate.getMonth().length(localDate.isLeapYear()) -convertToDate(date)[1]
+                    - (weekDayLast - dayNum))) , taskFrags);
+        }else{
+            return checktaskOnDate(convertToDate(changeDate(date, -convertToDate(date)[1] + 7 * weekNum + dayNum)), taskFrags);
+        }
+    }
+
+    private boolean checktaskOnDate(int[] date, ArrayList<TaskFragment> taskFrags){
+        for(int i = 0; i < taskFrags.size();i++){
+            if(taskFrags.get(i).getTask().compareDate("" + date[0] + " - " + date[1] + " - " + date[2])){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
