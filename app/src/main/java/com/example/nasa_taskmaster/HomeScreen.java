@@ -33,6 +33,32 @@ public class HomeScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_screen);
 
+        TaskFragment taskFrag1 = new TaskFragment();
+        TaskFragment taskFrag2 = new TaskFragment();
+        TaskFragment taskFrag3 = new TaskFragment();
+
+        taskFrag1.setTask(new Task("Task 1",
+                "Test Task",
+                "user1",
+                "Somewhere",
+                "3 - 10 - 2026",
+                "3 - 7 - 2026"));
+        taskFrag2.setTask(new Task("Task 2",
+                "Test Task",
+                "user1",
+                "Somewhere",
+                "2 - 10 - 2026",
+                "1 - 7 - 2026"));
+        taskFrag3.setTask(new Task("Task 3",
+                "Test Task",
+                "user1",
+                "Somewhere",
+                "3 - 25 - 2026",
+                "3 - 7 - 2026"));
+        taskFragments.add(taskFrag1);
+        taskFragments.add(taskFrag2);
+        taskFragments.add(taskFrag3);
+
 
         if (savedInstanceState == null) {
             /*

@@ -94,6 +94,7 @@ public class CalenderScreen extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 LocalDate localDate = LocalDate.ofEpochDay((long)(calendarView.getDate()/1000/60/60/24));
                 Log.d("Old Date: ", calendarView.getDate() + "");
                 localDate = localDate.minusMonths(1);
@@ -247,7 +248,7 @@ public class CalenderScreen extends AppCompatActivity {
     private long changeDate(long date, int days){
         LocalDate localDate = LocalDate.ofEpochDay((long)(date/1000/60/60/24));
         localDate.plusDays(days);
-        return localDate.toEpochDay() * 24 *60 * 60 * 1000;
+        return (long)(localDate.toEpochDay() * 24 *60 * 60 * 1000);
     }
 
 
@@ -260,21 +261,26 @@ public class CalenderScreen extends AppCompatActivity {
             if(dayNum < weekDayFirst){
                 return false;
             }
-            return checktaskOnDate(convertToDate(changeDate(date, -convertToDate(date)[1] + (dayNum - weekDayFirst))) , taskFrags);
+            int[] newDate = convertToDate(date);
+            newDate[1] =  dayNum - weekDayFirst;
+            return checktaskOnDate(newDate, taskFrags);
         }else if(weekNum >= 4){
             if(dayNum > weekDayFirst){
                 return false;
             }
-            return checktaskOnDate(convertToDate(changeDate(date, localDate.getMonth().length(localDate.isLeapYear()) -convertToDate(date)[1]
-                    - (weekDayLast - dayNum))) , taskFrags);
+            int[] newDate = convertToDate(changeDate(date, localDate.getMonth().length(localDate.isLeapYear())-convertToDate(date)[1] + (weekDayLast - dayNum)));
+            return checktaskOnDate(newDate, taskFrags);
         }else{
-            return checktaskOnDate(convertToDate(changeDate(date, -convertToDate(date)[1] + 7 * weekNum + dayNum)), taskFrags);
+            int[] newDate = convertToDate(changeDate(date, -convertToDate(date)[1] + (dayNum + 7 * weekNum)));
+            newDate[1] =  dayNum + 7 * weekNum - weekDayFirst;
+            Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
+            return checktaskOnDate(newDate, taskFrags);
         }
     }
 
     private boolean checktaskOnDate(int[] date, ArrayList<TaskFragment> taskFrags){
         for(int i = 0; i < taskFrags.size();i++){
-            if(taskFrags.get(i).getTask().compareDate("" + date[0] + " - " + date[1] + " - " + date[2])){
+            if(taskFrags.get(i).getTask().compareDate("" + (date[0]-1) + " - " + (date[1]+1) + " - " + date[2])){
                 return true;
             }
         }

@@ -37,6 +37,12 @@ public class Task {
     public String getTaskName(){
         return taskName;
     }
+    public String getOwnerName(){
+        return ownerName;
+    }
+    public String getTaskDeadline(){
+        return taskDeadline;
+    }
     public String getTaskInfo(){
         String info = "";
         info += "Task Name:   " +  taskName;
