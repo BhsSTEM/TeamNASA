@@ -135,7 +135,8 @@ public class CalenderScreen extends AppCompatActivity {
         int firstDayofMonthWeek = getFirstDayofWeek(calendarView.getDate());
         Log.d("Get Date Raw: " , "" + calendarView.getDate());
         Log.d("Get Date New: " , "" + date[0] + " / "+ date[1] + " / "+ date[2]);
-        int firstDayofMonth = 3;
+        int firstDayofMonth = getFirstDayofWeek(calendarView.getDate());
+        int monthLength = geMonthLength(calendarView.getDate());
         int weeksInMonth = 5;
 
         int canvasWidth = canvas.getWidth();
@@ -177,7 +178,7 @@ public class CalenderScreen extends AppCompatActivity {
                 float y = ((float) ((canvasHeight * 0.6 / weeksInMonth) * (j) + canvasHeight * 0.4));
                 for (int i = 0; i < 7; i++) {
                     float x = (float) ((canvasWidth * 0.88 / 7) * (i) + canvasWidth * 0.12);
-                    calendarView.getDate();
+
                     canvas.drawCircle(x, y, 10, paint);
                 }
             }
@@ -226,6 +227,11 @@ public class CalenderScreen extends AppCompatActivity {
         return out;
     }
 
+
+    private int geMonthLength(long date){
+        LocalDate localDate = LocalDate.ofEpochDay((long)(date/1000/60/60/24));
+        return localDate.getMonth().length(localDate.isLeapYear());
+    }
 
 
 }
