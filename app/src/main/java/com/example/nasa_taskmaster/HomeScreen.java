@@ -41,19 +41,19 @@ public class HomeScreen extends AppCompatActivity {
                 "Test Task",
                 "user1",
                 "Somewhere",
-                "3 - 10 - 2026",
+                "4 - 10 - 2026",
                 "3 - 7 - 2026"));
         taskFrag2.setTask(new Task("Task 2",
                 "Test Task",
                 "user1",
                 "Somewhere",
-                "2 - 10 - 2026",
+                "3 - 10 - 2026",
                 "1 - 7 - 2026"));
         taskFrag3.setTask(new Task("Task 3",
                 "Test Task",
                 "user1",
                 "Somewhere",
-                "3 - 25 - 2026",
+                "4 - 25 - 2026",
                 "3 - 7 - 2026"));
         taskFragments.add(taskFrag1);
         taskFragments.add(taskFrag2);

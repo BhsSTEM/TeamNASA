@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,7 +80,7 @@ public class CalenderScreen extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, dayOfMonth);
                 calendarView.setDate(calendar.getTimeInMillis());
-                ArrayList<TaskFragment> tasksFrags = getTaskFrags(month, dayOfMonth, year);
+                ArrayList<TaskFragment> tasksFrags = getTaskFrags(month+1, dayOfMonth, year);
 
                 if(tasksFrags.size() > 0){
                     Intent intent = new Intent(CalenderScreen.this, CalendarDayView.class);
@@ -94,14 +95,15 @@ public class CalenderScreen extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 LocalDate localDate = LocalDate.ofEpochDay((long)(calendarView.getDate()/1000/60/60/24));
                 Log.d("Old Date: ", calendarView.getDate() + "");
                 localDate = localDate.minusMonths(1);
                 calendarView.setDate((long)(localDate.toEpochDay() * 24 * 60 * 60 * 1000));
                 Log.d("New Date: ", calendarView.getDate() + "");
+                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 drawIcons(canvas, calendarView, paint);
                 imageView.setImageBitmap(bitmap);
+
             }
         });
 
@@ -113,8 +115,10 @@ public class CalenderScreen extends AppCompatActivity {
                 localDate = localDate.plusMonths(1);
                 calendarView.setDate((long)(localDate.toEpochDay() * 24 * 60 * 60 * 1000));
                 Log.d("New Date: ", calendarView.getDate() + "");
+                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 drawIcons(canvas, calendarView, paint);
                 imageView.setImageBitmap(bitmap);
+
             }
         });
 
@@ -175,7 +179,7 @@ public class CalenderScreen extends AppCompatActivity {
         if(HomeScreen.getTaskFragments().size() > 0) {
             ArrayList<TaskFragment> tasksFrags = HomeScreen.getTaskFragments();
 
-            for (int j = 1; j < weeksInMonth-1; j++) {
+            for (int j = 0; j < weeksInMonth; j++) {
                 float y = ((float) ((canvasHeight * 0.6 / weeksInMonth) * (j) + canvasHeight * 0.4));
                 for (int i = 0; i < 7; i++) {
                     float x = (float) ((canvasWidth * 0.88 / 7) * (i) + canvasWidth * 0.12);
@@ -224,7 +228,7 @@ public class CalenderScreen extends AppCompatActivity {
         int out = localDate.getDayOfWeek().getValue();
         out += 1;
         out %= 7;
-        Log.d("day of year: ", out + "" );
+       // Log.d("day of year: ", out + "" );
 
         return out;
     }
@@ -234,7 +238,7 @@ public class CalenderScreen extends AppCompatActivity {
         int out = localDate.getDayOfWeek().getValue();
         out += 1;
         out %= 7;
-        Log.d("day of year: ", out + "" );
+        //Log.d("day of year: ", out + "" );
 
         return out;
     }
@@ -263,16 +267,20 @@ public class CalenderScreen extends AppCompatActivity {
             }
             int[] newDate = convertToDate(date);
             newDate[1] =  dayNum - weekDayFirst;
+            Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
             return checktaskOnDate(newDate, taskFrags);
         }else if(weekNum >= 4){
-            if(dayNum > weekDayFirst){
+            if(dayNum > weekDayLast){
                 return false;
             }
-            int[] newDate = convertToDate(changeDate(date, localDate.getMonth().length(localDate.isLeapYear())-convertToDate(date)[1] + (weekDayLast - dayNum)));
+            int[] newDate = convertToDate(date);
+            newDate[1] =  localDate.lengthOfMonth() - (weekDayLast - dayNum);
+            Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
+
             return checktaskOnDate(newDate, taskFrags);
         }else{
-            int[] newDate = convertToDate(changeDate(date, -convertToDate(date)[1] + (dayNum + 7 * weekNum)));
-            newDate[1] =  dayNum + 7 * weekNum - weekDayFirst;
+            int[] newDate = convertToDate(date);
+            newDate[1] =  dayNum + weekNum * 7 - weekDayFirst;
             Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
             return checktaskOnDate(newDate, taskFrags);
         }
@@ -280,7 +288,7 @@ public class CalenderScreen extends AppCompatActivity {
 
     private boolean checktaskOnDate(int[] date, ArrayList<TaskFragment> taskFrags){
         for(int i = 0; i < taskFrags.size();i++){
-            if(taskFrags.get(i).getTask().compareDate("" + (date[0]-1) + " - " + (date[1]+1) + " - " + date[2])){
+            if(taskFrags.get(i).getTask().compareDate("" + (date[0]) + " - " + (date[1]+1) + " - " + date[2])){
                 return true;
             }
         }
