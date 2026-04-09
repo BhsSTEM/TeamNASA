@@ -18,13 +18,23 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterAccountPage extends AppCompatActivity {
 
+    private Firebase firebaser;
+    private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -33,12 +43,13 @@ public class RegisterAccountPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
         EdgeToEdge.enable(this);
         Log.d("DEBUG", "RegisterAccountPage loaded!");
         setContentView(R.layout.activity_register_account_page);
-        emailEditText = findViewById(R.id.editTextText21); // Replace with your actual EditText ID
-        passwordEditText = findViewById(R.id.editTextText31); // Replace with your actual EditText ID
-        regButton = findViewById(R.id.button21); // Replace with your actual Button ID
+        emailEditText = findViewById(R.id.editTextText21);
+        passwordEditText = findViewById(R.id.editTextText31);
+        regButton = findViewById(R.id.button21);
         if (regButton == null) {
             Log.e("DEBUG", "regButton is null! Check setContentView layout.");
         }
@@ -60,17 +71,13 @@ public class RegisterAccountPage extends AppCompatActivity {
         startActivity(intent);
     }
     private void handleRegClick() {
-        // Get text from the EditText fields
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString(); // Using username as password
 
-        // Basic validation
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        // Call your login function
         register(email, password);
     }
     private void register(String email, String password) {
@@ -84,13 +91,30 @@ public class RegisterAccountPage extends AppCompatActivity {
                             updateUI(user);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterAccountPage.this, "Authentication failed.",
+                            Toast.makeText(RegisterAccountPage.this, "Authentication failed."  + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
                     }
                 });
     }
-    private void updateUI(FirebaseUser user) {
+    private void updateUI(FirebaseUser unformattedUser) {
+        Map<String, String> user = new HashMap<>();
+        user.put("uid", unformattedUser.getUid());
+        user.put("email", unformattedUser.getEmail());
+        Log.d(TAG, "User created.");
+        db.collection("TestCollect")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 }
