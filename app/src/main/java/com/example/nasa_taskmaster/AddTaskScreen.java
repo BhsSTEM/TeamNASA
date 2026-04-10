@@ -86,7 +86,6 @@ public class AddTaskScreen extends AppCompatActivity {
                         taskDeadLine,
                         taskstartDate);
                 HomeScreen.addTasktoList(newTask);
-
                 startActivity(intent);
             }
 

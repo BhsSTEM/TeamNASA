@@ -46,10 +46,13 @@ dependencies {
     implementation(libs.fragment)
     implementation(libs.recyclerview)
     implementation(libs.gridlayout)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(platform("com.google.firebase:firebase-bom:34.9.0"))
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.android.material:material:1.9.0")
+
+
 }

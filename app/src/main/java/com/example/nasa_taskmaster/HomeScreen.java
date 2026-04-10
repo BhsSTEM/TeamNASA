@@ -59,6 +59,15 @@ public class HomeScreen extends AppCompatActivity {
         taskFragments.add(taskFrag2);
         taskFragments.add(taskFrag3);
 
+        FireBaseDataBase dataBase = new FireBaseDataBase();
+        ArrayList<Task> tasks = new ArrayList<>();
+        for(int i =0; i < taskFragments.size(); i++){
+            tasks.add(taskFragments.get(i).getTask());
+        }
+
+        Log.d("Works at 69", "");
+        dataBase.addData(tasks);
+
 
         if (savedInstanceState == null) {
             /*
@@ -84,6 +93,8 @@ public class HomeScreen extends AppCompatActivity {
                     .commit();
 
             */
+
+
         }
 
 
