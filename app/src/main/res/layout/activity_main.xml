@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -24,6 +25,10 @@
         android:height="40dp"
         android:text="The fitness gram pacer test is a multi-stage areobic capacity test that progressively gets more difficult as it continues."
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="ExtraText"
-        tools:layout_editor_absoluteX="91dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.822"
+        tools:ignore="ExtraText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

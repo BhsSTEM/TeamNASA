@@ -10,25 +10,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
-    /// Tristan :3
-    /// Tristan :3
-    /// Tristan :3
-    private FirebaseAuth mAuth;
+public class RegisterAccountPage extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance(); // ← This line is the fix
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_page_v2_fresh);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            // Initialize Firebase Auth
-            mAuth = FirebaseAuth.getInstance();
+
             return insets;
         });
     }
 }
-
-/// OwO? A new line?
