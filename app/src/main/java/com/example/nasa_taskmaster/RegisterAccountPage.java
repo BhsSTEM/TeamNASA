@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +35,7 @@ import java.util.Map;
 public class RegisterAccountPage extends AppCompatActivity {
 
     private Firebase firebaser;
-    private FirebaseFirestore db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance(FirebaseApp.getInstance(), "yoshi1");
     private FirebaseAuth mAuth;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -102,7 +103,7 @@ public class RegisterAccountPage extends AppCompatActivity {
         user.put("uid", unformattedUser.getUid());
         user.put("email", unformattedUser.getEmail());
         Log.d(TAG, "User created.");
-        db.collection("TestCollect")
+        db.collection("uzi1")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

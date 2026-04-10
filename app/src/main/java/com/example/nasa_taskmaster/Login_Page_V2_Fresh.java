@@ -103,9 +103,9 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     }
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class); // swap in your actual main activity
-            startActivity(intent);
-            finish();
+            //Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class); // swap in your actual main activity
+            //startActivity(intent);
+            //finish();
         }
     }
 
