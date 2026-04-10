@@ -67,6 +67,9 @@ public class RegisterAccountPage extends AppCompatActivity {
             }
         });
     }
+    //
+    // HEY DOOFUS!!! DON'T FORGET THIS!!!!!!!!
+    //
     public void bringToLogin(View view) {
         Intent intent = new Intent(this, Login_Page_V2_Fresh.class);
         startActivity(intent);
@@ -119,3 +122,41 @@ public class RegisterAccountPage extends AppCompatActivity {
                 });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//OwO? What's this?
