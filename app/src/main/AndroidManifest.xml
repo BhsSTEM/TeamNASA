@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
         <activity
+            android:name=".CalendarDayView"
+            android:exported="false" />
+        <activity
+            android:name=".CalenderScreen"
+            android:exported="false" />
+        <activity
             android:name=".TaskMoreScreen"
             android:exported="false" />
         <activity
@@ -22,6 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".EquipmentMainActivity"
+
             android:exported="false" />
         <activity
             android:name=".AddNewEquipment"
@@ -31,6 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".HomeScreen"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

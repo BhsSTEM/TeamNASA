@@ -33,6 +33,41 @@ public class HomeScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_screen);
 
+        TaskFragment taskFrag1 = new TaskFragment();
+        TaskFragment taskFrag2 = new TaskFragment();
+        TaskFragment taskFrag3 = new TaskFragment();
+
+        taskFrag1.setTask(new Task("Task 1",
+                "Test Task",
+                "user1",
+                "Somewhere",
+                "4 - 10 - 2026",
+                "3 - 7 - 2026"));
+        taskFrag2.setTask(new Task("Task 2",
+                "Test Task",
+                "user1",
+                "Somewhere",
+                "3 - 10 - 2026",
+                "1 - 7 - 2026"));
+        taskFrag3.setTask(new Task("Task 3",
+                "Test Task",
+                "user1",
+                "Somewhere",
+                "4 - 25 - 2026",
+                "3 - 7 - 2026"));
+        taskFragments.add(taskFrag1);
+        taskFragments.add(taskFrag2);
+        taskFragments.add(taskFrag3);
+
+        FireBaseDataBase dataBase = new FireBaseDataBase();
+        ArrayList<Task> tasks = new ArrayList<>();
+        for(int i =0; i < taskFragments.size(); i++){
+            tasks.add(taskFragments.get(i).getTask());
+        }
+
+        Log.d("Works at 69", "");
+        dataBase.addData(tasks);
+
 
         if (savedInstanceState == null) {
             /*
@@ -53,6 +88,13 @@ public class HomeScreen extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.navigationBar4, new Navigation_Bar())
                     .commit();
+           /* getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.topNavBar6, new TopNavBar())
+                    .commit();
+
+            */
+
+
         }
 
 
@@ -60,6 +102,7 @@ public class HomeScreen extends AppCompatActivity {
 
         Button addTaskBtn = findViewById(R.id.addTaskbtn);
         Button accordian1Btn = findViewById(R.id.accordian1Btn);
+        Button calenderBtn = findViewById(R.id.calendarBtn);
         Log.d("WORKS at", "" + 65);
         accordian = findViewById(R.id.accordianLayout);
         accordian.setLayoutManager(new LinearLayoutManager(this));
@@ -87,6 +130,16 @@ public class HomeScreen extends AppCompatActivity {
 
         });
 
+        calenderBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(HomeScreen.this, CalenderScreen.class);
+                startActivity(intent);
+            }
+
+        });
+
+
 
 
 
@@ -104,6 +157,11 @@ public class HomeScreen extends AppCompatActivity {
         newtask.setTask(task);
         taskFragments.add(newtask);
         Log.d("TASK LIST AFTER","" + taskFragments.size());
+    }
+
+    public static ArrayList<TaskFragment> getTaskFragments(){
+        Log.d("TASK LIST AFTER","" + taskFragments.size());
+        return taskFragments;
     }
 
 }
