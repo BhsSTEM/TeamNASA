@@ -71,9 +71,9 @@ public class Task {
         for(int i = 0; i < taskDeadline.length(); i++){
             theSameDate = (theSameDate) && (taskDeadline.charAt(i) == targetDate.charAt(i));
         }
-        Log.d("Task dates deadline: ", ""+ taskDeadline);
-        Log.d("Target Task dates deadline: ", ""+ targetDate);
-        Log.d("Task dates the same: ", ""+ theSameDate);
+      //  Log.d("Task dates deadline: ", ""+ taskDeadline);
+       // Log.d("Target Task dates deadline: ", ""+ targetDate);
+      //  Log.d("Task dates the same: ", ""+ theSameDate);
         return theSameDate;
     }
 

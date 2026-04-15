@@ -21,9 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static com.example.nasa_taskmaster.User.*;
+
 public class HomeScreen extends AppCompatActivity {
     public static  ArrayList<TaskFragment> taskFragments = new ArrayList<>();
     private static  ArrayList<TaskFragment> dataList = new ArrayList<>();
+
+    public static User user;
 
     private  RecyclerView accordian;
     private HomeScreenAdapter adapter;
@@ -33,40 +37,52 @@ public class HomeScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_screen);
 
-        TaskFragment taskFrag1 = new TaskFragment();
-        TaskFragment taskFrag2 = new TaskFragment();
-        TaskFragment taskFrag3 = new TaskFragment();
+        if(taskFragments.size() <= 0) {
 
-        taskFrag1.setTask(new Task("Task 1",
-                "Test Task",
-                "user1",
-                "Somewhere",
-                "4 - 10 - 2026",
-                "3 - 7 - 2026"));
-        taskFrag2.setTask(new Task("Task 2",
-                "Test Task",
-                "user1",
-                "Somewhere",
-                "3 - 10 - 2026",
-                "1 - 7 - 2026"));
-        taskFrag3.setTask(new Task("Task 3",
-                "Test Task",
-                "user1",
-                "Somewhere",
-                "4 - 25 - 2026",
-                "3 - 7 - 2026"));
-        taskFragments.add(taskFrag1);
-        taskFragments.add(taskFrag2);
-        taskFragments.add(taskFrag3);
 
-        FireBaseDataBase dataBase = new FireBaseDataBase();
-        ArrayList<Task> tasks = new ArrayList<>();
-        for(int i =0; i < taskFragments.size(); i++){
-            tasks.add(taskFragments.get(i).getTask());
+            TaskFragment taskFrag1 = new TaskFragment();
+            TaskFragment taskFrag2 = new TaskFragment();
+            TaskFragment taskFrag3 = new TaskFragment();
+
+            taskFrag1.setTask(new Task("Task 1",
+                    "Test Task",
+                    "user1",
+                    "Somewhere",
+                    "4 - 10 - 2026",
+                    "3 - 7 - 2026"));
+            taskFrag2.setTask(new Task("Task 2",
+                    "Test Task",
+                    "user1",
+                    "Somewhere",
+                    "3 - 10 - 2026",
+                    "1 - 7 - 2026"));
+            taskFrag3.setTask(new Task("Task 3",
+                    "Test Task",
+                    "user1",
+                    "Somewhere",
+                    "4 - 25 - 2026",
+                    "3 - 7 - 2026"));
+            taskFragments.add(taskFrag1);
+            taskFragments.add(taskFrag2);
+            taskFragments.add(taskFrag3);
         }
 
-        Log.d("Works at 69", "");
-        dataBase.addData(tasks);
+        if(user == null){
+            createUserAccount("user1", "StrongPassword123");
+            user = new User("user1");
+            if(taskFragments.size() > 0) {
+                ArrayList<Task> tasks = new ArrayList<>();
+                for (int i = 0; i < taskFragments.size(); i++) {
+                    tasks.add(taskFragments.get(i).getTask());
+                }
+                Log.d("Works at 69", "");
+                user.addTasks(tasks);
+                user.updateTaskstoFireBase();
+            }
+
+        }
+
+
 
 
         if (savedInstanceState == null) {

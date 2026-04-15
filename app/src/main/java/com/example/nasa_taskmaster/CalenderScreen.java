@@ -96,10 +96,10 @@ public class CalenderScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LocalDate localDate = LocalDate.ofEpochDay((long)(calendarView.getDate()/1000/60/60/24));
-                Log.d("Old Date: ", calendarView.getDate() + "");
+                //Log.d("Old Date: ", calendarView.getDate() + "");
                 localDate = localDate.minusMonths(1);
                 calendarView.setDate((long)(localDate.toEpochDay() * 24 * 60 * 60 * 1000));
-                Log.d("New Date: ", calendarView.getDate() + "");
+               // Log.d("New Date: ", calendarView.getDate() + "");
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 drawIcons(canvas, calendarView, paint);
                 imageView.setImageBitmap(bitmap);
@@ -111,10 +111,10 @@ public class CalenderScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LocalDate localDate = LocalDate.ofEpochDay((long)(calendarView.getDate()/1000/60/60/24));
-                Log.d("Old Date: ", calendarView.getDate() + "");
+                //Log.d("Old Date: ", calendarView.getDate() + "");
                 localDate = localDate.plusMonths(1);
                 calendarView.setDate((long)(localDate.toEpochDay() * 24 * 60 * 60 * 1000));
-                Log.d("New Date: ", calendarView.getDate() + "");
+               // Log.d("New Date: ", calendarView.getDate() + "");
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 drawIcons(canvas, calendarView, paint);
                 imageView.setImageBitmap(bitmap);
@@ -138,8 +138,8 @@ public class CalenderScreen extends AppCompatActivity {
 
         int[] date = convertToDate(calendarView.getDate());
         int firstDayofMonthWeek = getFirstDayofWeek(calendarView.getDate());
-        Log.d("Get Date Raw: " , "" + calendarView.getDate());
-        Log.d("Get Date New: " , "" + date[0] + " / "+ date[1] + " / "+ date[2]);
+       // Log.d("Get Date Raw: " , "" + calendarView.getDate());
+        //Log.d("Get Date New: " , "" + date[0] + " / "+ date[1] + " / "+ date[2]);
         int firstDayofMonth = getFirstDayofWeek(calendarView.getDate());
         int monthLength = geMonthLength(calendarView.getDate());
         int weeksInMonth = 5;
@@ -267,7 +267,7 @@ public class CalenderScreen extends AppCompatActivity {
             }
             int[] newDate = convertToDate(date);
             newDate[1] =  dayNum - weekDayFirst;
-            Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
+          //  Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
             return checktaskOnDate(newDate, taskFrags);
         }else if(weekNum >= 4){
             if(dayNum > weekDayLast){
@@ -275,13 +275,13 @@ public class CalenderScreen extends AppCompatActivity {
             }
             int[] newDate = convertToDate(date);
             newDate[1] =  localDate.lengthOfMonth() - (weekDayLast - dayNum);
-            Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
+        //    Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
 
             return checktaskOnDate(newDate, taskFrags);
         }else{
             int[] newDate = convertToDate(date);
             newDate[1] =  dayNum + weekNum * 7 - weekDayFirst;
-            Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
+       //     Log.d("Line 273, newDate: ", "I == " + dayNum + ", j == " + weekNum + ", new date == " + newDate[0] + " - " + newDate[1] + " - " + newDate[2]);
             return checktaskOnDate(newDate, taskFrags);
         }
     }

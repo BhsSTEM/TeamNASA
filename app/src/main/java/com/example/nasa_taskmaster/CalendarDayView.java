@@ -1,6 +1,7 @@
 package com.example.nasa_taskmaster;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class CalendarDayView extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.topNavBar7, new TopNavBar())
                     .commit();
+
         }
 
         taskRecycler = findViewById(R.id.taskRecyclerView);
