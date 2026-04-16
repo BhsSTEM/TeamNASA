@@ -35,7 +35,8 @@ import java.util.Map;
 public class RegisterAccountPage extends AppCompatActivity {
 
     private Firebase firebaser;
-    FirebaseFirestore db = FirebaseFirestore.getInstance(FirebaseApp.getInstance(), "yoshi1");
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //FirebaseFirestore db = FirebaseFirestore.getInstance(FirebaseApp.getInstance(), "yoshi1");
     private FirebaseAuth mAuth;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -92,6 +93,7 @@ public class RegisterAccountPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Log.d(TAG, user.toString());
                             updateUI(user);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -112,6 +114,7 @@ public class RegisterAccountPage extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.d(TAG, db.toString() + "I am a user :)");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
