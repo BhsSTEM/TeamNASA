@@ -29,6 +29,7 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     EditText emailEditText;
     EditText passwordEditText;
     Button loginButton;
+    Button logoutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
@@ -38,6 +39,7 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         emailEditText = findViewById(R.id.editTextText2);
         passwordEditText = findViewById(R.id.editTextText3);
         loginButton = findViewById(R.id.logb);
+        logoutButton = findViewById(R.id.logb2);
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +54,12 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 handleLoginClick();
+            }
+        });
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
             }
         });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -112,5 +120,11 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     public void bringToRegistry(View view) {
         Intent intent = new Intent(this, RegisterAccountPage.class);
         startActivity(intent);
+    }
+
+    public void logout() {
+        mAuth.getInstance()
+                 .signOut();
+        Toast.makeText(this, "User has been logged out.", Toast.LENGTH_SHORT).show();
     }
 }
