@@ -1,5 +1,6 @@
 package com.example.nasa_taskmaster;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,7 +24,13 @@ import java.util.ArrayList;
 
 import static com.example.nasa_taskmaster.User.*;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class HomeScreen extends AppCompatActivity {
+    public static String userID = "K2osUikmjEP4E7AhvNjf7kgvLyU2";
     public static  ArrayList<TaskFragment> taskFragments = new ArrayList<>();
     private static  ArrayList<TaskFragment> dataList = new ArrayList<>();
 
@@ -36,7 +43,11 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_screen);
-
+        FirebaseApp app = FirebaseApp.initializeApp(this);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance(app);
+        mAuth.createUserWithEmailAndPassword("Fake User", "Fake Password");
+        mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
+/*
         if(taskFragments.size() <= 0) {
 
 
@@ -66,21 +77,27 @@ public class HomeScreen extends AppCompatActivity {
             taskFragments.add(taskFrag2);
             taskFragments.add(taskFrag3);
         }
+        */
+
 
         if(user == null){
-            createUserAccount("user1", "StrongPassword123");
-            user = new User("user1");
-            if(taskFragments.size() > 0) {
-                ArrayList<Task> tasks = new ArrayList<>();
-                for (int i = 0; i < taskFragments.size(); i++) {
-                    tasks.add(taskFragments.get(i).getTask());
+            //FirebaseUser fireUser = FirebaseAuth.getInstance().getCurrentUser();
+            // if(fireUser == null) {
+            user = User.getUserfromUID(userID);
+            //}
+            ArrayList<Task> taskList = user.getTasksFromDataBase();
+            if(taskList.size() > 0) {
+                for (int i = 0; i < taskList.size(); i++) {
+                    TaskFragment taskFrag = new TaskFragment();
+                    taskFrag.setTask(taskList.get(i));
+                    taskFragments.add(taskFrag);
                 }
+
                 Log.d("Works at 69", "");
-                user.addTasks(tasks);
-                user.updateTaskstoFireBase();
             }
 
         }
+
 
 
 
