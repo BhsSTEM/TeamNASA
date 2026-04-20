@@ -27,6 +27,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private  RecyclerView accordian;
     private HomeScreenAdapter adapter;
+    private Luqol q = new Luqol();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

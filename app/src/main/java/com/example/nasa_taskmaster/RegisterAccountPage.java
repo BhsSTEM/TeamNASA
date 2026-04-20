@@ -41,6 +41,7 @@ public class RegisterAccountPage extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button regButton;
+    private Luqol q = new Luqol();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();

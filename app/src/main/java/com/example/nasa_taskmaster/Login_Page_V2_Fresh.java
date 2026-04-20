@@ -30,8 +30,10 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     EditText passwordEditText;
     Button loginButton;
     Button logoutButton;
+    private Luqol q = new Luqol();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        q.log("Luqol initiated.");
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
