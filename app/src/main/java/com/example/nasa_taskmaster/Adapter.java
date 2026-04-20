@@ -39,6 +39,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         int equipmentYear = equipment.getYear();
         String equipmentDescription = equipment.getDescription();
 
+        String locationName = "No Location";
+        if(!(equipment.getLocation() == null))
+        {
+            Locations location = equipment.getLocation();
+            locationName = location.getName();
+        }
+
+        String finalLocation = locationName;
+
         holder.equipmentButton.setText(equipmentName);
 
         holder.equipmentButton.setOnClickListener(v -> {
@@ -47,6 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
            intent.putExtra("equipmentStatus", equipmentStatus);
            intent.putExtra("equipmentYear", equipmentYear);
            intent.putExtra("equipmentDescription", equipmentDescription);
+           intent.putExtra("location", finalLocation);
            context.startActivity(intent);
         });
     }

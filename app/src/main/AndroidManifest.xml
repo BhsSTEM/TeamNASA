@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
+        <activity
+            android:name=".EditEquipmentDetails"
+            android:exported="false" />
         <activity
             android:name=".Map"
             android:exported="false" />
@@ -33,7 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".EquipmentMainActivity"
             android:exported="true" />
@@ -49,8 +52,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA"/>
-
+            android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA" />
     </application>
 
 </manifest>

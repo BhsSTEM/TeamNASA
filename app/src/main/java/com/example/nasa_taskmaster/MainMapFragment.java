@@ -97,7 +97,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
 
         ArrayList<MarkerOptions> currMarkers = new ArrayList<>();
 
-        //turn current locations into markers and add to lis that prints current markers
+        //Turn current locations into markers and add to lis that prints current markers
         for(Locations locations : map.getLocations()) {
             LatLng latLng = new LatLng(locations.getLat(), locations.getLon());
             String name = locations.getName();
@@ -105,11 +105,13 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
                     .title(name));
         }
 
-        //PRINT ALL CURRENT markers in locations array
-        printMarkers(mMap, currMarkers);
+
 
         if (allowAddLocations) //adding a new pin on the map screen
         {
+            //PRINT ALL CURRENT markers in locations array
+            printMarkers(mMap, currMarkers);
+
             mMap.setOnMapClickListener(latLng -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Name new pin");
@@ -155,7 +157,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
             });
         }
 
-        /*Log.d("Map Fragment Code", "this is the loop that accesses the new list after smth has beena dded");
+        /*Log.d("Map Fragment Code", "this is the loop that accesses the new list after smth has been added");
         int i = 0;
         for(Locations location : map.getLocations())
         {

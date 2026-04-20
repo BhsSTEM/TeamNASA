@@ -57,6 +57,15 @@ public class Equipment {
         this.description = description;
     }
 
+    public Locations getLocation() {
+        return location;
+    }
+
+    public void setLocation(Locations location) {
+        this.location = location;
+    }
+
+
     @Override
     public String toString() {
         return name;
