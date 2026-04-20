@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -130,8 +131,14 @@ public class User {
     public ArrayList<Task> getTasksFromDataBase(){
         ArrayList<Task> outList = new ArrayList<>();
         DocumentReference docRef = dataBase.collection(uID).document(  "Tasks");
-        Map<String, Object> results = docRef.get().addOnCompleteListener()
-            if(tasksList.size() > 0){
+        Map<String, Object> results = docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentSnapshot> task) {
+                Log.d("Task Got", "Success!!");
+            }
+        }).getResult().getData();
+
+        if(tasksList.size() > 0){
                 for(int i = 0; i < outList.size(); i++){
                     outList.add(tasksList.get(i));
                 }
