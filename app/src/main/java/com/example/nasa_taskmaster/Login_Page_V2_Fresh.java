@@ -16,9 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,9 @@ import android.widget.Toast;
 
 public class Login_Page_V2_Fresh extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private Firebase firebaser;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //FirebaseFirestore db = FirebaseFirestore.getInstance(FirebaseApp.getInstance(), "yoshi1");
     EditText emailEditText;
     EditText passwordEditText;
     Button loginButton;
@@ -34,6 +39,7 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         q.log("Luqol initiated.");
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -110,6 +116,9 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
             return;
         }
         login(email, password);
+        Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class);
+        startActivity(intent);
+        finish();
     }
     private void updateUI(FirebaseUser user) {
         if (user != null) {
