@@ -87,7 +87,6 @@ public class AddTaskScreen extends AppCompatActivity {
                         taskstartDate);
                 HomeScreen.addTasktoList(newTask);
                 HomeScreen.user.addTask(newTask);
-                HomeScreen.user.updateTaskstoFireBase();
                 startActivity(intent);
             }
 

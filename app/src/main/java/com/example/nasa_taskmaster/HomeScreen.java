@@ -1,6 +1,8 @@
 package com.example.nasa_taskmaster;
 
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,8 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -24,13 +28,20 @@ import java.util.ArrayList;
 
 import static com.example.nasa_taskmaster.User.*;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeScreen extends AppCompatActivity {
-    public static String userID = "K2osUikmjEP4E7AhvNjf7kgvLyU2";
+    public static String userID;
     public static  ArrayList<TaskFragment> taskFragments = new ArrayList<>();
     private static  ArrayList<TaskFragment> dataList = new ArrayList<>();
 
@@ -43,10 +54,7 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_screen);
-        FirebaseApp app = FirebaseApp.initializeApp(this);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance(app);
-        mAuth.createUserWithEmailAndPassword("Fake User", "Fake Password");
-        mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
+
 /*
         if(taskFragments.size() <= 0) {
 
@@ -81,9 +89,31 @@ public class HomeScreen extends AppCompatActivity {
 
 
         if(user == null){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            if(mAuth.getCurrentUser() == null){
+                mAuth.signInWithEmailAndPassword("fakeuser@gmail.com", "password")
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> authResult) {
+                                if (authResult.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // If sign in fails, display a message to the user.
+                                Log.w("signInWithEmail:failure", e.getMessage() + "");
+                            }
+                        });
+            }
+            userID = mAuth.getCurrentUser().getUid();
+            user = User.getUserfromUID(userID);
             //FirebaseUser fireUser = FirebaseAuth.getInstance().getCurrentUser();
             // if(fireUser == null) {
-            user = User.getUserfromUID(userID);
+            Log.d("UserId 118" , userID + "");
+
             //}
             ArrayList<Task> taskList = user.getTasksFromDataBase();
             if(taskList.size() > 0) {

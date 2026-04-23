@@ -15,6 +15,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
@@ -29,10 +30,11 @@ public class User {
     private FirebaseAuth mAuth;
     public static FirebaseFirestore dataBase;
     private boolean taskedUpdatedToDB = false;
-    public User(String uID, String username, Map<String, Task> tasksList){
-        this.username = username;
-        this.tasksList = tasksList;
+    public User(String uID){
+        Log.d("UID: ", this.uID);
+        this.tasksList = getTasksFromDataBase(uID);
         this.uID = uID;
+
 
     }
 
@@ -42,34 +44,7 @@ public class User {
             dataBase.enableNetwork();
         }
 
-
-
-        String userName = "None";
-        Map<String, Task> taskArray = new HashMap<>();
-        DocumentSnapshot document;
-
-        DocumentReference docRef = dataBase.collection(uID).document("Tasks");
-         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-
-
-
-        return new User(uID, "Guest",taskArray );
+        return new User(uID);
     }
 
 
@@ -95,12 +70,7 @@ public class User {
     }
 
     public void updateTaskstoFireBase(){
-        if(!taskedUpdatedToDB){
-            updateTasktoDBHelper();
-            taskedUpdatedToDB = true;
-        }else{
-            Log.d("Task already updated", "");
-        }
+        updateTasktoDBHelper();
     }
     private void updateTasktoDBHelper(){
         if (tasksList.size() > 0 && dataBase != null) {;
@@ -108,22 +78,18 @@ public class User {
             for (int i = 0; i < tasksList.size(); i++) {
                 taskMap.put(uID + " tasks", tasksList.get(i));
             }
-            dataBase.collection(uID).document( "Tasks").set(taskMap, SetOptions.merge());
 
         }
     }
 
     private void updateTaskstoFireBase(Map<String, Task> taskMap){
-        if(!taskedUpdatedToDB){
-            updateTasktoDBHelper(taskMap);
-            taskedUpdatedToDB = true;
-        }else{
-            Log.d("Task already updated", "");
-        }
+        updateTasktoDBHelper(taskMap);
     }
     private void updateTasktoDBHelper(Map<String, Task> taskMap){
         if (tasksList.size() > 0 && dataBase != null) {
-            dataBase.collection(uID).document( " Tasks").set(taskMap, SetOptions.merge());
+            for(int i = 0; i < tasksList.size(); i++) {
+                dataBase.collection(uID).add(taskMap.get(i));
+            }
 
         }
     }
@@ -131,12 +97,20 @@ public class User {
     public ArrayList<Task> getTasksFromDataBase(){
         ArrayList<Task> outList = new ArrayList<>();
         DocumentReference docRef = dataBase.collection(uID).document(  "Tasks");
-        Map<String, Object> results = docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentSnapshot> task) {
+                Map<String, Object> result = task.getResult().getData();
                 Log.d("Task Got", "Success!!");
+                if(result != null){
+                    Log.d("Task Type", result.get(0).getClass() + "");
+                }
+                Log.d("Task Type", "null" );
             }
-        }).getResult().getData();
+        });
+
+
 
         if(tasksList.size() > 0){
                 for(int i = 0; i < outList.size(); i++){
@@ -144,12 +118,50 @@ public class User {
                 }
             }
 
+        /*
 
         if(results.size() > 0){
                 for(int i = 0; i < results.size(); i++){
                     outList.add((Task)(results.get(i)));
                 }
         }
+
+         */
+
+        return outList;
+
+
+    }
+
+    public Map<String,Task> getTasksFromDataBase(String uID){
+        Map<String,Task> outList = new HashMap<>();
+        if(dataBase.collection(uID).getPath() != null ) {
+            dataBase.collection(uID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                    Log.d("Task Size: ", task.getResult().size() + "");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("Task Get Failed: ", e.getMessage() + "");
+                }
+            });
+        }
+
+
+
+
+
+        /*
+
+        if(results.size() > 0){
+                for(int i = 0; i < results.size(); i++){
+                    outList.add((Task)(results.get(i)));
+                }
+        }
+
+         */
 
         return outList;
 
