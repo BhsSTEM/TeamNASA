@@ -89,25 +89,8 @@ public class HomeScreen extends AppCompatActivity {
 
 
         if(user == null){
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            if(mAuth.getCurrentUser() == null){
-                mAuth.signInWithEmailAndPassword("fakeuser@gmail.com", "password")
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> authResult) {
-                                if (authResult.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // If sign in fails, display a message to the user.
-                                Log.w("signInWithEmail:failure", e.getMessage() + "");
-                            }
-                        });
-            }
+            getMAuthh();
+            Log.d("Mauth is null", (mAuth.getCurrentUser() == null) + "");
             userID = mAuth.getCurrentUser().getUid();
             user = User.getUserfromUID(userID);
             //FirebaseUser fireUser = FirebaseAuth.getInstance().getCurrentUser();

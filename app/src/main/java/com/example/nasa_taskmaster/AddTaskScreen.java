@@ -81,7 +81,7 @@ public class AddTaskScreen extends AppCompatActivity {
                 }
                 Task newTask = new Task(taskName,
                         taskDescription,
-                        "User 1",
+                        HomeScreen.user.getUsername(),
                         taskLocation,
                         taskDeadLine,
                         taskstartDate);

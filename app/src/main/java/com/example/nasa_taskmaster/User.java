@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,25 +27,82 @@ public class User {
 
     private String username = "None";
     private String uID = "None";
-    private Map<String, Task> tasksList;
-    private FirebaseAuth mAuth;
+    private ArrayList<Task> tasksList;
+    public static FirebaseAuth mAuth;
     public static FirebaseFirestore dataBase;
     private boolean taskedUpdatedToDB = false;
     public User(String uID){
-        Log.d("UID: ", this.uID);
-        this.tasksList = getTasksFromDataBase(uID);
         this.uID = uID;
+        Log.d("Does user have a collection:", (dataBase.collection(uID).getPath() != null) + "");
+        if(dataBase.collection(uID).getPath() != null) {
+            Log.d("Does user have a collection:", dataBase.collection(uID).getPath());
+            this.tasksList = getTasksFromDataBase(uID);
+        }
+
+        Log.d("UID: ", this.uID);
+
 
 
     }
 
     public static User getUserfromUID(String uID){
-        if(dataBase == null){
+        if(dataBase == null || mAuth == null){
             dataBase = FirebaseFirestore.getInstance("parkerptestbase");
             dataBase.enableNetwork();
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            Log.d("Mauth is null 93", (mAuth.getCurrentUser() == null) + "");
+            if(mAuth.getCurrentUser() == null){
+                mAuth.signInWithEmailAndPassword("fakeuser@gmail.com", "password")
+                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> authResult) {
+                                if (authResult.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("sign in", "signInWithEmail:success");
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // If sign in fails, display a message to the user.
+                                Log.w("signInWithEmail:failure", e.getMessage() + "");
+                            }
+                        });
+            }
+
         }
 
         return new User(uID);
+    }
+
+    public static FirebaseAuth getMAuthh(){
+        if(mAuth == null){
+            mAuth = FirebaseAuth.getInstance();
+            mAuth.signInWithEmailAndPassword("fakeuser@gmail.com", "password")
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> authResult) {
+                            if (authResult.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("sign in", "signInWithEmail:success");
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // If sign in fails, display a message to the user.
+                            Log.w("signInWithEmail:failure", e.getMessage() + "");
+                        }
+                    });
+
+            return mAuth;
+        }
+        return mAuth;
+    }
+
+    public String getUsername(){
+        return mAuth.getCurrentUser().getDisplayName();
     }
 
 
@@ -52,43 +110,29 @@ public class User {
 
 
     public void addTask(Task task){
-        if(task != null){
-            Map<String, Task>  taskMap = new HashMap<>();
-            taskMap.put(task.getTaskName(), task);
-            updateTaskstoFireBase(taskMap);
-        }
+        Log.d("adding data 113:",dataBase.collection(uID) + "");
+            dataBase.collection(uID).document(task.getTaskName()).set(task);
     }
     public void addTasks(ArrayList<Task> tasks){
-        if(tasks.size() > 0){
-            Map<String, Task>  taskMap = new HashMap<>();
+            ArrayList<Task>   taskMap = new ArrayList<>();
             for(int i = 0; i < tasks.size(); i++){
-                taskMap.put(tasks.get(i).getTaskName(), tasks.get(i));
+                taskMap.add(tasks.get(i));
             }
             updateTaskstoFireBase(taskMap);
-        }
 
     }
 
-    public void updateTaskstoFireBase(){
-        updateTasktoDBHelper();
-    }
-    private void updateTasktoDBHelper(){
-        if (tasksList.size() > 0 && dataBase != null) {;
-            Map<String, Task> taskMap = new HashMap<>();
-            for (int i = 0; i < tasksList.size(); i++) {
-                taskMap.put(uID + " tasks", tasksList.get(i));
-            }
 
-        }
-    }
-
-    private void updateTaskstoFireBase(Map<String, Task> taskMap){
+    private void updateTaskstoFireBase(ArrayList<Task> taskMap){
         updateTasktoDBHelper(taskMap);
     }
-    private void updateTasktoDBHelper(Map<String, Task> taskMap){
-        if (tasksList.size() > 0 && dataBase != null) {
+    private void updateTasktoDBHelper(ArrayList<Task>  taskMap){
+        Log.d("adding data:",dataBase.collection(uID) + "");
+        Log.d("data size:",tasksList.size() + "");
+        if (tasksList.size() > 0) {
             for(int i = 0; i < tasksList.size(); i++) {
-                dataBase.collection(uID).add(taskMap.get(i));
+                dataBase.collection(uID).document(taskMap.get(i).getTaskName()).set(taskMap.get(i));
+                Log.d("adding data:",dataBase.collection(uID).getId() + "");
             }
 
         }
@@ -96,19 +140,15 @@ public class User {
 
     public ArrayList<Task> getTasksFromDataBase(){
         ArrayList<Task> outList = new ArrayList<>();
-        DocumentReference docRef = dataBase.collection(uID).document(  "Tasks");
+        CollectionReference collRef = dataBase.collection(uID);
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        collRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentSnapshot> task) {
-                Map<String, Object> result = task.getResult().getData();
-                Log.d("Task Got", "Success!!");
-                if(result != null){
-                    Log.d("Task Type", result.get(0).getClass() + "");
-                }
-                Log.d("Task Type", "null" );
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                Log.d("Gets collection", "true");
             }
         });
+
 
 
 
@@ -133,8 +173,8 @@ public class User {
 
     }
 
-    public Map<String,Task> getTasksFromDataBase(String uID){
-        Map<String,Task> outList = new HashMap<>();
+    public ArrayList<Task> getTasksFromDataBase(String uID){
+        ArrayList<Task> outList = new ArrayList<>();
         if(dataBase.collection(uID).getPath() != null ) {
             dataBase.collection(uID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
