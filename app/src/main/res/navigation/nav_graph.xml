@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login_Page_V2_Fresh">
+    <activity
+        android:id="@+id/login_Page_V2_Fresh"
+        android:name="com.example.nasa_taskmaster.Login_Page_V2_Fresh"
+        android:label="activity_login_page_v2_fresh"
+        tools:layout="@layout/activity_login_page_v2_fresh" />
+    <activity
+        android:id="@+id/registerAccountPage"
+        android:name="com.example.nasa_taskmaster.RegisterAccountPage"
+        android:label="activity_register_account_page"
+        tools:layout="@layout/activity_register_account_page" />
+</navigation>

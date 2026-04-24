@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
         <activity
-            android:name=".EditEquipmentDetails"
+            android:name=".CalendarDayView"
             android:exported="false" />
         <activity
-            android:name=".Map"
+            android:name=".CalenderScreen"
             android:exported="false" />
         <activity
             android:name=".TaskMoreScreen"
@@ -29,7 +27,18 @@
             android:name=".AddTaskScreen"
             android:exported="false" />
         <activity
+            android:name=".EquipmentMainActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".AddNewEquipment"
+            android:exported="false" />
+        <activity
+            android:name=".EquipmentDetails"
+            android:exported="false" />
+        <activity
             android:name=".HomeScreen"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,21 +47,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EquipmentMainActivity"
+            android:name=".RegisterAccountPage"
+            android:exported="false" />
+        <activity
+            android:name=".Login_Page_V2_Fresh"
             android:exported="true" />
-        <activity
-            android:name=".AddNewEquipment"
-            android:exported="false" />
-        <activity
-            android:name=".EquipmentDetails"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false"/>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA" />
     </application>
 
 </manifest>

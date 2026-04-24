@@ -30,12 +30,11 @@ public class EquipmentMainActivity extends AppCompatActivity {
         });
 
         // DELETE LATER
-        if (equipmentList.isEmpty())
-        {
-            equipmentList.add(new Equipment("Drill Press", 2022, "Operational", "Heavy Duty", new Locations("Chicago", 41.8781, -87.6298)));
-            equipmentList.add(new Equipment("Soldering Iron", 2023, "In Use", "Precision Tool", null));
-            equipmentList.add(new Equipment("3D Printer", 2021, "Maintenance", "FDM Printer", null));
-            equipmentList.add(new Equipment("Oscilloscope", 2024, "New", "Digital Storage", null));
+        if (equipmentList.isEmpty()) {
+            equipmentList.add(new Equipment("Drill Press", 2022, "Operational", "Heavy Duty"));
+            equipmentList.add(new Equipment("Soldering Iron", 2023, "In Use", "Precision Tool"));
+            equipmentList.add(new Equipment("3D Printer", 2021, "Maintenance", "FDM Printer"));
+            equipmentList.add(new Equipment("Oscilloscope", 2024, "New", "Digital Storage"));
         }
 
         //Code for Equipment dropdown - this will be for filters
@@ -57,8 +56,7 @@ public class EquipmentMainActivity extends AppCompatActivity {
 
     public ArrayList<Equipment> getEquipmentList() {    return equipmentList;   }
 
-    public void setEquipmentList(ArrayList<Equipment> equipmentList)
-    {
+    public void setEquipmentList(ArrayList<Equipment> equipmentList) {
         this.equipmentList = equipmentList;
     }
 }
