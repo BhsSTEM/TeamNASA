@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class TaskDetailScreen extends AppCompatActivity {
+    private static Task displayTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,21 @@ public class TaskDetailScreen extends AppCompatActivity {
         TextView taskHeader = findViewById(R.id.taskHeader);
         String taskInfo = getIntent().getStringExtra("TaskInfo");
         String taskName = getIntent().getStringExtra("TaskName");
-        if(taskInfo != null){
-            taskText.setText(taskInfo);
-            taskHeader.setText(taskName);
+
+        Button completeBtn1 = findViewById(R.id.completeBtn);
+        completeBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayTask.settoComplete();
+                if(displayTask != null){
+                    taskText.setText(displayTask.getTaskInfo());
+                    taskHeader.setText(displayTask.getTaskName());
+                }
+            }
+        });
+        if(displayTask != null){
+            taskText.setText(displayTask.getTaskInfo());
+            taskHeader.setText(displayTask.getTaskName());
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

@@ -13,6 +13,7 @@ public class Task {
     private String taskLocation = "None";
     private String taskDeadline = "None";
     private String taskStartDate = "None";
+    private boolean isCompplete = false;
 
 
     public Task(String name, String taskDescription, String ownerName){
@@ -66,6 +67,13 @@ public class Task {
     public String getTaskStartDate(){
         return taskStartDate;
     }
+    private boolean isTaskComplete(){
+        return isCompplete;
+    }
+
+    public void settoComplete(){
+        isCompplete = true;
+    }
     public String getTaskInfo(){
         String info = "";
         info += "Task Name:   " +  taskName;
@@ -87,6 +95,9 @@ public class Task {
         info +=  "\n";
         info +=  "\n";
         info += "Created by :   " +  ownerName;
+        info +=  "\n";
+        info +=  "\n";
+        info += "Status :   " +  ((isCompplete) ? "Done":"Not Done");
         return info;
     }
     public boolean compareDate(String targetDate){
