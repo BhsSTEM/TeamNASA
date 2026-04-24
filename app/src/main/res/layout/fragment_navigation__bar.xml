@@ -1,58 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#40B0B0B0"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="8dp">
 
-    <ImageButton
-        android:id="@+id/SettingsButton"
+    <!-- Top border line for separation -->
+    <View
+        android:id="@+id/navTopBorder"
         android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:contentDescription="Settings Button"
-        android:src="@drawable/settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/HomeButton"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
-        android:id="@+id/HomeButton"
+    <!-- Settings -->
+    <LinearLayout
+        android:id="@+id/settingsNavItem"
         android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:contentDescription="Home Button"
-        android:filterTouchesWhenObscured="true"
-        android:orientation="horizontal"
-        android:src="@drawable/home"
-        app:iconPadding="16dp"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@id/navTopBorder"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/EquipmentButton"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/SettingsButton" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/homeNavItem"
+        app:layout_constraintHorizontal_weight="1">
 
-    <ImageButton
-        android:id="@+id/EquipmentButton"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:contentDescription="settings button"
-        android:src="@android:drawable/ic_menu_manage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/MapButton"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/HomeButton"
-        app:tint="#000000" />
+        <ImageButton
+            android:id="@+id/SettingsButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="Settings"
+            android:src="@drawable/settings"
+            app:tint="#616161" />
 
-    <ImageButton
-        android:id="@+id/MapButton"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textSize="10sp"
+            android:textColor="#616161"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Home -->
+    <LinearLayout
+        android:id="@+id/homeNavItem"
         android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:contentDescription="map"
-        android:src="@android:drawable/ic_dialog_map"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@id/navTopBorder"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/settingsNavItem"
+        app:layout_constraintEnd_toStartOf="@id/equipmentNavItem"
+        app:layout_constraintHorizontal_weight="1">
+
+        <ImageButton
+            android:id="@+id/HomeButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="Home"
+            android:src="@drawable/home"
+            app:tint="#1565C0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textSize="10sp"
+            android:textColor="#1565C0"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Equipment -->
+    <LinearLayout
+        android:id="@+id/equipmentNavItem"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@id/navTopBorder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/homeNavItem"
+        app:layout_constraintEnd_toStartOf="@id/mapNavItem"
+        app:layout_constraintHorizontal_weight="1">
+
+        <ImageButton
+            android:id="@+id/EquipmentButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="Equipment"
+            android:src="@android:drawable/ic_menu_manage"
+            app:tint="#616161" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipment"
+            android:textSize="10sp"
+            android:textColor="#616161"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Map -->
+    <LinearLayout
+        android:id="@+id/mapNavItem"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@id/navTopBorder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/equipmentNavItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/EquipmentButton"
-        app:tint="#000000" />
+        app:layout_constraintHorizontal_weight="1">
+
+        <ImageButton
+            android:id="@+id/MapButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="Map"
+            android:src="@android:drawable/ic_dialog_map"
+            app:tint="#616161" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map"
+            android:textSize="10sp"
+            android:textColor="#616161"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

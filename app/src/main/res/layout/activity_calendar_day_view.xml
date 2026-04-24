@@ -5,10 +5,33 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarDayView">
+    tools:context=".Map">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/navigationBar7"
+        android:id="@+id/topNavBar4"
+        android:name="com.example.nasa_taskmaster.TopNavBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_top_nav_bar" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewXX"
+        android:name="com.example.nasa_taskmaster.MainMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="54dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationBar4"
         android:name="com.example.nasa_taskmaster.Navigation_Bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,42 +41,31 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_navigation__bar" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/topNavBar7"
-        android:name="com.example.nasa_taskmaster.TopNavBar"
+    <ImageButton
+        android:id="@+id/AddNewLocation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_top_nav_bar" />
-
-    <TextView
-        android:id="@+id/textHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:text="Tasks:"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="344dp"
+        android:contentDescription="Settings Button"
+        android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.772"
+        app:tint="#000000" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="128dp"
+    <Spinner
+        android:id="@+id/showStuffSpinner"
+        android:layout_width="127dp"
+        android:layout_height="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textHeader"
-        tools:listitem="@layout/fragment_task" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
