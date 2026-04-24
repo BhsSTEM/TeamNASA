@@ -1,4 +1,5 @@
 package com.example.nasa_taskmaster;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -24,6 +27,9 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
     private String[] locationNames = {};
     private ArrayList<Locations> locationList;
     private Locations selectedLocation = null;
+
+    private FirebaseFirestore db;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,12 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Get instance of Firebase database
+        db = FirebaseFirestore.getInstance();
+
+        // Get reference for the database
+       // databaseReference = firebaseDatabase.getReference("testdatabaseneysa");
 
         // Use static method to get locations
         locationList = Map.getLocations();
@@ -82,7 +94,7 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
             try {
                 equipmentYear = Integer.parseInt(equipmentYearStr);
             } catch (NumberFormatException e) {
-                // Handle invalid year input if necessary
+                // Handle invalid year input
             }
 
             String status = "";
@@ -91,26 +103,40 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
                 status = statusInput.getText().toString().trim();
             }
 
-            //if they enter nothing - tell them to enter stuff and dont make object
-            Log.d("Spinner", "Equipmemt Name is empty" + equipmentName.isEmpty());
-            Log.d("Spinner", "Equipmemt Year is empty" + equipmentYearStr.isEmpty());
-            Log.d("Spinner", "Equipmemt Status is empty" + status.isEmpty());
-            Log.d("Spinner", "Selected position: " + selectedLocation);
             if(equipmentName.isEmpty() && equipmentYearStr.isEmpty() && status.isEmpty() && selectedLocation == null)
             {
                 Toast.makeText(this, "Please enter a field", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Create new equipment object using the selectedLocation from the spinner if they entered something
+            // Create new equipment object
             Equipment equipment = new Equipment(equipmentName, equipmentYear, status, "No Description", selectedLocation);
 
-            // Replicating your original logic to avoid changing EquipmentMainActivity
             EquipmentMainActivity equipmentMainActivity = new EquipmentMainActivity();
             ArrayList<Equipment> equipmentList = equipmentMainActivity.getEquipmentList();
             equipmentList.add(equipment);
             equipmentMainActivity.setEquipmentList(equipmentList);
 
+            // Add to database BEFORE navigating
+            db.collection("testdatabaseneysa")
+                    .add(equipment)
+                    .addOnSuccessListener(documentReference -> {
+                        // This code runs ONLY after the data is successfully saved
+                        Toast.makeText(AddNewEquipment.this, "Equipment saved!", Toast.LENGTH_SHORT).show();
+                        Log.d("FirestoreSuccess", "DocumentSnapshot written with ID: " + documentReference.getId());
+
+                        /* Navigate back AFTER success
+                        Intent intent = new Intent(AddNewEquipment.this, EquipmentMainActivity.class);
+                        startActivity(intent);
+                        finish();*/
+                    })
+                    .addOnFailureListener(e -> {
+                        // This runs if there is an error (like no internet or permission denied)
+                        Log.e("FirestoreError", "Error adding document", e);
+                        Toast.makeText(AddNewEquipment.this, "Failed to save: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+
+            // Navigate back AFTER success
             Intent intent = new Intent(this, EquipmentMainActivity.class);
             startActivity(intent);
             finish();
@@ -119,10 +145,6 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("Spinner", "Selected position: " + position);
-
-        //Toast.makeText(getApplicationContext(), locationNames[position], Toast.LENGTH_SHORT).show();
-
         if(!locationNames[position].equals("No Location Selected") && !locationNames[position].equals("Add New Location"))
         {
             selectedLocation = locationList.get(position);
@@ -132,7 +154,6 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
             Intent intent = new Intent(this, Map.class);
             startActivity(intent);
         }
-
     }
 
     @Override

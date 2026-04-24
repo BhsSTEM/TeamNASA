@@ -8,6 +8,8 @@ public class Equipment {
 
     private Locations location;
 
+    public Equipment() {}
+
     public Equipment(String name, int year, String status, String description, Locations location) {
         this.name = name;
         this.year = year;

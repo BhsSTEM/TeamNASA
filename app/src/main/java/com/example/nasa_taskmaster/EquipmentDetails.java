@@ -62,9 +62,9 @@ public class EquipmentDetails extends AppCompatActivity {
 
         findViewById(R.id.saveDetailsButton).setOnClickListener(v -> {
             Intent intent1 = new Intent(this, EditEquipmentDetails.class);
-            intent.putExtra("equipmentName", equipmentName);
-            intent.putExtra("equipmentYear", equipmentYear);
-            intent.putExtra("location", location);
+            intent1.putExtra("equipmentName", equipmentName);
+            intent1.putExtra("equipmentYear", equipmentYear);
+            intent1.putExtra("location", location);
             startActivity(intent1);
         });
 

@@ -35,7 +35,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ArrayList<MarkerOptions> currMarkers = new ArrayList<>();
     private GoogleMap mMap;
     private boolean allowAddLocations;
 
@@ -58,12 +58,25 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
         return fragment;
     }
 
+    public static MainMapFragment newInstance(boolean allowAddLocations, ArrayList<MarkerOptions> currMarkers) {
+        MainMapFragment fragment = new MainMapFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("allowAddLocations", allowAddLocations);
+        args.putParcelableArrayList("currMarkers", currMarkers);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            ArrayList<MarkerOptions> markers = getArguments().getParcelableArrayList("currMarkers");
+            if (markers != null) {
+                currMarkers = markers;
+            }
             allowAddLocations = getArguments().getBoolean("allowAddLocations");
         }
 
@@ -95,17 +108,20 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
 
         Map map = new Map();
 
-        ArrayList<MarkerOptions> currMarkers = new ArrayList<>();
+
+        if(currMarkers != null)
+        {
+            printMarkers(mMap, currMarkers);
+        }
 
         //Turn current locations into markers and add to lis that prints current markers
-        for(Locations locations : map.getLocations()) {
+        for(Locations locations : Map.getLocations()) {
             LatLng latLng = new LatLng(locations.getLat(), locations.getLon());
             String name = locations.getName();
+            
             currMarkers.add(new MarkerOptions().position(latLng)
                     .title(name));
         }
-
-
 
         if (allowAddLocations) //adding a new pin on the map screen
         {
@@ -126,9 +142,9 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
 
                     //adding to main locations array
                     Locations NewLocation = new Locations(name, latLng.latitude, latLng.longitude);
-                    ArrayList<Locations> locations = map.getLocations();
+                    ArrayList<Locations> locations = Map.getLocations();
                     locations.add(NewLocation);
-                    map.setLocations(locations);
+                    Map.setLocations(locations);
 
                     //adding to curr markers so it will display
                     MarkerOptions marker = new MarkerOptions()
@@ -141,7 +157,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
 
                     /**Log.d("Map Fragment", "This is where the list has been modified");
                     int i = 0;
-                    for(Locations location : map.getLocations())
+                    for(Locations location : Map.getLocations())
                     {
 
                         LatLng latLng1 = new LatLng(location.getLat(), location.getLon());
@@ -159,7 +175,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
 
         /*Log.d("Map Fragment Code", "this is the loop that accesses the new list after smth has been added");
         int i = 0;
-        for(Locations location : map.getLocations())
+        for(Locations location : Map.getLocations())
         {
 
             LatLng latLng1 = new LatLng(location.getLat(), location.getLon());

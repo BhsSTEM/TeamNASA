@@ -58,7 +58,7 @@
         app:tint="#000000" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/showStuffSpinner"
         android:layout_width="127dp"
         android:layout_height="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
