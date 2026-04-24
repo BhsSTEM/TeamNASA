@@ -4,12 +4,16 @@ package com.example.nasa_taskmaster;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.nasa_taskmaster.HomeScreen.addTasktoList;
+
+import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -21,6 +25,7 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -30,13 +35,15 @@ public class User {
     private ArrayList<Task> tasksList;
     public static FirebaseAuth mAuth;
     public static FirebaseFirestore dataBase;
-    private boolean taskedUpdatedToDB = false;
+    public boolean gettingTasks = false;
     public User(String uID){
         this.uID = uID;
         Log.d("Does user have a collection:", (dataBase.collection(uID).getPath() != null) + "");
         if(dataBase.collection(uID).getPath() != null) {
             Log.d("Does user have a collection:", dataBase.collection(uID).getPath());
-            this.tasksList = getTasksFromDataBase(uID);
+            this.tasksList = new ArrayList<>();
+            Log.d("User task amount:", this.tasksList.size() + "");
+
         }
 
         Log.d("UID: ", this.uID);
@@ -141,22 +148,36 @@ public class User {
     public ArrayList<Task> getTasksFromDataBase(){
         ArrayList<Task> outList = new ArrayList<>();
         CollectionReference collRef = dataBase.collection(uID);
-
+        gettingTasks = true;
         collRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
-                Log.d("Gets collection", "true");
+                Log.d("Gets collection 154", "true");
+                Log.d("Collection size 155", "" + task.getResult().size());
+                if(task.getResult().size() > 0){
+                    List<DocumentSnapshot> docRefs = task.getResult().getDocuments();
+                    for(int i = 0; i < docRefs.size();i++){
+                        DocumentSnapshot docRef = docRefs.get(i);
+                        String taskName = docRef.get("taskName") + "";
+                        String ownerName = docRef.get("ownerName") + "";
+                        String taskLocation= docRef.get("taskLocation") + "";
+                        String taskDescription= docRef.get("taskDescription") + "";
+                        String taskDeadline= docRef.get("taskDeadline") + "";
+                        String taskStartDate=docRef.get("taskStartDate") + "";
+                        String taskTime= docRef.get("taskTime") + "";
+
+                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocation, taskDeadline, taskStartDate, taskTime);
+                        outList.add(newTask);
+
+                        gettingTasks = false;
+
+
+                    }
+                }
+
             }
         });
 
-
-
-
-        if(tasksList.size() > 0){
-                for(int i = 0; i < outList.size(); i++){
-                    outList.add(tasksList.get(i));
-                }
-            }
 
         /*
 
@@ -175,19 +196,34 @@ public class User {
 
     public ArrayList<Task> getTasksFromDataBase(String uID){
         ArrayList<Task> outList = new ArrayList<>();
-        if(dataBase.collection(uID).getPath() != null ) {
-            dataBase.collection(uID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
-                    Log.d("Task Size: ", task.getResult().size() + "");
+        CollectionReference collRef = dataBase.collection(uID);
+
+        collRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                Log.d("Gets collection 204", "true");
+                Log.d("Collection size 204", "" + task.getResult().size());
+                if(task.getResult().size() > 0){
+                    List<DocumentSnapshot> docRefs = task.getResult().getDocuments();
+                    for(int i = 0; i < docRefs.size();i++){
+                        DocumentSnapshot docRef = docRefs.get(i);
+                        String taskName = docRef.get("taskName") + "";
+                        String ownerName = docRef.get("ownerName") + "";
+                        String taskLocation= docRef.get("taskLocation") + "";
+                        String taskDescription= docRef.get("taskDescription") + "";
+                        String taskDeadline= docRef.get("taskDeadline") + "";
+                        String taskStartDate=docRef.get("taskStartDate") + "";
+                        String taskTime= docRef.get("taskTime") + "";
+
+                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocation, taskDeadline, taskStartDate, taskTime);
+                        outList.add(newTask);
+
+
+                    }
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("Task Get Failed: ", e.getMessage() + "");
-                }
-            });
-        }
+
+            }
+        });
 
 
 
@@ -206,6 +242,156 @@ public class User {
         return outList;
 
 
+    }
+
+    public void getTasksFromDataBase(ArrayList<Task> tasksList){
+        CollectionReference collRef = dataBase.collection(uID);
+
+        collRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                Log.d("Gets collection 252", "true");
+                Log.d("Collection size 253", "" + task.getResult().size());
+                if(task.getResult().size() > 0){
+                    List<DocumentSnapshot> docRefs = task.getResult().getDocuments();
+                    for(int i = 0; i < docRefs.size();i++){
+                        DocumentSnapshot docRef = docRefs.get(i);
+                        String taskName = docRef.get("taskName") + "";
+                        String ownerName = docRef.get("ownerName") + "";
+                        String taskLocation= docRef.get("taskLocation") + "";
+                        String taskDescription= docRef.get("taskDescription") + "";
+                        String taskDeadline= docRef.get("taskDeadline") + "";
+                        String taskStartDate=docRef.get("taskStartDate") + "";
+                        String taskTime= docRef.get("taskTime") + "";
+
+                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocation, taskDeadline, taskStartDate, taskTime);
+                        tasksList.add(newTask);
+
+
+                    }
+                }
+
+            }
+        });
+
+
+
+
+
+
+        /*
+
+        if(results.size() > 0){
+                for(int i = 0; i < results.size(); i++){
+                    outList.add((Task)(results.get(i)));
+                }
+        }
+
+         */
+
+
+
+    }
+
+
+    public void setHomeTask(){
+        CollectionReference collRef = dataBase.collection(uID);
+        ArrayList<Task> outList = new ArrayList<>();
+
+        collRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                Log.d("Gets collection 303", "true");
+
+                if(task.getResult().size() > 0){
+                    List<DocumentSnapshot> docRefs = task.getResult().getDocuments();
+                    Log.d("Collection size 304" , "" +docRefs.size());
+                    for(int i = 0; i < docRefs.size();i++){
+                        DocumentSnapshot docRef = docRefs.get(i);
+                        String taskName = docRef.get("taskName") + "";
+                        String ownerName = docRef.get("ownerName") + "";
+                        String taskLocation= docRef.get("taskLocation") + "";
+                        String taskDescription= docRef.get("taskDescription") + "";
+                        String taskDeadline= docRef.get("taskDeadline") + "";
+                        String taskStartDate=docRef.get("taskStartDate") + "";
+                        String taskTime= docRef.get("taskTime") + "";
+
+                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocation, taskDeadline, taskStartDate, taskTime);
+                        outList.add(newTask);
+
+
+                    }
+                }
+
+            }
+        });
+
+        for(int i = 0; i < tasksList.size(); i++){
+            HomeScreen.addTasktoList(tasksList.get(i));
+        }
+        Log.d("Loacl data size 332", "" + tasksList.size());
+
+
+    }
+
+    public ArrayList<Task> getTasksFromCollection(CollectionReference collRef, Activity activity){
+
+        ArrayList<Task> outList = new ArrayList<>();
+
+        collRef.get().addOnCompleteListener(activity, new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                Log.d("Gets collection 342", "true");
+
+                if(task.getResult().size() > 0){
+                    List<DocumentSnapshot> docRefs = task.getResult().getDocuments();
+                    Log.d("Collection size 343", "" + docRefs.size() );
+                    for(int i = 0; i < docRefs.size();i++){
+                        DocumentSnapshot docRef = docRefs.get(i);
+                        String taskName = docRef.get("taskName") + "";
+                        String ownerName = docRef.get("ownerName") + "";
+                        String taskLocation= docRef.get("taskLocation") + "";
+                        String taskDescription= docRef.get("taskDescription") + "";
+                        String taskDeadline= docRef.get("taskDeadline") + "";
+                        String taskStartDate=docRef.get("taskStartDate") + "";
+                        String taskTime= docRef.get("taskTime") + "";
+
+                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocation, taskDeadline, taskStartDate, taskTime);
+                        HomeScreen.taskssList.add(newTask);
+
+
+                    }
+
+
+                    HomeScreen.updateTaskFrags();
+                    Log.d("Task list size: ", HomeScreen.taskssList.size() + "");
+
+                }
+
+            }
+        });
+
+
+
+
+
+
+        /*
+
+        if(results.size() > 0){
+                for(int i = 0; i < results.size(); i++){
+                    outList.add((Task)(results.get(i)));
+                }
+        }
+
+         */
+
+        Log.d("SIZE 307", "" + outList.size());
+        return outList;
+    }
+
+    public ArrayList<Task> getTasksList(){
+        return tasksList;
     }
 
 

@@ -9,7 +9,7 @@ public class Task {
     private String taskName = "None";
     private String ownerName = "None";
     private String taskDescription = "None";
-    private double taskTime = 0;
+    private String taskTime = "0";
     private String taskLocation = "None";
     private String taskDeadline = "None";
     private String taskStartDate = "None";
@@ -30,6 +30,16 @@ public class Task {
         this.taskStartDate = taskStartDate;
     }
 
+    public Task(String name, String taskDescription, String ownerName, String taskLocation, String taskDeadline, String taskStartDate, String taskTime){
+        this.taskName = name;
+        this.taskDescription = taskDescription;
+        this.ownerName = ownerName;
+        this.taskLocation = taskLocation;
+        this.taskDeadline = taskDeadline;
+        this.taskStartDate = taskStartDate;
+        this.taskTime = taskTime;
+    }
+
 
 
     // Constructor for creating the object from a Parcel
@@ -42,6 +52,19 @@ public class Task {
     }
     public String getTaskDeadline(){
         return taskDeadline;
+    }
+    public String getTaskDescription(){
+        return taskDescription;
+    }
+
+    public String getTaskLocation(){
+        return taskLocation;
+    }
+    public String getTaskTime(){
+        return taskTime + "";
+    }
+    public String getTaskStartDate(){
+        return taskStartDate;
     }
     public String getTaskInfo(){
         String info = "";
@@ -76,6 +99,7 @@ public class Task {
       //  Log.d("Task dates the same: ", ""+ theSameDate);
         return theSameDate;
     }
+
 
 
 }
