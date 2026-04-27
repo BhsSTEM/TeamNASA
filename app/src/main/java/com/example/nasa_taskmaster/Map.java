@@ -68,7 +68,7 @@ public class Map extends AppCompatActivity implements AdapterView.OnItemSelected
         if(position == 0)
         {
             //do nothing, print nothing
-            getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerViewXX, MainMapFragment.newInstance(true, null)).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerViewXX, MainMapFragment.newInstance(false)).commit();
 
         } else if (position == 1) {
             EquipmentMainActivity equipmentMainActivity = new EquipmentMainActivity();

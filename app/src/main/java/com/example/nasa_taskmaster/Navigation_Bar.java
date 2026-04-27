@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,16 +73,25 @@ public class Navigation_Bar extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Equipment Button
+        view.findViewById(R.id.EquipmentButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), EquipmentMainActivity.class);
+            startActivity(intent);
+        });
+
+        //Task Button
+
         view.findViewById(R.id.HomeButton).setOnClickListener(v -> {
-            Log.d("Go to home main", "home");
             Intent intent = new Intent(getActivity(), HomeScreen.class);
             startActivity(intent);
         });
 
-        //Equipment Button
-        view.findViewById(R.id.EquipmentButton).setOnClickListener(v -> {
-            Log.d("Go to equip main", "equip");
-            Intent intent = new Intent(getActivity(), EquipmentMainActivity.class);
+        //Settings Button
+
+        //Map Button
+
+        view.findViewById(R.id.MapButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Map.class);
             startActivity(intent);
         });
 

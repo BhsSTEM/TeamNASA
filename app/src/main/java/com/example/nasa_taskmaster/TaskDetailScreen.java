@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class TaskDetailScreen extends AppCompatActivity {
-    private static Task displayTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +21,21 @@ public class TaskDetailScreen extends AppCompatActivity {
         setContentView(R.layout.activity_task_detail_screen);
 
         TextView taskText = findViewById(R.id.taskView);
-        TextView taskHeader = findViewById(R.id.taskHeader);
+        TextView taskHEader = findViewById(R.id.taskHeader);
         String taskInfo = getIntent().getStringExtra("TaskInfo");
         String taskName = getIntent().getStringExtra("TaskName");
-
-        Button completeBtn1 = findViewById(R.id.completeBtn);
-        completeBtn1.setOnClickListener(new View.OnClickListener() {
+        if(taskInfo != null){
+            taskText.setText(taskInfo);
+            taskHEader.setText(taskName);
+        }
+        Button homeBtn = findViewById(R.id.homeBtn);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayTask.settoComplete();
-                if(displayTask != null){
-                    taskText.setText(displayTask.getTaskInfo());
-                    taskHeader.setText(displayTask.getTaskName());
-                }
+                Intent intent = new Intent(TaskDetailScreen.this, HomeScreen.class );
+                startActivity(intent);
             }
         });
-        if(displayTask != null){
-            taskText.setText(displayTask.getTaskInfo());
-            taskHeader.setText(displayTask.getTaskName());
-        }
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
