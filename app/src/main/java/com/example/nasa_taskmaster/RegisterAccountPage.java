@@ -41,6 +41,7 @@ public class RegisterAccountPage extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button regButton;
+    private Button textButton;
     private Luqol q = new Luqol();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class RegisterAccountPage extends AppCompatActivity {
         emailEditText = findViewById(R.id.editTextText21);
         passwordEditText = findViewById(R.id.editTextText31);
         regButton = findViewById(R.id.button21);
+        textButton = findViewById(R.id.button111);
         if (regButton == null) {
             Log.e("DEBUG", "regButton is null! Check setContentView layout.");
         }
@@ -66,6 +68,13 @@ public class RegisterAccountPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 handleRegClick();
+            }
+        });
+        textButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterAccountPage.this, Login_Page_V2_Fresh.class);
+                startActivity(intent);
             }
         });
     }
@@ -116,6 +125,8 @@ public class RegisterAccountPage extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         Log.d(TAG, db.toString() + "I am a user :)");
+                        Intent lintent = new Intent(RegisterAccountPage.this, Login_Page_V2_Fresh.class);
+                        startActivity(lintent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
