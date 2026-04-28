@@ -5,7 +5,30 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollIndicators="right"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
     tools:context=".AddTaskScreen">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/topNavBar5"
+        android:name="com.example.nasa_taskmaster.TopNavBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_top_nav_bar" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationBar5"
+        android:name="com.example.nasa_taskmaster.Navigation_Bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_navigation__bar" />
 
     <EditText
         android:id="@+id/textlocation"
@@ -25,7 +48,7 @@
         android:id="@+id/taskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="Enter Task Name"
         android:inputType="text"
@@ -50,27 +73,42 @@
 
     <Button
         android:id="@+id/addTaskBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="128dp"
         android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textlocation" />
+        app:layout_constraintTop_toBottomOf="@+id/textlocation"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/dueDateView"
+    <Button
+        android:id="@+id/dueDateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Enter Due Date"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="64dp"
+        android:text="Set Due Date"
+        app:layout_constraintBottom_toTopOf="@+id/addTaskBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textlocation"
         app:layout_constraintVertical_bias="0.0" />
+
+    <CalendarView
+        android:id="@+id/calendarView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/addTaskBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dueDateBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
