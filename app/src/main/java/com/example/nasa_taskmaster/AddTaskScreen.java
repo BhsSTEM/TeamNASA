@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 import java.time.LocalDate;
 
 public class AddTaskScreen extends AppCompatActivity {
-    String dueDate = "None";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +23,13 @@ public class AddTaskScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_task_screen);
 
-        CalendarView calendarView = findViewById(R.id.calendarView2);
-        calendarView.setVisibility(View.GONE);
-
         Button addTaskbtn = findViewById(R.id.addTaskBtn);
-        Button dueDateButton = findViewById(R.id.dueDateBtn);
 
         EditText newTaskName = findViewById(R.id.taskName);
         EditText newTaskDescription = findViewById(R.id.taskName);
         EditText newTaskLocation = findViewById(R.id.taskName);
+        EditText dueDate = findViewById(R.id.dueDateView);
 
-        dueDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendarView.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                dueDate = "" + month + " - " + dayOfMonth + " - " + year;
-            }
-        });
         addTaskbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -68,7 +47,7 @@ public class AddTaskScreen extends AppCompatActivity {
                 String  taskName = newTaskName.getText().toString();
                 String  taskDescription = newTaskDescription.getText().toString();
                 String  taskLocation = newTaskLocation.getText().toString();
-                String  taskDeadLine = dueDate;
+                String  taskDeadLine = dueDate.getText().toString();
                 LocalDate localDate = LocalDate.now();
                 String  taskstartDate = "";
                 int dayNum = localDate.getDayOfMonth();
@@ -83,12 +62,12 @@ public class AddTaskScreen extends AppCompatActivity {
                 }
                 Task newTask = new Task(taskName,
                         taskDescription,
-                        HomeScreen.user.getUsername(),
+                        "User 1",
                         taskLocation,
                         taskDeadLine,
-                        taskstartDate, "0");
+                        taskstartDate);
                 HomeScreen.addTasktoList(newTask);
-                HomeScreen.user.addTask(newTask);
+
                 startActivity(intent);
             }
 

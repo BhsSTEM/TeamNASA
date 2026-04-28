@@ -24,6 +24,14 @@ public class TaskMoreScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_task_more_screen);
 
+        Button homeBtn = findViewById(R.id.homeButton);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TaskMoreScreen.this, HomeScreen.class );
+                startActivity(intent);
+            }
+        });
 
                 recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
