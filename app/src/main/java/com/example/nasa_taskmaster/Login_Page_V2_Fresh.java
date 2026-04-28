@@ -96,6 +96,8 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class);
+                            startActivity(intent);
                         } else {
                             //Fail
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -116,8 +118,6 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
             return;
         }
         login(email, password);
-        Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class);
-        startActivity(intent);
         finish();
     }
     private void updateUI(FirebaseUser user) {
@@ -139,3 +139,5 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         Toast.makeText(this, "User has been logged out.", Toast.LENGTH_SHORT).show();
     }
 }
+
+// Many, many hours gone into just 143 lines of code.
