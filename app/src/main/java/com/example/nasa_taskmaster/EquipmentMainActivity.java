@@ -2,7 +2,10 @@ package com.example.nasa_taskmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class EquipmentMainActivity extends AppCompatActivity {
+public class EquipmentMainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private static ArrayList<Equipment> equipmentList = new ArrayList<>();
+
+    private String[] options = {};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +44,18 @@ public class EquipmentMainActivity extends AppCompatActivity {
         }
 
         //Code for Equipment dropdown - this will be for filters
-        AutoCompleteTextView equipmentDropdown = findViewById(R.id.categoryDropdown);
+        Spinner spinner = findViewById(R.id.categoryDropdown);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
 
         //recyclerView - scrollable list of equipment
         RecyclerView recyclerView = findViewById(R.id.equipmentRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        Adapter adapter = new Adapter(equipmentList, this);
-        recyclerView.setAdapter(adapter);
+        Adapter adapter1 = new Adapter(equipmentList, this);
+        recyclerView.setAdapter(adapter1);
 
 
         //Clicking Add Equipment Button
@@ -53,6 +63,13 @@ public class EquipmentMainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddNewEquipment.class);
             startActivity(intent);
         });
+    }
+
+    public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
+
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     public ArrayList<Equipment> getEquipmentList() {    return equipmentList;   }

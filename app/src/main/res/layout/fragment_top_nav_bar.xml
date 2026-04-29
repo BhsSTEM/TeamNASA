@@ -1,46 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/topNavBarFrame"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#40B0B0B0"
+    android:layout_height="64dp"
+    android:background="@color/white"
+    android:elevation="8dp"
     tools:context=".TopNavBar">
 
-    <!--<com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent"
-        app:cornerRadius="8dp"
-        app:icon="@android:drawable/ic_menu_send"
-        app:strokeColor="@android:color/black"
-        app:strokeWidth="2dp"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="6dp" />
-    -->
-    <ImageButton
-        android:id="@+id/BackButton"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:contentDescription="Settings Button"
-        app:tint="#000000"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <!-- Back Button -->
+    <LinearLayout
+        android:id="@+id/settingsNavItem"
+        android:layout_width="64dp"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@id/navBottomBorder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/CommunicationButton"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:contentDescription="Comms Button"
-        android:src="@android:drawable/ic_menu_send"
+        <ImageButton
+            android:id="@+id/BackButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="Back Button"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Back"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <!--Calendar Button-->
+
+    <LinearLayout
+        android:id="@+id/calendarButtonLayout"
+        android:layout_width="64dp"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@id/navBottomBorder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#000000"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/calendarButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="Calendar Button"
+            app:tint="#000000"
+            tools:src="@drawable/outline_ad_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Calendar"
+            android:textSize="10sp" />
+    </LinearLayout>
 
 
+    <!-- Bottom border line -->
+    <View
+        android:id="@+id/navBottomBorder"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
