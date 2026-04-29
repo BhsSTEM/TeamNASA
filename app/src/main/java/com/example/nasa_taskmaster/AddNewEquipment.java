@@ -66,7 +66,7 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
 
 
         // code for adding spinner for locations
-        Spinner spinner = findViewById(R.id.addLocationSpinner);
+        Spinner spinner = findViewById(R.id.addLocationSpinner2);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -74,10 +74,10 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
 
 
         //get all info once button is pressed
-        findViewById(R.id.addNewEquipmentButton).setOnClickListener(v -> {
+        findViewById(R.id.addTaskBtn).setOnClickListener(v -> {
 
             String equipmentName = "";
-            TextInputEditText equipmentNameInput = findViewById(R.id.equipmentNameInputBoxBox);
+            TextInputEditText equipmentNameInput = findViewById(R.id.taskName);
             if (equipmentNameInput.getText() != null && !equipmentNameInput.getText().toString().isEmpty()) {
                 equipmentName = equipmentNameInput.getText().toString().trim();
             }
@@ -96,7 +96,7 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
             }
 
             String status = "";
-            TextInputEditText statusInput = findViewById(R.id.equipmentStatusInputBoxBox);
+            TextInputEditText statusInput = findViewById(R.id.taskDescript);
             if (statusInput.getText() != null && !statusInput.getText().toString().isEmpty()) {
                 status = statusInput.getText().toString().trim();
             }

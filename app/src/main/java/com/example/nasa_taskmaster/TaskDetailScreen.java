@@ -21,24 +21,29 @@ public class TaskDetailScreen extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_task_detail_screen);
 
-        TextView taskText = findViewById(R.id.taskView);
-        TextView taskHeader = findViewById(R.id.taskHeader);
-        String taskInfo = getIntent().getStringExtra("TaskInfo");
-        String taskName = getIntent().getStringExtra("TaskName");
+        TextView taskOwnerText = findViewById(R.id.taskOwnerNameTextView);
+        TextView taskDescript = findViewById(R.id.taskDescript);
+        TextView taskTime = findViewById(R.id.taskTimeTextView);
+        TextView taskLocation = findViewById(R.id.taskLocationTextView);
+        TextView taskDueDate = findViewById(R.id.taskDueDtaTextView);
+        TextView taskStartDate = findViewById(R.id.taskStartDate);
+        TextView taskHeader = findViewById(R.id.taskHeaderDetail);
 
         Button completeBtn1 = findViewById(R.id.completeBtn);
         completeBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayTask.settoComplete();
-                if(displayTask != null){
-                    taskText.setText(displayTask.getTaskInfo());
-                    taskHeader.setText(displayTask.getTaskName());
-                }
+                    Intent intent = getIntent();
+                    startActivity(intent);
             }
         });
         if(displayTask != null){
-            taskText.setText(displayTask.getTaskInfo());
+            taskOwnerText.setText(displayTask.getTaskName());
+            taskDescript.setText(displayTask.getTaskDescription());
+            taskDueDate.setText(displayTask.getTaskDeadline());
+            taskLocation.setText(displayTask.getTaskLocation());
+            taskTime.setText(displayTask.getTaskTime());
+            taskStartDate.setText(displayTask.getTaskStartDate());
             taskHeader.setText(displayTask.getTaskName());
         }
 
@@ -47,5 +52,9 @@ public class TaskDetailScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public static void setDetailedTask(Task task){
+        displayTask = task;
     }
 }

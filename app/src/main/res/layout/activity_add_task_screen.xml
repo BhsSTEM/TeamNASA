@@ -10,7 +10,7 @@
     tools:context=".AddTaskScreen">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/topNavBar5"
+        android:id="@+id/topNavBar11"
         android:name="com.example.nasa_taskmaster.TopNavBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_top_nav_bar" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/navigationBar5"
+        android:id="@+id/navigationBar11"
         android:name="com.example.nasa_taskmaster.Navigation_Bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,85 +30,164 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_navigation__bar" />
 
-    <EditText
-        android:id="@+id/textlocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Enter the location"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDescription"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/taskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:ems="10"
-        android:hint="Enter Task Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/textDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Enter Description "
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/addTaskBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="256dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="128dp"
-        android:text="Add Task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textlocation"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/dueDateBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Set Due Date"
-        app:layout_constraintBottom_toTopOf="@+id/addTaskBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textlocation"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <CalendarView
-        android:id="@+id/calendarView2"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/addTaskBtn"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dueDateBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/topNavBar11">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:paddingHorizontal="32dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:showDividers="middle|end">
+
+            <!-- Equipment Name Label -->
+            <TextView
+                android:id="@+id/taskNameLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.08"
+                android:text="Task Name"
+                android:textAllCaps="true"
+                android:textSize="12sp" />
+
+            <!-- Equipment Name Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/equipmentNameInputBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Task Name"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Equipment Year Label -->
+
+            <!-- Equipment Year Input -->
+
+            <!-- Equipment Status Label -->
+            <TextView
+                android:id="@+id/equipmentStatusLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:letterSpacing="0.08"
+                android:text="Task Description"
+                android:textAllCaps="true"
+                android:textSize="12sp" />
+
+            <!-- Equipment Status Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/equipmentStatusInputBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskDescript"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Description"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="2dp"
+                android:alpha="0.2"
+                android:background="?attr/colorOutline" />
+
+            <!-- Equipment Description Label -->
+
+            <!-- Equipment Description Input -->
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="2dp"
+                android:alpha="0.2"
+                android:background="?attr/colorOutline" />
+
+            <Button
+                android:id="@+id/dueDateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Due  Date" />
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="2dp"
+                android:alpha="0.2"
+                android:background="?attr/colorOutline" />
+
+            <CalendarView
+                android:id="@+id/calendarView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="2dp"
+                android:alpha="0.2"
+                android:background="?attr/colorOutline" />
+
+            <!-- Location Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:letterSpacing="0.08"
+                android:text="Location"
+                android:textAllCaps="true"
+                android:textSize="12sp" />
+
+            <!-- Location Spinner -->
+            <Spinner
+                android:id="@+id/addLocationSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Map -->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/mapFragmentEquipmentDetails2"
+                android:name="com.example.nasa_taskmaster.MainMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="12dp"
+                tools:layout="@layout/fragment_support_map" />
+
+            <!-- Add Equipment Button -->
+            <Button
+                android:id="@+id/addTaskBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Add Task"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

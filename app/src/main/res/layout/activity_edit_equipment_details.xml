@@ -51,7 +51,7 @@
 
             <!-- Equipment Name Label -->
             <TextView
-                android:id="@+id/equipmentNameInputLabel"
+                android:id="@+id/taskNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Equipment Name"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="4dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/equipmentNameInputBoxBox"
+                    android:id="@+id/taskName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter equipment name"
@@ -136,7 +136,7 @@
                 android:layout_marginTop="4dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/equipmentStatusInputBoxBox"
+                    android:id="@+id/taskDescript"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter status"
@@ -200,7 +200,7 @@
 
             <!-- Location Spinner -->
             <Spinner
-                android:id="@+id/addLocationSpinner"
+                android:id="@+id/addLocationSpinner2"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="4dp" />
@@ -215,7 +215,7 @@
 
             <!-- Save Equipment Button -->
             <Button
-                android:id="@+id/addNewEquipmentButton"
+                android:id="@+id/addTaskBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save Edits"
