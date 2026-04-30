@@ -65,5 +65,4 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
         return taskFragmentList.size();
     }
 
-
 }
