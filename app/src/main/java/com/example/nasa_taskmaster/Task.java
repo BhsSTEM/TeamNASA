@@ -71,6 +71,10 @@ public class Task {
         return isCompplete;
     }
 
+    public void setTaskTime(double time){
+        taskTime = "" + time;
+    }
+
     public void settoComplete(){
         isCompplete = true;
     }

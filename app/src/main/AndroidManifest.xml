@@ -62,6 +62,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
+        <activity android:name=".CompleteTaskScreen"
+            android:exported="false"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA" />

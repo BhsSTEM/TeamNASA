@@ -22,7 +22,7 @@ public class TaskDetailScreen extends AppCompatActivity {
         setContentView(R.layout.activity_task_detail_screen);
 
         TextView taskOwnerText = findViewById(R.id.taskOwnerNameTextView);
-        TextView taskDescript = findViewById(R.id.taskDescript);
+        TextView taskDescript = findViewById(R.id.TaskDescriptionTextView);
         TextView taskTime = findViewById(R.id.taskTimeTextView);
         TextView taskLocation = findViewById(R.id.taskLocationTextView);
         TextView taskDueDate = findViewById(R.id.taskDueDtaTextView);
@@ -33,7 +33,8 @@ public class TaskDetailScreen extends AppCompatActivity {
         completeBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = getIntent();
+                    Intent intent = new Intent(TaskDetailScreen.this, CompleteTaskScreen.class);
+                    CompleteTaskScreen.setTask(displayTask);
                     startActivity(intent);
             }
         });
