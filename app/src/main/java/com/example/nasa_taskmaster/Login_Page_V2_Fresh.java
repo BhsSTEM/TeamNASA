@@ -26,6 +26,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Login_Page_V2_Fresh extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Firebase firebaser;
@@ -87,6 +92,11 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         }
     }
     private void login(String email, String password) {
+        q.log("Made it to login.");
+        q.warn("THIS IS AN INSECURE DEBUG BUILD. DO NOT USE.");
+        q.log(email);
+        q.log(password);
+        q.startProcess("Login");
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -98,13 +108,14 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                             updateUI(user);
                             Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class);
                             startActivity(intent);
+                            q.endProcess("Login");
                         } else {
                             //Fail
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(Login_Page_V2_Fresh.this, "Authentication failed: " + task.getException().getMessage(),
-
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            q.interruptProcess("Login");
+                            q.warn(email);
+                            q.warn(password);
+                            Toast.makeText(Login_Page_V2_Fresh.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

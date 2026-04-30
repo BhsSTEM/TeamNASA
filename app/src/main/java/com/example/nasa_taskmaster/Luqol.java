@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Luqol {
-    public ArrayList<String> processes;
+    public ArrayList<String> processes = new ArrayList<>();
     public String log(String m) {
         Log.d(TAG, m);
         return m;

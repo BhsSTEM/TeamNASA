@@ -32,6 +32,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class RegisterAccountPage extends AppCompatActivity {
 
     private Firebase firebaser;
