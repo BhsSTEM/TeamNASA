@@ -49,10 +49,10 @@ public class HomeScreen extends AppCompatActivity {
     public static  ArrayList<Task> taskssList= new ArrayList<>();
     private static  ArrayList<TaskFragment> dataList = new ArrayList<>();
 
+    private  RecyclerView accordian;
+    private HomeScreenAdapter adapter;
+    private Luqol q = new Luqol();
     public static User user;
-
-    private  static RecyclerView accordian;
-    private static HomeScreenAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
