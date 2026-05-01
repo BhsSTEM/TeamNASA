@@ -15,7 +15,14 @@ public class Equipment {
         this.year = year;
         this.status = status;
         this.description = description;
-        this.location = location;
+        if(location == null)
+        {
+            location = new Locations("No Location");
+        }
+        else
+        {
+            this.location = location;
+        }
     }
 
     //will remove later js to test how input works
@@ -65,6 +72,11 @@ public class Equipment {
 
     public void setLocation(Locations location) {
         this.location = location;
+    }
+
+    public String getLocationsName()
+    {
+        return location.getName();
     }
 
 

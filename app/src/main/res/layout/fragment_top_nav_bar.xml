@@ -73,7 +73,7 @@
     </LinearLayout>
 
 
-    <!-- Bottom border line -->
+    <!-- Bottom borderline -->
     <View
         android:id="@+id/navBottomBorder"
         android:layout_width="0dp"

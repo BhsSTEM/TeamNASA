@@ -7,7 +7,9 @@ public class Locations {
     private double lon;
 
     // Firebase needs a no-argument constructor
-    public Locations() {}
+    public Locations(String name) {
+        this.name = name;
+    }
 
     public Locations(String name, double lat, double lon)
     {

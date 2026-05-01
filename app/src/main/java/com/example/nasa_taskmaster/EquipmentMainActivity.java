@@ -2,9 +2,9 @@ package com.example.nasa_taskmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +21,7 @@ public class EquipmentMainActivity extends AppCompatActivity implements AdapterV
 
     private static ArrayList<Equipment> equipmentList = new ArrayList<>();
 
+    private String[] categories = {"Null", "Locations", "Status", "Year"};
     private String[] options = {};
 
     @Override
@@ -46,7 +47,7 @@ public class EquipmentMainActivity extends AppCompatActivity implements AdapterV
         //Code for Equipment dropdown - this will be for filters
         Spinner spinner = findViewById(R.id.categoryDropdown);
         spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -65,7 +66,53 @@ public class EquipmentMainActivity extends AppCompatActivity implements AdapterV
         });
     }
 
-    public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id)
+    {
+        ArrayList<String> templist = new ArrayList<>();
+
+        if(categories[position] == "Locations" )
+        {
+            //clear options that dont already exist
+            templist.clear();
+            //Log.d("EquipmentMainAcitivity", "Clear worked");
+
+            //add to temporary List
+            for(Equipment eq : equipmentList)
+            {
+                Log.d("EquipmentMainAcitivity", "Checking equipment List" + eq.getName() + "location " + eq.getLocation().getName());
+
+                for (String s : templist)
+                {
+                    if(!eq.getLocationsName().equals(s)) // if not already in list, add to list
+                    {
+                        templist.add(s);
+                        Log.d("EquipmentMainAcitivity", "Running through list and checking and add stuff");
+
+                    }
+                }
+
+            }
+
+            //set values from tempList to options
+            options = templist.toArray(new String[templist.size()]);
+            Log.d("EquipmentMainAcitivity", "set values worked");
+
+            int i = 0;
+            for (String s : options)
+            {
+                i++;
+                Log.d("EquipmentMainAcitivity", "Value " + i + ": " + s);
+            }
+
+        }
+        else if (categories[position] == "Status")
+        {
+
+        }
+        else if (categories[position] == "Year")
+        {
+
+        }
 
     }
 
