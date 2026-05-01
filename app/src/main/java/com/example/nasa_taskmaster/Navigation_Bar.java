@@ -88,6 +88,11 @@ public class Navigation_Bar extends Fragment {
 
         //Settings Button
 
+        view.findViewById(R.id.SettingsButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Settings.class);
+            startActivity(intent);
+        });
+
         //Map Button
 
         view.findViewById(R.id.MapButton).setOnClickListener(v -> {

@@ -49,8 +49,8 @@ public class HomeScreen extends AppCompatActivity {
     public static  ArrayList<Task> taskssList= new ArrayList<>();
     private static  ArrayList<TaskFragment> dataList = new ArrayList<>();
 
-    private  RecyclerView accordian;
-    private HomeScreenAdapter adapter;
+    private static RecyclerView accordian;
+    private static HomeScreenAdapter adapter;
     private Luqol q = new Luqol();
     public static User user;
     @Override
@@ -223,5 +223,4 @@ public class HomeScreen extends AppCompatActivity {
         adapter = new HomeScreenAdapter(dataList);
         accordian.setAdapter(adapter);
     }
-
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +13,10 @@
         android:roundIcon="@mipmap/licon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
+        <activity
+            android:name=".Settings"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".EditEquipmentDetails"
             android:exported="false" />
@@ -34,7 +40,6 @@
             android:exported="false" />
         <activity
             android:name=".EquipmentMainActivity"
-
             android:exported="false" />
         <activity
             android:name=".AddNewEquipment"
@@ -44,7 +49,6 @@
             android:exported="false" />
         <activity
             android:name=".HomeScreen"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,7 +56,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RegisterAccountPage"
             android:exported="false" />
@@ -61,11 +64,11 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA" />
-
     </application>
 
 </manifest>
