@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EquipmentMainActivity">
+    tools:context=".Map">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/topNavBar6"
+        android:id="@+id/topNavBar4"
         android:name="com.example.nasa_taskmaster.TopNavBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,36 +17,21 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_top_nav_bar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/equipmentRecyclerView"
-        android:layout_width="376dp"
-        android:layout_height="372dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/addNewEquipmentButtonOnEquipmentPage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryDropdown">
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/addNewEquipmentButtonOnEquipmentPage"
-        android:layout_width="376dp"
-        android:layout_height="82dp"
-        android:layout_marginBottom="108dp"
-        android:text="Add New Equipment"
-        app:icon="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/navigationBar"
+        android:id="@+id/fragmentContainerViewXX"
+        android:name="com.example.nasa_taskmaster.MainMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="54dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationBar4"
         android:name="com.example.nasa_taskmaster.Navigation_Bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,23 +41,31 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_navigation__bar" />
 
-    <AutoCompleteTextView
-        android:id="@+id/categoryDropdown"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="376dp"
+    <ImageButton
+        android:id="@+id/AddNewLocation"
+        android:layout_width="0dp"
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Select Equipment"
-        android:inputType="none"
-        android:visibility="visible"
+        android:layout_marginEnd="344dp"
+        android:contentDescription="Settings Button"
+        android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084"
-        tools:ignore="HardcodedText"
-        tools:visibility="visible" />
+        app:layout_constraintVertical_bias="0.772"
+        app:tint="#000000" />
+
+    <Spinner
+        android:id="@+id/showStuffSpinner"
+        android:layout_width="127dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

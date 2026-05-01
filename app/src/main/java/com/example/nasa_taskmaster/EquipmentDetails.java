@@ -2,6 +2,7 @@ package com.example.nasa_taskmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -10,7 +11,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class EquipmentDetails extends AppCompatActivity {
+
+    private ArrayList<Locations> locations;
+    private Locations selectedLocation = null;
+    private String location = "No Location";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +36,15 @@ public class EquipmentDetails extends AppCompatActivity {
         String equipmentStatus = intent.getStringExtra("equipmentStatus");
         int equipmentYear = intent.getIntExtra("equipmentYear", 0);
         String equipmentDescription = intent.getStringExtra("equipmentDescription");
+        String location = intent.getStringExtra("location");
+        Log.d("Equipment Details", "Location:" + location);
+        this.location = location;
 
-        TextView equipmentDetailsEquipmentName = findViewById(R.id.equipmentDetailsEquipmentName);
-        TextView equipmentDetailsEquipmentStatus = findViewById(R.id.equipmentDetailsEquipmentStatus);
-        TextView equipmentDetailsEquipmentYear = findViewById(R.id.equipmentDetailsEquipmentYear);
-        TextView equipmentDetailsEquipmentDescription = findViewById(R.id.equipmentDetailsEquipmentDescription);
+        TextView equipmentDetailsEquipmentName = findViewById(R.id.equipmentNameView);
+        TextView equipmentDetailsEquipmentStatus = findViewById(R.id.equipmentStatusView);
+        TextView equipmentDetailsEquipmentYear = findViewById(R.id.equipmentYearView);
+        TextView equipmentDetailsEquipmentDescription = findViewById(R.id.equipmentDetailsEquipmentDescriptionView);
+        TextView equipmentDetailsEquipmentLocation = findViewById(R.id.equipmentDetailsEquipmentLocationView);
 
         if(equipmentName != null) equipmentDetailsEquipmentName.setText(equipmentName);
 
@@ -41,6 +53,20 @@ public class EquipmentDetails extends AppCompatActivity {
         if(equipmentYear != 0) equipmentDetailsEquipmentYear.setText(String.valueOf(equipmentYear));
 
         if(equipmentDescription != null)  equipmentDetailsEquipmentDescription.setText(equipmentDescription);
+        
+        if(location != null) equipmentDetailsEquipmentLocation.setText(location);
+
+        //CODE TO SHOW LOCATION ON MAP FRAGMENT
+        //create fragment with location
+        getSupportFragmentManager().beginTransaction().add(R.id.mapFragmentEquipmentDetails, ShowLocationMapFragment.newInstance(location)).commit();
+
+        findViewById(R.id.saveDetailsButton).setOnClickListener(v -> {
+            Intent intent1 = new Intent(this, EditEquipmentDetails.class);
+            intent1.putExtra("equipmentName", equipmentName);
+            intent1.putExtra("equipmentYear", equipmentYear);
+            intent1.putExtra("location", location);
+            startActivity(intent1);
+        });
 
     }
 }

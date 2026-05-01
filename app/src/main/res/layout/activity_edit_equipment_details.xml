@@ -6,11 +6,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EquipmentDetails">
+    tools:context=".EditEquipmentDetails">
 
     <!-- Top Nav -->
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/topNavBar3"
+        android:id="@+id/topNavBar2"
         android:name="com.example.nasa_taskmaster.TopNavBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
 
     <!-- Bottom Nav -->
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/navigationBar3"
+        android:id="@+id/navigationBar2"
         android:name="com.example.nasa_taskmaster.Navigation_Bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,8 +36,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/topNavBar3"
-        app:layout_constraintBottom_toTopOf="@id/navigationBar3"
+        app:layout_constraintTop_toBottomOf="@id/topNavBar2"
+        app:layout_constraintBottom_toTopOf="@id/navigationBar2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -51,7 +51,7 @@
 
             <!-- Equipment Name Label -->
             <TextView
-                android:id="@+id/equipmentNameLabel"
+                android:id="@+id/taskNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Equipment Name"
@@ -59,15 +59,20 @@
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
 
-            <!-- Equipment Name -->
-            <TextView
-                android:id="@+id/equipmentNameView"
+            <!-- Equipment Name Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/equipmentNameInputBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp"
-                tools:text="Hubble Space Telescope" />
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter equipment name"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -79,7 +84,7 @@
 
             <!-- Equipment Year Label -->
             <TextView
-                android:id="@+id/equipmentYearLabel"
+                android:id="@+id/equipmentYearInputLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Equipment Year"
@@ -88,14 +93,21 @@
                 android:letterSpacing="0.08"
                 android:layout_marginTop="12dp" />
 
-            <!-- Equipment Year -->
-            <TextView
-                android:id="@+id/equipmentYearView"
+            <!-- Equipment Year Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/equipmentYearInputBoxtextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginTop="4dp"
-                tools:text="2003" />
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/equipmentYearInputBoxBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Enter year"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -116,14 +128,20 @@
                 android:letterSpacing="0.08"
                 android:layout_marginTop="12dp" />
 
-            <!-- Equipment Status -->
-            <TextView
-                android:id="@+id/equipmentStatusView"
+            <!-- Equipment Status Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/equipmentStatusInputBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginTop="4dp"
-                tools:text="Operational" />
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskDescript"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter status"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -144,15 +162,23 @@
                 android:letterSpacing="0.08"
                 android:layout_marginTop="12dp" />
 
-            <!-- Equipment Description -->
-            <TextView
-                android:id="@+id/equipmentDetailsEquipmentDescriptionView"
+            <!-- Equipment Description Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/equipmentDescriptionInputBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:lineSpacingExtra="4dp"
-                android:layout_marginTop="4dp"
-                tools:text="Used for deep-space imaging and orbital diagnostics." />
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/equipmentDescriptionInputBoxBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter description"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:gravity="top"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -164,7 +190,6 @@
 
             <!-- Location Label -->
             <TextView
-                android:id="@+id/equipmentLocationLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Location"
@@ -173,30 +198,27 @@
                 android:letterSpacing="0.08"
                 android:layout_marginTop="12dp" />
 
-            <!-- Location Value -->
-            <TextView
-                android:id="@+id/equipmentDetailsEquipmentLocationView"
+            <!-- Location Spinner -->
+            <Spinner
+                android:id="@+id/addLocationSpinner2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginTop="4dp"
-                tools:text="Low Earth Orbit" />
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp" />
 
             <!-- Map -->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/mapFragmentEquipmentDetails"
-                android:name="com.example.nasa_taskmaster.ShowLocationMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginTop="12dp"
                 tools:layout="@layout/fragment_support_map" />
 
-            <!-- Edit Details Button -->
+            <!-- Save Equipment Button -->
             <Button
-                android:id="@+id/saveDetailsButton"
+                android:id="@+id/addTaskBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Details"
+                android:text="Save Edits"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
 

@@ -1,8 +1,7 @@
 package com.example.nasa_taskmaster;
 
-
+import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.MyViewHolder>{
+public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.MyViewHolder>{
 
 
     private List<TaskFragment> taskFragmentList;
 
-    public HomeScreenAdapter(List<TaskFragment> dataList){
+    public CalendarDayAdapter(List<TaskFragment> dataList){
         this.taskFragmentList = dataList;
     }
 
@@ -38,31 +38,30 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
     @NonNull
     @Override
-    public HomeScreenAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CalendarDayAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_task, parent, false);
-        return new HomeScreenAdapter.MyViewHolder(itemView);
+        return new CalendarDayAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeScreenAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CalendarDayAdapter.MyViewHolder holder, int position) {
         TaskFragment taskItem = taskFragmentList.get(position);
         holder.taskName.setText(taskItem.getTask().getTaskName());
         holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("VIew More", "works");
+                Log.d("View More", "works");
                 Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
                 intent.putExtra("TaskInfo", taskItem.getTask().getTaskInfo());
-                TaskDetailScreen.setDetailedTask(taskItem.getTask());
                 v.getContext().startActivity(intent);
             }
         });
-        Log.d("TaskFrag pos", "" + position);
     }
 
     @Override
     public int getItemCount() {
         return taskFragmentList.size();
     }
+
 
 }

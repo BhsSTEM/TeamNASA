@@ -1,14 +1,14 @@
 package com.example.nasa_taskmaster;
-import com.google.firebase.firestore.FirebaseFirestore;
+
+import static java.lang.Integer.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,35 +18,29 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-
 import java.util.ArrayList;
 
-public class AddNewEquipment extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditEquipmentDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private String[] locationNames = {};
     private ArrayList<Locations> locationList;
     private Locations selectedLocation = null;
-
-    private FirebaseFirestore db;
+    private Equipment EquipmentEditied = null;
+    private ArrayList<Equipment> equipmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_new_equipment);
+        setContentView(R.layout.activity_edit_equipment_details);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Get instance of Firebase database
-        db = FirebaseFirestore.getInstance();
+        //Location Spinner Code
 
-        // Get reference for the database
-       // databaseReference = firebaseDatabase.getReference("testdatabaseneysa");
-
-        // Use static method to get locations
         locationList = Map.getLocations();
         if(locationList.isEmpty())
         {
@@ -64,22 +58,54 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
             locationNames[locationList.size()] = "Add New Location";
         }
 
-
-        // code for adding spinner for locations
         Spinner spinner = findViewById(R.id.addLocationSpinner2);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        Intent intent = getIntent();
+        String equipmentName = intent.getStringExtra("equipmentName");
+        int equipmentYear = intent.getIntExtra("equipmentYear", 0);
+        String location = intent.getStringExtra("location");
 
-        //get all info once button is pressed
+        //find what equipment is being edited
+        EquipmentMainActivity equipmentMainActivity = new EquipmentMainActivity();
+        equipmentList = equipmentMainActivity.getEquipmentList();
+
+        for(Equipment equipment : equipmentList) {
+           // Log.d("EquipmentDetails", "Equipment: " + equipment.getName() + " == " + equipmentName + "? : " + (equipment.getName().equals(equipmentName)));
+            if(equipment.getName().equals(equipmentName) && equipment.getYear() == equipmentYear)
+            {
+                EquipmentEditied = equipment;
+                //Log.d("Equipment Details", "Equipment found: " + equipment.getName() + " " + equipment.getYear());
+                break;
+            }
+        }
+
+        //set fields to have the equipment values
+        TextView equipmentDetailsEquipmentName = findViewById(R.id.taskName);
+        equipmentDetailsEquipmentName.setText(EquipmentEditied.getName()); //set Name
+
+        TextView equipmentDetailsEquipmentYear = findViewById(R.id.equipmentYearInputBoxBox);
+        equipmentDetailsEquipmentYear.setText(String.valueOf(EquipmentEditied.getYear())); //set Year
+
+        TextView equipmentDetailsEquipmentStatus = findViewById(R.id.taskDescript);
+        equipmentDetailsEquipmentStatus.setText(EquipmentEditied.getStatus()); //set Status
+
+        TextView equipmentDetailsEquipmentDescription = findViewById(R.id.equipmentDescriptionInputBoxBox);
+        equipmentDetailsEquipmentDescription.setText(EquipmentEditied.getDescription()); //set Description
+
+        //CODE TO SHOW LOCATION ON MAP FRAGMENT
+        //create fragment with location
+        getSupportFragmentManager().beginTransaction().add(R.id.mapFragmentEquipmentDetails, ShowLocationMapFragment.newInstance(location)).commit();
+
         findViewById(R.id.addTaskBtn).setOnClickListener(v -> {
 
-            String equipmentName = "";
+            String equipmentName1 = "";
             TextInputEditText equipmentNameInput = findViewById(R.id.taskName);
             if (equipmentNameInput.getText() != null && !equipmentNameInput.getText().toString().isEmpty()) {
-                equipmentName = equipmentNameInput.getText().toString().trim();
+                equipmentName1 = equipmentNameInput.getText().toString().trim();
             }
 
             String equipmentYearStr = "";
@@ -88,9 +114,9 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
                 equipmentYearStr = equipmentYearInput.getText().toString().trim();
             }
 
-            int equipmentYear = 0;
+            int equipmentYear1 = 0;
             try {
-                equipmentYear = Integer.parseInt(equipmentYearStr);
+                equipmentYear1 = parseInt(equipmentYearStr);
             } catch (NumberFormatException e) {
                 // Handle invalid year input
             }
@@ -101,53 +127,19 @@ public class AddNewEquipment extends AppCompatActivity implements AdapterView.On
                 status = statusInput.getText().toString().trim();
             }
 
-            if(equipmentName.isEmpty() && equipmentYearStr.isEmpty() && status.isEmpty() && selectedLocation == null)
-            {
-                Toast.makeText(this, "Please enter a field", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Create new equipment object
-            Equipment equipment = new Equipment(equipmentName, equipmentYear, status, "No Description", selectedLocation);
-
-            EquipmentMainActivity equipmentMainActivity = new EquipmentMainActivity();
-            ArrayList<Equipment> equipmentList = equipmentMainActivity.getEquipmentList();
-            equipmentList.add(equipment);
-            equipmentMainActivity.setEquipmentList(equipmentList);
-
-            // Add to database BEFORE navigating
-            db.collection("testdatabaseneysa")
-                    .add(equipment)
-                    .addOnSuccessListener(documentReference -> {
-                        // This code runs ONLY after the data is successfully saved
-                        Toast.makeText(AddNewEquipment.this, "Equipment saved!", Toast.LENGTH_SHORT).show();
-                        Log.d("FirestoreSuccess", "DocumentSnapshot written with ID: " + documentReference.getId());
-
-                        /* Navigate back AFTER success
-                        Intent intent = new Intent(AddNewEquipment.this, EquipmentMainActivity.class);
-                        startActivity(intent);
-                        finish();*/
-                    })
-                    .addOnFailureListener(e -> {
-                        // This runs if there is an error (like no internet or permission denied)
-                        Log.e("FirestoreError", "Error adding document", e);
-                        Toast.makeText(AddNewEquipment.this, "Failed to save: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    });
-
-            // Navigate back AFTER success
-            Intent intent = new Intent(this, EquipmentMainActivity.class);
-            startActivity(intent);
-            finish();
+          /*  Intent intent1 = new Intent(this, EquipmentMainActivity.class);
+            startActivity(intent1);*/
         });
+        
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         if(!locationNames[position].equals("No Location Selected") && !locationNames[position].equals("Add New Location"))
         {
             selectedLocation = locationList.get(position);
         }
-
         if(locationNames[position].equals("Add New Location")){
             Intent intent = new Intent(this, Map.class);
             startActivity(intent);

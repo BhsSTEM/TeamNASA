@@ -6,11 +6,16 @@ public class Equipment {
     private String status;
     private String description;
 
-    public Equipment(String name, int year, String status, String description) {
+    private Locations location;
+
+    public Equipment() {}
+
+    public Equipment(String name, int year, String status, String description, Locations location) {
         this.name = name;
         this.year = year;
         this.status = status;
         this.description = description;
+        this.location = location;
     }
 
     //will remove later js to test how input works
@@ -34,7 +39,7 @@ public class Equipment {
         return year;
     }
 
-       public void setYear(int year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -53,6 +58,15 @@ public class Equipment {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Locations getLocation() {
+        return location;
+    }
+
+    public void setLocation(Locations location) {
+        this.location = location;
+    }
+
 
     @Override
     public String toString() {

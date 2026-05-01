@@ -79,7 +79,21 @@ public class Navigation_Bar extends Fragment {
             startActivity(intent);
         });
 
+        //Task Button
+
+        view.findViewById(R.id.HomeButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), HomeScreen.class);
+            startActivity(intent);
+        });
+
+        //Settings Button
+
+        //Map Button
+
+        view.findViewById(R.id.MapButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Map.class);
+            startActivity(intent);
+        });
+
     }
 }
-
-

@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
         <activity
+            android:name=".EditEquipmentDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Map"
+            android:exported="false" />
+        <activity
+            android:name=".CalendarDayView"
+            android:exported="false" />
+        <activity
+            android:name=".CalenderScreen"
+            android:exported="false" />
+        <activity
             android:name=".TaskMoreScreen"
             android:exported="false" />
         <activity
@@ -21,7 +33,18 @@
             android:name=".AddTaskScreen"
             android:exported="false" />
         <activity
+            android:name=".EquipmentMainActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".AddNewEquipment"
+            android:exported="false" />
+        <activity
+            android:name=".EquipmentDetails"
+            android:exported="false" />
+        <activity
             android:name=".HomeScreen"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".RegisterAccountPage"
             android:exported="false" />
@@ -37,13 +61,11 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
