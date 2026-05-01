@@ -8,7 +8,7 @@
     tools:context=".EquipmentMainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/topNavBar"
+        android:id="@+id/topNavBar6"
         android:name="com.example.nasa_taskmaster.TopNavBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

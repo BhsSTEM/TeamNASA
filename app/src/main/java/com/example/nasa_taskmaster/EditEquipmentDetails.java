@@ -4,13 +4,11 @@ import static java.lang.Integer.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,7 +58,7 @@ public class EditEquipmentDetails extends AppCompatActivity implements AdapterVi
             locationNames[locationList.size()] = "Add New Location";
         }
 
-        Spinner spinner = findViewById(R.id.addLocationSpinner);
+        Spinner spinner = findViewById(R.id.addLocationSpinner2);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -86,13 +84,13 @@ public class EditEquipmentDetails extends AppCompatActivity implements AdapterVi
         }
 
         //set fields to have the equipment values
-        TextView equipmentDetailsEquipmentName = findViewById(R.id.equipmentNameInputBoxBox);
+        TextView equipmentDetailsEquipmentName = findViewById(R.id.taskName);
         equipmentDetailsEquipmentName.setText(EquipmentEditied.getName()); //set Name
 
         TextView equipmentDetailsEquipmentYear = findViewById(R.id.equipmentYearInputBoxBox);
         equipmentDetailsEquipmentYear.setText(String.valueOf(EquipmentEditied.getYear())); //set Year
 
-        TextView equipmentDetailsEquipmentStatus = findViewById(R.id.equipmentStatusInputBoxBox);
+        TextView equipmentDetailsEquipmentStatus = findViewById(R.id.taskDescript);
         equipmentDetailsEquipmentStatus.setText(EquipmentEditied.getStatus()); //set Status
 
         TextView equipmentDetailsEquipmentDescription = findViewById(R.id.equipmentDescriptionInputBoxBox);
@@ -102,10 +100,10 @@ public class EditEquipmentDetails extends AppCompatActivity implements AdapterVi
         //create fragment with location
         getSupportFragmentManager().beginTransaction().add(R.id.mapFragmentEquipmentDetails, ShowLocationMapFragment.newInstance(location)).commit();
 
-        findViewById(R.id.addNewEquipmentButton).setOnClickListener(v -> {
+        findViewById(R.id.addTaskBtn).setOnClickListener(v -> {
 
             String equipmentName1 = "";
-            TextInputEditText equipmentNameInput = findViewById(R.id.equipmentNameInputBoxBox);
+            TextInputEditText equipmentNameInput = findViewById(R.id.taskName);
             if (equipmentNameInput.getText() != null && !equipmentNameInput.getText().toString().isEmpty()) {
                 equipmentName1 = equipmentNameInput.getText().toString().trim();
             }
@@ -124,7 +122,7 @@ public class EditEquipmentDetails extends AppCompatActivity implements AdapterVi
             }
 
             String status = "";
-            TextInputEditText statusInput = findViewById(R.id.equipmentStatusInputBoxBox);
+            TextInputEditText statusInput = findViewById(R.id.taskDescript);
             if (statusInput.getText() != null && !statusInput.getText().toString().isEmpty()) {
                 status = statusInput.getText().toString().trim();
             }

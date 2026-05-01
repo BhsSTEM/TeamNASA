@@ -53,6 +53,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
                 Log.d("VIew More", "works");
                 Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
                 intent.putExtra("TaskInfo", taskItem.getTask().getTaskInfo());
+                TaskDetailScreen.setDetailedTask(taskItem.getTask());
                 v.getContext().startActivity(intent);
             }
         });
@@ -63,6 +64,5 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     public int getItemCount() {
         return taskFragmentList.size();
     }
-
 
 }

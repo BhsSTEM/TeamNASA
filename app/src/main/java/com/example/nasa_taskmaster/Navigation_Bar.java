@@ -97,5 +97,3 @@ public class Navigation_Bar extends Fragment {
 
     }
 }
-
-

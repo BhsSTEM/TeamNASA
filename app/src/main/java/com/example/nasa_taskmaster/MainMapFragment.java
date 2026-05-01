@@ -118,7 +118,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
         for(Locations locations : Map.getLocations()) {
             LatLng latLng = new LatLng(locations.getLat(), locations.getLon());
             String name = locations.getName();
-            
+
             currMarkers.add(new MarkerOptions().position(latLng)
                     .title(name));
         }
@@ -156,15 +156,15 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback {
                     printMarkers(mMap, currMarkers);
 
                     /**Log.d("Map Fragment", "This is where the list has been modified");
-                    int i = 0;
-                    for(Locations location : Map.getLocations())
-                    {
+                     int i = 0;
+                     for(Locations location : Map.getLocations())
+                     {
 
-                        LatLng latLng1 = new LatLng(location.getLat(), location.getLon());
-                        String name1 = location.getName();
-                        Log.d("MapFragment", "List:" + location.getName()+ i);
-                        i++;
-                    }*/
+                     LatLng latLng1 = new LatLng(location.getLat(), location.getLon());
+                     String name1 = location.getName();
+                     Log.d("MapFragment", "List:" + location.getName()+ i);
+                     i++;
+                     }*/
                 });
 
                 builder.setNegativeButton("Cancel", null);

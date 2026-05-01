@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/licon"
+        android:label="John Deere™ TaskMaster"
+        android:roundIcon="@mipmap/licon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NASATaskMaster">
         <activity
@@ -18,6 +16,12 @@
             android:exported="false" />
         <activity
             android:name=".Map"
+            android:exported="false" />
+        <activity
+            android:name=".CalendarDayView"
+            android:exported="false" />
+        <activity
+            android:name=".CalenderScreen"
             android:exported="false" />
         <activity
             android:name=".TaskMoreScreen"
@@ -29,17 +33,9 @@
             android:name=".AddTaskScreen"
             android:exported="false" />
         <activity
-            android:name=".HomeScreen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".EquipmentMainActivity"
-            android:exported="true" />
+
+            android:exported="false" />
         <activity
             android:name=".AddNewEquipment"
             android:exported="false" />
@@ -47,12 +43,29 @@
             android:name=".EquipmentDetails"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+            android:name=".HomeScreen"
 
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".RegisterAccountPage"
+            android:exported="false" />
+        <activity
+            android:name=".Login_Page_V2_Fresh"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBXRxaFwo3wHNy1m3Kw1Gt_Sw1jvyz0eRA" />
+
     </application>
 
 </manifest>
