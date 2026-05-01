@@ -32,6 +32,7 @@ import java.util.Map;
 public class User {
 
     private String username = "None";
+    public static boolean isSetup = false;
     private String uID = "None";
     private ArrayList<Task> tasksList;
     public static FirebaseAuth mAuth;
@@ -54,30 +55,13 @@ public class User {
     }
 
     public static User getUserfromUID(String uID){
-        if(dataBase == null || mAuth == null){
+        if(dataBase == null || !isSetup){
+            isSetup = true;
             dataBase = FirebaseFirestore.getInstance("parkerptestbase");
             dataBase.enableNetwork();
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             Log.d("Mauth is null 93", (mAuth.getCurrentUser() == null) + "");
-            if(mAuth.getCurrentUser() == null){
-                mAuth.signInWithEmailAndPassword("fakeuser@gmail.com", "password")
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> authResult) {
-                                if (authResult.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("sign in", "signInWithEmail:success");
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // If sign in fails, display a message to the user.
-                                Log.w("signInWithEmail:failure", e.getMessage() + "");
-                            }
-                        });
-            }
 
         }
 
@@ -85,28 +69,8 @@ public class User {
     }
 
     public static FirebaseAuth getMAuthh(){
-        if(mAuth == null){
+        if(!isSetup){
             mAuth = FirebaseAuth.getInstance();
-            mAuth.signInWithEmailAndPassword("fakeuser@gmail.com", "password")
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> authResult) {
-                            if (authResult.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("sign in", "signInWithEmail:success");
-                                mAuth.getCurrentUser().reload();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // If sign in fails, display a message to the user.
-                            Log.w("signInWithEmail:failure", e.getMessage() + "");
-                        }
-                    });
-
-
-            return mAuth;
         }
         return mAuth;
     }
