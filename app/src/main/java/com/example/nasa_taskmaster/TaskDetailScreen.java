@@ -39,12 +39,12 @@ public class TaskDetailScreen extends AppCompatActivity {
             }
         });
         if(displayTask != null){
-            taskOwnerText.setText(displayTask.getTaskName());
-            taskDescript.setText(displayTask.getTaskDescription());
-            taskDueDate.setText(displayTask.getTaskDeadline());
-            taskLocation.setText(displayTask.getTaskLocation());
-            taskTime.setText(displayTask.getTaskTime());
-            taskStartDate.setText(displayTask.getTaskStartDate());
+            taskOwnerText.setText("     Task Owner: " + displayTask.getTaskName());
+            taskDescript.setText("     Task Description: " + displayTask.getTaskDescription());
+            taskDueDate.setText("     Task Due Date: " + displayTask.getTaskDeadline());
+            taskLocation.setText("     Task Location: " + displayTask.getTaskLocation());
+            taskTime.setText("     Task Time: " + displayTask.getTaskTime());
+            taskStartDate.setText("     Task Start Date: " + displayTask.getTaskStartDate());
             taskHeader.setText(displayTask.getTaskName());
         }
 

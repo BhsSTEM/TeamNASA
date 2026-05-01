@@ -9,7 +9,7 @@ public class Task {
     private String taskName = "None";
     private String ownerName = "None";
     private String taskDescription = "None";
-    private String taskTime = "0";
+    private String taskTime = "-1";
     private String taskLocation = "None";
     private String taskDeadline = "None";
     private String taskStartDate = "None";
@@ -62,7 +62,7 @@ public class Task {
         return taskLocation;
     }
     public String getTaskTime(){
-        return taskTime + "";
+        return taskTime;
     }
     public String getTaskStartDate(){
         return taskStartDate;
@@ -72,7 +72,24 @@ public class Task {
     }
 
     public void setTaskTime(double time){
-        taskTime = "" + time;
+        double minutes = time % 60;
+        int hours = (int)(Math.floor(time/60.0));
+        Log.d(" Hour and Min: ", hours + "  " + minutes);
+
+        if(hours > 1){
+            taskTime = hours + " hours ";
+        }else if(hours == 1){
+            taskTime = hours + " hour ";
+        }
+
+        if(minutes > 1){
+            taskTime += minutes + " minutes ";
+        }else if(minutes == 1){
+            taskTime += minutes + " minute ";
+        }
+
+
+
     }
 
     public void settoComplete(){

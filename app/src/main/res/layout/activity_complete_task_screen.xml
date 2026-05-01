@@ -78,7 +78,7 @@
             <TextView
                 android:id="@+id/taskHeader3"
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
                 android:text="When did you start the task"
                 android:textAlignment="center"
                 android:textAllCaps="false"
@@ -87,6 +87,22 @@
 
             <View
                 android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+            <TextView
+                android:id="@+id/taskHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Format - Hour:Minute"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <View
+                android:id="@+id/view11"
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
@@ -100,7 +116,8 @@
                     android:layout_width="202dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Enter Time When Started"
+                    android:hint="Enter Time \n When Started"
+                    android:inputType="datetime|time"
                     android:singleLine="false"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -113,7 +130,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Enter Time When Started"
+                    android:hint="Enter Time \n When Started"
+                    android:inputType="datetime|time"
+                    android:singleLine="false"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="20sp"
@@ -137,6 +156,22 @@
 
             <View
                 android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+            <TextView
+                android:id="@+id/taskHeader5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Format - Hour:Minute"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <View
+                android:id="@+id/view13"
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
@@ -169,7 +204,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="sans-serif"
-                    android:hint="Enter Time When Completed"
+                    android:hint="Enter Time \n When Completed"
+                    android:inputType="datetime|time"
                     android:selectAllOnFocus="false"
                     android:singleLine="false"
                     android:textAlignment="center"
@@ -185,7 +221,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="sans-serif"
-                    android:hint="Enter Time When Completed"
+                    android:hint="Enter Time \n When Completed"
+                    android:inputType="datetime|time"
                     android:selectAllOnFocus="false"
                     android:singleLine="false"
                     android:textAlignment="center"

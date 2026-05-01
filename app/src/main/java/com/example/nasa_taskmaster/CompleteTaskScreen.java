@@ -1,5 +1,6 @@
 package com.example.nasa_taskmaster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +31,7 @@ public class CompleteTaskScreen extends AppCompatActivity {
         Log.d("has task:", "" + (displayTask != null));
         taskHeader.setText(displayTask.getTaskName());
 
-        TextView startTimeTextViewHour = findViewById(R.id.editTextTime2);
+        TextView startTimeTextViewHour = findViewById(R.id.editTextTime);
         TextView startTimeTextViewMin = findViewById(R.id.editTextTime4);
         TextView endTimeTextViewHour = findViewById(R.id.editTextTime5);
         TextView endTimeTextViewMin = findViewById(R.id.editTextTime2);
@@ -41,7 +42,7 @@ public class CompleteTaskScreen extends AppCompatActivity {
         justDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                endTime = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE).toString();
+                endTime = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE).toString();
                 taskJustDone = true;
 
             }
@@ -59,12 +60,16 @@ public class CompleteTaskScreen extends AppCompatActivity {
                 }
                 Log.d("Start time", startTime + "");
                 Log.d("End time", endTime + "");
-                Scanner scannerStart = new Scanner(startTime);
-                Scanner scannerEnd = new Scanner(endTime);
-                newTime = (scannerEnd.nextInt() + scannerEnd.nextInt()*60) - (scannerStart.nextInt() + scannerStart.nextInt()*60);
+                newTime = (getNums(endTimeTextViewMin.getText().toString()) + getNums(endTimeTextViewHour.getText().toString())*60)
+                        - (getNums(startTimeTextViewMin.getText().toString()) + getNums(startTimeTextViewHour.getText().toString())*60);
 
                 Log.d("task time", newTime + "");
                 displayTask.setTaskTime(newTime);
+                HomeScreen.user.updateTasktoFireBase(displayTask);
+
+                Intent intent = new Intent(CompleteTaskScreen.this, TaskDetailScreen.class);
+                TaskDetailScreen.setDetailedTask(displayTask);
+                startActivity(intent);
 
             }
         });
@@ -78,6 +83,20 @@ public class CompleteTaskScreen extends AppCompatActivity {
 
     public static void setTask(Task task){
         displayTask = task;
+    }
+
+    public int getNums(String inputStr){
+        int out = 0;
+        for(int i = 0; i < inputStr.length(); i++){
+            Log.d("Char at " + i +  " in " + inputStr, "" + inputStr.charAt(i));
+            if(out != 0){
+                out *= 10;
+                out += inputStr.charAt(i);
+            }else{
+                out += inputStr.charAt(i);
+            }
+        }
+        return out;
     }
 
 

@@ -136,6 +136,11 @@ public class User {
     private void updateTaskstoFireBase(ArrayList<Task> taskMap){
         updateTasktoDBHelper(taskMap);
     }
+    public void updateTasktoFireBase(Task task){
+        if(task != null){
+            dataBase.collection(uID).document(task.getTaskName()).set(task);
+        }
+    }
     private void updateTasktoDBHelper(ArrayList<Task>  taskMap){
         Log.d("adding data:",dataBase.collection(uID) + "");
         Log.d("data size:",tasksList.size() + "");
@@ -207,6 +212,7 @@ public class User {
     public ArrayList<Task> getTasksList(){
         return tasksList;
     }
+
 
 
 
