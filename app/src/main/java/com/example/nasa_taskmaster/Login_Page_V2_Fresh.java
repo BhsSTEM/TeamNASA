@@ -109,6 +109,7 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                             Intent intent = new Intent(Login_Page_V2_Fresh.this, HomeScreen.class);
                             startActivity(intent);
                             q.endProcess("Login");
+                            finish(); // Finish activity only on success
                         } else {
                             //Fail
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -121,15 +122,14 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
                 });
     }
     private void handleLoginClick() {
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString(); // Using username as password
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
         login(email, password);
-        finish();
     }
     private void updateUI(FirebaseUser user) {
         if (user != null) {
@@ -150,5 +150,3 @@ public class Login_Page_V2_Fresh extends AppCompatActivity {
         Toast.makeText(this, "User has been logged out.", Toast.LENGTH_SHORT).show();
     }
 }
-
-// Many, many hours gone into just 143 lines of code.
