@@ -1,6 +1,14 @@
 package com.example.nasa_taskmaster;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +17,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceFragmentCompat;
 
-public class Settings extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
 
+
+
+public class Settings extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private Luqol q = new Luqol();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +34,7 @@ public class Settings extends AppCompatActivity {
         //            .replace(R.id.settings, new SettingsFragment())
         //            .commit();
         //}
+        mAuth = FirebaseAuth.getInstance();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -35,5 +49,10 @@ public class Settings extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
+    }
+    public void logout() {
+        mAuth.getInstance()
+                .signOut();
+        Toast.makeText(this, "User has been logged out.", Toast.LENGTH_SHORT).show();
     }
 }

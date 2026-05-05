@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 public class User {
-
+    private Luqol q = new Luqol();
     private String username = "None";
     private String uID = "None";
     private ArrayList<Task> tasksList;
