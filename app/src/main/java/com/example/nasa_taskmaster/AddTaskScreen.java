@@ -40,7 +40,26 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
        Button addTaskbtn = findViewById(R.id.addTaskBtn);
        Button dueDateButton = findViewById(R.id.dueDateBtn);
 
-       EditText newTaskName = findViewById(R.id.taskName);
+        locationList = Map.getLocations();
+        if(locationList.isEmpty())
+        {
+            //so there is no null errors if the user currently has no locations
+            locationNames = new String[1+1];
+            locationNames[0] = "No Location Selected";
+            locationNames[1] = "Add New Location";
+        }
+        else //if(!(locationList.isEmpty()))
+        {
+            locationNames = new String[locationList.size()+1];
+            for (int i = 0; i < locationList.size(); i++) {
+                locationNames[i] = locationList.get(i).getName();
+            }
+            locationNames[locationList.size()] = "Add New Location";
+        }
+
+
+
+        EditText newTaskName = findViewById(R.id.taskName);
       EditText newTaskDescription = findViewById(R.id.taskDescript);
         Spinner spinner = findViewById(R.id.addLocationSpinner2);
         spinner.setOnItemSelectedListener(this);
@@ -80,7 +99,9 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
                 Intent intent1 = new Intent(AddTaskScreen.this, HomeScreen.class);
                 String  taskName = newTaskName.getText().toString();
                 String  taskDescription = newTaskDescription.getText().toString();
-                String  taskLocation = "";
+                String  taskLocationName = "";
+                double longitude = 0;
+                double latitude = 0;
                 String  taskDeadLine = dueDate;
                 LocalDate localDate = LocalDate.now();
                 String  taskstartDate = "";
@@ -97,7 +118,9 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
                 Task newTask = new Task(taskName,
                         taskDescription,
                         HomeScreen.user.getUsername(),
-                        taskLocation,
+                        taskLocationName,
+                        longitude,
+                        latitude,
                         taskDeadLine,
                         taskstartDate, "0");
                 HomeScreen.addTasktoList(newTask);
@@ -137,4 +160,5 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> parent) {
         selectedLocation = null;
     }
+
 }

@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class TaskDetailScreen extends AppCompatActivity {
     private static Task displayTask;
+    private static int displayTaskIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class TaskDetailScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     Intent intent = new Intent(TaskDetailScreen.this, CompleteTaskScreen.class);
-                    CompleteTaskScreen.setTask(displayTask);
+                    CompleteTaskScreen.setTask(displayTask, displayTaskIndex);
                     startActivity(intent);
             }
         });
@@ -55,7 +56,8 @@ public class TaskDetailScreen extends AppCompatActivity {
         });
     }
 
-    public static void setDetailedTask(Task task){
+    public static void setDetailedTask(Task task, int index){
         displayTask = task;
+        displayTaskIndex = index;
     }
 }

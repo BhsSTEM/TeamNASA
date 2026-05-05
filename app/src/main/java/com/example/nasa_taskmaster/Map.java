@@ -44,10 +44,13 @@ public class Map extends AppCompatActivity implements AdapterView.OnItemSelected
 
         if(locations.isEmpty())
         {
-            locations.add(new Locations("Chicago", 41.8781, -87.6298));
-            locations.add(new Locations("New York", 40.7128, -74.0060));
-            locations.add(new Locations("Los Angeles", 34.0522, -118.2437));
-            locations.add(new Locations("Houston", 29.7604, -95.3698));
+            if(HomeScreen.user.getTasksList().size() > 0){
+                ArrayList<Task> taskArrayList = HomeScreen.user.getTasksList();
+                for(int i = 0; i < taskArrayList.size(); i++){
+                    Task task = taskArrayList.get(i);
+                    locations.add(new Locations(task.getTaskLocation(), task.getLongitude(), task.getLatitude()));
+                }
+            }
         }
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerViewXX, MainMapFragment.newInstance(false)).commit();

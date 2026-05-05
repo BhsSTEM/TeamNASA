@@ -19,6 +19,7 @@ import java.util.Scanner;
 
 public class CompleteTaskScreen extends AppCompatActivity {
     private static Task displayTask;
+    private static int displayTaskindex;
     private String endTime;
     private boolean taskJustDone = false;
 
@@ -42,7 +43,7 @@ public class CompleteTaskScreen extends AppCompatActivity {
         justDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                endTime = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE).toString();
+                endTime = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE).toString();
                 taskJustDone = true;
 
             }
@@ -67,8 +68,9 @@ public class CompleteTaskScreen extends AppCompatActivity {
                 displayTask.setTaskTime(newTime);
                 HomeScreen.user.updateTasktoFireBase(displayTask);
 
-                Intent intent = new Intent(CompleteTaskScreen.this, TaskDetailScreen.class);
-                TaskDetailScreen.setDetailedTask(displayTask);
+                Intent intent = new Intent(CompleteTaskScreen.this, HomeScreen.class);
+                HomeScreen.taskssList.remove(displayTaskindex);
+                HomeScreen.updateTaskFrags();
                 startActivity(intent);
 
             }
@@ -81,8 +83,9 @@ public class CompleteTaskScreen extends AppCompatActivity {
         });
     }
 
-    public static void setTask(Task task){
+    public static void setTask(Task task, int index){
         displayTask = task;
+        displayTaskindex = index;
     }
 
     public int getNums(String inputStr){

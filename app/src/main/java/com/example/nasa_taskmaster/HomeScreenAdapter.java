@@ -46,17 +46,17 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     @Override
     public void onBindViewHolder(@NonNull HomeScreenAdapter.MyViewHolder holder, int position) {
         TaskFragment taskItem = taskFragmentList.get(position);
-        holder.taskName.setText(taskItem.getTask().getTaskName());
-        holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("VIew More", "works");
-                Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
-                intent.putExtra("TaskInfo", taskItem.getTask().getTaskInfo());
-                TaskDetailScreen.setDetailedTask(taskItem.getTask());
-                v.getContext().startActivity(intent);
-            }
-        });
+            holder.taskName.setText(taskItem.getTask().getTaskName());
+            holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("VIew More", "works");
+                    Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
+                    intent.putExtra("TaskInfo", taskItem.getTask().getTaskInfo());
+                    TaskDetailScreen.setDetailedTask(taskItem.getTask(), position);
+                    v.getContext().startActivity(intent);
+                }
+            });
         Log.d("TaskFrag pos", "" + position);
     }
 

@@ -57,7 +57,7 @@ public class User {
     public static User getUserfromUID(String uID){
         if(dataBase == null || !isSetup){
             isSetup = true;
-            dataBase = FirebaseFirestore.getInstance("parkerptestbase");
+            dataBase = FirebaseFirestore.getInstance("teamdatabase");
             dataBase.enableNetwork();
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -133,13 +133,15 @@ public class User {
                         DocumentSnapshot docRef = docRefs.get(i);
                         String taskName = docRef.get("taskName") + "";
                         String ownerName = docRef.get("ownerName") + "";
-                        String taskLocation= docRef.get("taskLocation") + "";
+                        String taskLocationName = docRef.get("taskLocationName") + "";
+                        double taskLongitude = (double)(docRef.get("latitude")) + 0.0;
+                        double taskLatitude = (double)(docRef.get("longitude"))+ 0.0;
                         String taskDescription= docRef.get("taskDescription") + "";
                         String taskDeadline= docRef.get("taskDeadline") + "";
                         String taskStartDate=docRef.get("taskStartDate") + "";
                         String taskTime= docRef.get("taskTime") + "";
 
-                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocation, taskDeadline, taskStartDate, taskTime);
+                        Task newTask = new Task(taskName, taskDescription, ownerName, taskLocationName,taskLatitude,taskLongitude, taskDeadline, taskStartDate, taskTime);
                         HomeScreen.taskssList.add(newTask);
 
 

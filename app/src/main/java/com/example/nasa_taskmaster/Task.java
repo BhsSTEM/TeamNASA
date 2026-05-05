@@ -14,6 +14,8 @@ public class Task {
     private String taskDeadline = "None";
     private String taskStartDate = "None";
     private boolean isCompplete = false;
+    private double longitude = 0;
+    private double latitude = 0;
 
 
     public Task(String name, String taskDescription, String ownerName){
@@ -31,11 +33,13 @@ public class Task {
         this.taskStartDate = taskStartDate;
     }
 
-    public Task(String name, String taskDescription, String ownerName, String taskLocation, String taskDeadline, String taskStartDate, String taskTime){
+    public Task(String name, String taskDescription, String ownerName, String taskLocation, double longitude, double latitude, String taskDeadline, String taskStartDate, String taskTime){
         this.taskName = name;
         this.taskDescription = taskDescription;
         this.ownerName = ownerName;
         this.taskLocation = taskLocation;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.taskDeadline = taskDeadline;
         this.taskStartDate = taskStartDate;
         this.taskTime = taskTime;
@@ -95,6 +99,9 @@ public class Task {
     public void settoComplete(){
         isCompplete = true;
     }
+    public boolean isComplete(){
+        return isCompplete;
+    }
     public String getTaskInfo(){
         String info = "";
         info += "Task Name:   " +  taskName;
@@ -133,5 +140,19 @@ public class Task {
     }
 
 
+    public double getLongitude() {
+        return longitude;
+    }
 
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 }
