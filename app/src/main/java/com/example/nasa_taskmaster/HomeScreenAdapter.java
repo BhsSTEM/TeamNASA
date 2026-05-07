@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.MyViewHolder>{
@@ -46,17 +48,19 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     @Override
     public void onBindViewHolder(@NonNull HomeScreenAdapter.MyViewHolder holder, int position) {
         TaskFragment taskItem = taskFragmentList.get(position);
+        if(getDiffDays(taskItem.getTask().getTaskDeadline())) {
             holder.taskName.setText(taskItem.getTask().getTaskName());
             holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("VIew More", "works");
+                    Log.d("View More", "works");
                     Intent intent = new Intent(v.getContext(), TaskDetailScreen.class);
                     intent.putExtra("TaskInfo", taskItem.getTask().getTaskInfo());
                     TaskDetailScreen.setDetailedTask(taskItem.getTask(), position);
                     v.getContext().startActivity(intent);
                 }
             });
+        }
         Log.d("TaskFrag pos", "" + position);
     }
 
@@ -64,5 +68,35 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     public int getItemCount() {
         return taskFragmentList.size();
     }
+
+    private int[] convertToDate(String date){
+        int[] out = new int[3];
+
+        if(!date.isEmpty()){
+            String[] strings = date.split("-");
+            for(int i = 0; i < strings.length; i++){
+                Log.d("String + " + i, strings[i]);
+                int num = 0;
+                int place = 0;
+                num = Integer.parseInt(strings[i].trim());
+                Log.d("Out Num at " + i, num + "");
+                out[i] = num;
+            }
+        }
+
+        return out;
+    }
+
+
+    public boolean getDiffDays(String date){
+        int[] newdate = convertToDate(date);
+        Log.d("Year: ", newdate[2] + "");
+        Log.d("Month: ", newdate[0] + "");
+        Log.d("Day: ", newdate[1] + "");
+        LocalDate localDate = LocalDate.of(newdate[2], newdate[0], newdate[1]);
+        LocalDate todayDate = LocalDate.now();
+        return ((localDate.isBefore(todayDate.plusDays(31))) && (localDate.isAfter(todayDate)));
+    }
+
 
 }

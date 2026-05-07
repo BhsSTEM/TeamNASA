@@ -16,6 +16,7 @@ public class Task {
     private boolean isCompplete = false;
     private double longitude = 0;
     private double latitude = 0;
+    private boolean Isyearly = false;
 
 
     public Task(String name, String taskDescription, String ownerName){
@@ -154,5 +155,13 @@ public class Task {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public boolean isIsyearly() {
+        return Isyearly;
+    }
+
+    public void setIsyearly(boolean isyearly) {
+        Isyearly = isyearly;
     }
 }
