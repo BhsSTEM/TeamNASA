@@ -36,13 +36,14 @@
         android:width="128dp"
         android:height="40dp"
         android:text="Logout"
+        android:visibility="invisible"
+        app:backgroundTint="#AA0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.678"
-        app:backgroundTint="#AA0000"
         tools:ignore="ExtraText" />
 
     <Button
