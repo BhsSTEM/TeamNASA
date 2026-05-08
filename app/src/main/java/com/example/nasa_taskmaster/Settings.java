@@ -1,29 +1,22 @@
 package com.example.nasa_taskmaster;
 
-import com.google.firebase.Firebase;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceFragmentCompat;
-
-import com.google.firebase.auth.FirebaseAuth;
-
 
 
 public class Settings extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Luqol q = new Luqol();
+    Button logoutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +32,15 @@ public class Settings extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.navigationBar4, new Navigation_Bar())
-                .commit();
+        logoutButton = findViewById(R.id.button4);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                q.logout();
+                Intent intent = new Intent(Settings.this, Login_Page_V2_Fresh.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
