@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.example.nasa_taskmaster.User.*;
@@ -153,7 +154,9 @@ public class HomeScreen extends AppCompatActivity {
         accordian = findViewById(R.id.accordianLayout);
         accordian.setLayoutManager(new LinearLayoutManager(this));
 
-        dataList = taskFragments;
+
+
+        dataList = getTasksNearMe(taskFragments);
         adapter = new HomeScreenAdapter(dataList);
         accordian.setAdapter(adapter);
 
@@ -223,6 +226,49 @@ public class HomeScreen extends AppCompatActivity {
         adapter = new HomeScreenAdapter(dataList);
         accordian.setAdapter(adapter);
     }
+    private int[] convertToDate(String date){
+        int[] out = new int[3];
+
+        if(!date.isEmpty()){
+            String[] strings = date.split("-");
+            for(int i = 0; i < strings.length; i++){
+                Log.d("String + " + i, strings[i]);
+                int num = 0;
+                int place = 0;
+                num = Integer.parseInt(strings[i].trim());
+                Log.d("Out Num at " + i, num + "");
+                out[i] = num;
+            }
+        }
+
+        return out;
+    }
+
+
+    public boolean getDiffDays(String date){
+        int[] newdate = convertToDate(date);
+        Log.d("Year: ", newdate[2] + "");
+        Log.d("Month: ", newdate[0] + "");
+        Log.d("Day: ", newdate[1] + "");
+        LocalDate localDate = LocalDate.of(newdate[2], newdate[0], newdate[1]);
+        LocalDate todayDate = LocalDate.now();
+        return ((localDate.isBefore(todayDate.plusDays(31))) && (localDate.isAfter(todayDate)));
+    }
+
+    public ArrayList<TaskFragment> getTasksNearMe(ArrayList<TaskFragment> taskFrags){
+        ArrayList<TaskFragment> out = new ArrayList<>();
+
+        for(int i = 0; i < taskFrags.size(); i++){
+            if(getDiffDays(taskFrags.get(i).getTask().getTaskDeadline()) &&
+            !taskFrags.get(i).getTask().isComplete()){
+                out.add(taskFrags.get(i));
+            }
+        }
+
+        return out;
+    }
+
+
 
 
 
