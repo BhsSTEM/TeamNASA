@@ -164,4 +164,7 @@ public class Task {
     public void setIsyearly(boolean isyearly) {
         Isyearly = isyearly;
     }
+    public void setTaskDueDate(int[] date){
+        this.taskDeadline = date[0] + " - " + date[1] + " - " + date[2];
+    }
 }

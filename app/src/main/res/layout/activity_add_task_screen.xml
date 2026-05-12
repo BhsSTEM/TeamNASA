@@ -132,50 +132,8 @@
                 android:text="Set Due  Date" />
 
             <View
-                android:id="@+id/view10"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="2dp"
-                android:alpha="0.2"
-                android:background="?attr/colorOutline" />
-
-            <CalendarView
-                android:id="@+id/calendarView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <View
-                android:id="@+id/view14"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="2dp"
-                android:alpha="0.2"
-                android:background="?attr/colorOutline" />
-
-            <RadioButton
-                android:id="@+id/rangeBtn1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/JohnDereGreen"
-                android:backgroundTintMode="add"
-                android:buttonTint="@color/JohnDereGreen"
-                android:text="Repeat"
-                android:textSize="16sp" />
-
-            <View
-                android:id="@+id/view15"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="2dp"
-                android:alpha="0.2"
-                android:background="?attr/colorOutline" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="24dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="2dp"
                 android:alpha="0.2"

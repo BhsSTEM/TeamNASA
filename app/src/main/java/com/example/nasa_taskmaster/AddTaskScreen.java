@@ -3,6 +3,7 @@ package com.example.nasa_taskmaster;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,10 +23,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    String dueDate = "None";
-    private String[] locationNames = {};
-    private ArrayList<Locations> locationList;
-    private Locations selectedLocation = null;
+    static String dueDate = "None";
+    static String newTaskStringName = "Enter Task Name";
+    private static String[] locationNames = {};
+    private static ArrayList<Locations> locationList;
+    private static Locations selectedLocation = null;
+    private static int[] startRange;
+    private static int[] endRange;
+    private static int amountOfTasks = 0;
 
 
     @Override
@@ -34,14 +39,10 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_task_screen);
 
-        CalendarView calendarView = findViewById(R.id.calendarView2);
-       calendarView.setVisibility(View.GONE);
 
        Button addTaskbtn = findViewById(R.id.addTaskBtn);
        Button dueDateButton = findViewById(R.id.dueDateBtn);
-       Button repeatBtn = findViewById(R.id.rangeBtn1);
 
-        repeatBtn.setVisibility(View.GONE);
 
         locationList = Map.getLocations();
         if(locationList.isEmpty())
@@ -70,30 +71,29 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        newTaskName.setText(newTaskStringName);
+
+        newTaskName.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                newTaskStringName = newTaskName.getText().toString();
+                return false;
+            }
+        });
+
 
         dueDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendarView.setVisibility(View.VISIBLE);
-                repeatBtn.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                dueDate = "" + month + " - " + dayOfMonth + " - " + year;
-            }
-        });
-        repeatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddTaskScreen.this, RepeatTaskScreen.class);
                 startActivity(intent);
             }
         });
+
+
+
+
         addTaskbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -128,14 +128,16 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
                 }
                 Task newTask = new Task(taskName,
                         taskDescription,
-                        HomeScreen.user.getUsername(),
+                        "Yours",
                         taskLocationName,
                         longitude,
                         latitude,
                         taskDeadLine,
                         taskstartDate, "0");
-                HomeScreen.addTasktoList(newTask);
-                HomeScreen.user.addTask(newTask);
+                createTask(newTask, startRange, endRange, amountOfTasks);
+
+
+
                 startActivity(intent1);
             }
 
@@ -170,6 +172,54 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         selectedLocation = null;
+    }
+
+    public static void setRange(int[] startRange, int[] endRange, int amount){
+        startRange = startRange;
+        endRange = endRange;
+        amountOfTasks = amount;
+    }
+
+    public static void clearTask(){
+       dueDate = "None";
+       locationNames = new String[]{};
+        locationList = new ArrayList<>();
+        selectedLocation = null;
+        startRange = new int[3];
+        endRange  = new int[3];
+        amountOfTasks = 0;
+    }
+
+    public void createTask(Task task, int[] start, int[] end, int amount){
+        if(amount <= 1){
+            Log.d("Only added one task", "");
+            task.setTaskDueDate(start);
+            HomeScreen.addTasktoList(task);
+            HomeScreen.user.addTask(task);
+        }else{
+            int days = (int)(convertToDays(start) - convertToDays(end));
+            for(int i = 0; i < amount; i++){
+                Task newTask = task;
+                newTask.setTaskDueDate(convertLocalToArray(LocalDate.of(start[2], start[0], start[1]).plusDays(days * (i/amount))));
+                HomeScreen.addTasktoList(newTask);
+                HomeScreen.user.addTask(newTask);
+            }
+            Log.d("Added task", amount + "");
+
+        }
+    }
+
+    private long convertToDays(int[] date){
+        LocalDate localDate = LocalDate.of(date[2], date[0], date[1]);
+        return (int)(localDate.toEpochDay());
+    }
+
+    public int[] convertLocalToArray(LocalDate localDate){
+        int[] out = new int[3];
+        out[0] = localDate.getMonth().getValue();
+        out[1] = localDate.getDayOfMonth();
+        out[2] = localDate.getYear();
+        return out;
     }
 
 }

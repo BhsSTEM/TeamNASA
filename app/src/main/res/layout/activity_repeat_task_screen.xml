@@ -39,8 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="64dp"
+        android:layout_marginBottom="72dp"
         android:paddingLeft="16dp"
         android:paddingEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topNavBar10"
         tools:layout_editor_absoluteX="16dp">
 
@@ -48,6 +50,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="#FFFFFF"
+                android:checked="false"
+                android:showText="false"
+                android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
+                android:text="Schedule Task"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/repeatHeader5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Due Date"
+                android:textAlignment="center"
+                android:textSize="24dp" />
+
+            <View
+                android:id="@+id/view14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <CalendarView
+                android:id="@+id/calendarView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
 
             <TextView
                 android:id="@+id/repeatHeader1"
@@ -64,11 +101,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
-            <Button
-                android:id="@+id/startRangeBtn"
+            <TextView
+                android:id="@+id/repeatHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Set Start Date" />
+                android:lineSpacingExtra="12sp"
+                android:text="Select The Start Date of the Task"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="normal" />
 
             <View
                 android:id="@+id/view27"
@@ -81,20 +122,24 @@
                 android:layout_height="wrap_content" />
 
             <View
-                android:id="@+id/view25"
+                android:id="@+id/view28"
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
-            <Button
-                android:id="@+id/setEndDateBtn"
+            <TextView
+                android:id="@+id/repeatHeader3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Set End Date" />
+                android:lineSpacingExtra="12sp"
+                android:text="Select The End Date of the Task"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="normal" />
 
             <View
-                android:id="@+id/view28"
+                android:id="@+id/view25"
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="16dp" />
 
             <CalendarView
                 android:id="@+id/calendarView4"
@@ -120,78 +165,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="8dp" />
 
-            <TextView
-                android:id="@+id/yealyHeader"
+            <Button
+                android:id="@+id/yearlyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Every Year"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                android:text="Repeat Every Year" />
 
             <View
                 android:id="@+id/view32"
                 android:layout_width="match_parent"
-                android:layout_height="4dp" />
+                android:layout_height="8dp" />
 
-            <ToggleButton
-                android:id="@+id/yearlyBtn"
+            <Button
+                android:id="@+id/montlyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Every Year"
-                android:textAlignment="center"
-                android:textOff="Off"
-                android:textOn="On"
-                android:textSize="16sp"
-                android:textStyle="italic" />
+                android:text="Repeat Each Month" />
 
             <View
                 android:id="@+id/view30"
                 android:layout_width="match_parent"
                 android:layout_height="8dp" />
 
-            <TextView
-                android:id="@+id/yealyHeader2"
+            <Button
+                android:id="@+id/weeklyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Each Month"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                android:text="Repeat Each Week" />
 
             <View
                 android:id="@+id/view33"
                 android:layout_width="match_parent"
-                android:layout_height="4dp" />
+                android:layout_height="32dp" />
 
-            <ToggleButton
-                android:id="@+id/monthlyBtn"
+            <Button
+                android:id="@+id/backToAddTaskBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Every Month" />
-
-            <View
-                android:id="@+id/view31"
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
-
-            <TextView
-                android:id="@+id/yealyHeader3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Each Week"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <View
-                android:id="@+id/view34"
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-            <ToggleButton
-                android:id="@+id/weeklyBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Every Week" />
+                android:text="Back to Add Task Screen" />
 
         </LinearLayout>
     </ScrollView>

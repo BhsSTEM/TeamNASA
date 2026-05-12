@@ -165,6 +165,7 @@ public class HomeScreen extends AppCompatActivity {
         addTaskBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                AddTaskScreen.clearTask();
                 Intent intent = new Intent(HomeScreen.this, AddTaskScreen.class);
                 startActivity(intent);
             }
