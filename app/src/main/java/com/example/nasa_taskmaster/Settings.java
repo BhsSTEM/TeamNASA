@@ -2,11 +2,13 @@ package com.example.nasa_taskmaster;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +22,8 @@ public class Settings extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Luqol q = new Luqol();
     Button logoutButton;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    Switch LDSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,7 @@ public class Settings extends AppCompatActivity {
         //}
         mAuth = FirebaseAuth.getInstance();
         ActionBar actionBar = getSupportActionBar();
+        LDSwitch = findViewById(R.id.switch1);
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -44,6 +49,13 @@ public class Settings extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        LDSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onDarkModeToggled(true);
+            } else {
+                onDarkModeToggled(false);
+            }
+        });
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -52,12 +64,6 @@ public class Settings extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
     }
-    public void logout() {
-        mAuth.getInstance()
-                .signOut();
-        Toast.makeText(this, "User has been logged out.", Toast.LENGTH_SHORT).show();
-    }
-
     public void onDarkModeToggled(boolean isDarkMode) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putBoolean("dark_mode", isDarkMode).apply();
