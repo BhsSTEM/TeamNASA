@@ -39,6 +39,9 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
 
        Button addTaskbtn = findViewById(R.id.addTaskBtn);
        Button dueDateButton = findViewById(R.id.dueDateBtn);
+       Button repeatBtn = findViewById(R.id.rangeBtn1);
+
+        repeatBtn.setVisibility(View.GONE);
 
         locationList = Map.getLocations();
         if(locationList.isEmpty())
@@ -72,6 +75,7 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 calendarView.setVisibility(View.VISIBLE);
+                repeatBtn.setVisibility(View.VISIBLE);
             }
         });
 
@@ -81,6 +85,13 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 dueDate = "" + month + " - " + dayOfMonth + " - " + year;
+            }
+        });
+        repeatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddTaskScreen.this, RepeatTaskScreen.class);
+                startActivity(intent);
             }
         });
         addTaskbtn.setOnClickListener(new View.OnClickListener(){
