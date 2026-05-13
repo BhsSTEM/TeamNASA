@@ -33,9 +33,7 @@ public class CompleteTaskScreen extends AppCompatActivity {
         taskHeader.setText(displayTask.getTaskName());
 
         TextView startTimeTextViewHour = findViewById(R.id.editTextTime);
-        TextView startTimeTextViewMin = findViewById(R.id.editTextTime4);
         TextView endTimeTextViewHour = findViewById(R.id.editTextTime5);
-        TextView endTimeTextViewMin = findViewById(R.id.editTextTime2);
         Button justDoneBtn = findViewById(R.id.button5);
         Button completeBtn = findViewById(R.id.button6);
 
@@ -53,7 +51,7 @@ public class CompleteTaskScreen extends AppCompatActivity {
             public void onClick(View v) {
                 displayTask.settoComplete();
                 String oldTime = displayTask.getTaskTime();
-                String startTime = startTimeTextViewHour.getText().toString() + " : " + startTimeTextViewMin.getText().toString();
+                String startTime = startTimeTextViewHour.getText().toString();
                 int newTime = 0;
 
                 if(!taskJustDone) {

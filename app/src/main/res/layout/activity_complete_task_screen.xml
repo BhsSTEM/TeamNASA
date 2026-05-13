@@ -113,10 +113,10 @@
 
                 <EditText
                     android:id="@+id/editTextTime"
-                    android:layout_width="202dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Enter Time \n When Started"
+                    android:hint="Enter Time When Started \n (Hour:Min Format) "
                     android:inputType="datetime|time"
                     android:singleLine="false"
                     android:textAlignment="center"
@@ -124,19 +124,6 @@
                     android:textSize="20sp"
                     android:textStyle="normal" />
 
-                <EditText
-                    android:id="@+id/editTextTime4"
-                    android:layout_width="202dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Enter Time \n When Started"
-                    android:inputType="datetime|time"
-                    android:singleLine="false"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="20sp"
-                    android:textStyle="normal" />
             </LinearLayout>
 
             <View
@@ -179,7 +166,7 @@
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/JohnDereGreen"
+                android:backgroundTint="@color/JohnDeereGreen"
                 android:insetLeft="64dp"
                 android:insetRight="64dp"
                 android:text="Just Done"
@@ -204,7 +191,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="sans-serif"
-                    android:hint="Enter Time \n When Completed"
+                    android:hint="Enter Time When Completeded \n (Hour:Min Format) "
                     android:inputType="datetime|time"
                     android:selectAllOnFocus="false"
                     android:singleLine="false"
@@ -214,23 +201,6 @@
                     android:textSize="20sp"
                     android:textStyle="normal" />
 
-                <EditText
-                    android:id="@+id/editTextTime2"
-                    style="@style/Widget.AppCompat.EditText"
-                    android:layout_width="202dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:fontFamily="sans-serif"
-                    android:hint="Enter Time \n When Completed"
-                    android:inputType="datetime|time"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="false"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="20sp"
-                    android:textStyle="normal"
-                    android:typeface="normal" />
             </LinearLayout>
 
             <View
@@ -242,7 +212,7 @@
                 android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/JohnDereGreen"
+                android:backgroundTint="@color/JohnDeereGreen"
                 android:insetLeft="32dp"
                 android:insetRight="32dp"
                 android:text="Complete Task"
