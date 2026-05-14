@@ -55,12 +55,12 @@ public class CompleteTaskScreen extends AppCompatActivity {
                 int newTime = 0;
 
                 if(!taskJustDone) {
-                    endTime = endTimeTextViewHour.getText().toString() + " : " +  endTimeTextViewMin.getText().toString();
+                    endTime = endTimeTextViewHour.getText().toString();
                 }
                 Log.d("Start time", startTime + "");
                 Log.d("End time", endTime + "");
-                newTime = (getNums(endTimeTextViewMin.getText().toString()) + getNums(endTimeTextViewHour.getText().toString())*60)
-                        - (getNums(startTimeTextViewMin.getText().toString()) + getNums(startTimeTextViewHour.getText().toString())*60);
+                newTime = (getNums(endTimeTextViewHour.getText().toString())
+                        - getNums( startTimeTextViewHour.getText().toString()));
 
                 Log.d("task time", newTime + "");
                 displayTask.setTaskTime(newTime);

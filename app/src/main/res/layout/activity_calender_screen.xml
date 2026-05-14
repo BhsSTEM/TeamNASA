@@ -77,15 +77,13 @@
         android:adjustViewBounds="false"
         android:cropToPadding="false"
         android:scaleType="fitXY"
-        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="@+id/calendarView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/calendarView"
         app:layout_constraintTop_toTopOf="@+id/calendarView"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_launcher_background"
-        tools:visibility="invisible" />
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <Button
         android:id="@+id/backBtnCalendar"
@@ -94,6 +92,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:cursorVisible="true"
+        android:visibility="visible"
         app:iconTint="#FBFBFB"
         app:iconTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="@+id/calendarView"
@@ -101,8 +100,9 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/calendarView"
         app:layout_constraintTop_toTopOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.025"
-        app:strokeColor="#141313" />
+        app:layout_constraintVertical_bias="0.15"
+        app:strokeColor="#141313"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/forwardBtnCalendar2"
@@ -121,7 +121,7 @@
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="@+id/calendarView"
         app:layout_constraintTop_toTopOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintVertical_bias="0.15"
         app:strokeColor="@color/white"
         tools:visibility="visible" />
 

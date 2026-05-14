@@ -156,7 +156,7 @@ public class HomeScreen extends AppCompatActivity {
 
 
 
-        dataList = getTasksNearMe(taskFragments);
+        dataList = taskFragments;
         adapter = new HomeScreenAdapter(dataList);
         accordian.setAdapter(adapter);
 
