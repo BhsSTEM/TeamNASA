@@ -123,7 +123,7 @@ public class RegisterAccountPage extends AppCompatActivity {
         user.put("uid", unformattedUser.getUid());
         user.put("email", unformattedUser.getEmail());
         Log.d(TAG, "User created.");
-        db.collection("uzi1")
+        db.collection("teamdatabase")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

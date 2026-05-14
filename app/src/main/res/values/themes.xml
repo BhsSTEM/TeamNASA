@@ -5,5 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!-- or Theme.MaterialComponents.DayNight if using Material -->
+    </style>
+
     <style name="Theme.NASATaskMaster" parent="Base.Theme.NASATaskMaster" />
 </resources>

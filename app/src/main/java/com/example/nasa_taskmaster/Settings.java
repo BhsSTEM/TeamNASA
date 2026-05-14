@@ -1,0 +1,76 @@
+package com.example.nasa_taskmaster;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Switch;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
+
+public class Settings extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private Luqol q = new Luqol();
+    Button logoutButton;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    Switch LDSwitch;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings_activity);
+        //if (savedInstanceState == null) {
+        //    getSupportFragmentManager()
+        //            .beginTransaction()
+        //            .replace(R.id.settings, new SettingsFragment())
+        //            .commit();
+        //}
+        mAuth = FirebaseAuth.getInstance();
+        ActionBar actionBar = getSupportActionBar();
+        LDSwitch = findViewById(R.id.switch1);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        logoutButton = findViewById(R.id.button4);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                q.logout();
+                Intent intent = new Intent(Settings.this, Login_Page_V2_Fresh.class);
+                startActivity(intent);
+            }
+        });
+        LDSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onDarkModeToggled(true);
+            } else {
+                onDarkModeToggled(false);
+            }
+        });
+    }
+
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.root_preferences, rootKey);
+        }
+    }
+    public void onDarkModeToggled(boolean isDarkMode) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putBoolean("dark_mode", isDarkMode).apply();
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+}

@@ -2,15 +2,35 @@ package com.example.nasa_taskmaster;
 
 import static android.content.ContentValues.TAG;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Luqol {
+    private static FirebaseAuth mAuth;
     public ArrayList<String> processes = new ArrayList<>();
+    public Luqol() {
+        mAuth = FirebaseAuth.getInstance();
+    }
     public String log(String m) {
         Log.d(TAG, m);
         return m;
@@ -120,5 +140,10 @@ public class Luqol {
             }
         }
         return duplicates;
+    }
+    public void logout() {
+        mAuth.getInstance()
+                .signOut();
+        log("User has been logged in.");
     }
 }

@@ -2,10 +2,10 @@
 <resources>
     <color name="black">#FFFFFF </color> <!-- ONLY USE FOR ELEMENTS THAT ARE *ALWAYS* WHITE! -->
     <color name="white">#000000 </color> <!-- ONLY USE FOR ELEMENTS THAT ARE *ALWAYS* BLACK! -->
-    <color name="Black">#FF000000</color> <!-- Changes with theme. -->
-    <color name="White">#FFFFFFFF</color> <!-- Changes with theme. -->
-    <color name = "JohnDeereGreen"> #367C2B </color>
-    <color name = "JohnDeereYellow"> #FFDE00 </color>
+    <color name="Black">#FFFFFF </color> <!-- Changes with theme. -->
+    <color name="White">#000000 </color> <!-- Changes with theme. -->
+    <color name = "JohnDeereGreen"> #FFDE00 </color>
+    <color name = "JohnDeereYellow"> #367C2B </color>
     <color name = "AlertRed"> #FF0000 </color>
     <!-- Alert red should be used sparingly! -->
 </resources>
