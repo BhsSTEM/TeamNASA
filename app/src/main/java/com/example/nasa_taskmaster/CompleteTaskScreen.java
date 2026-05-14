@@ -41,7 +41,7 @@ public class CompleteTaskScreen extends AppCompatActivity {
         justDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                endTime = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE).toString();
+                endTime = LocalDate.now().format(DateTimeFormatter.ISO_DATE_TIME).toString();
                 taskJustDone = true;
 
             }

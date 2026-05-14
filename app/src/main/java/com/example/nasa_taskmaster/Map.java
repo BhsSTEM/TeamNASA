@@ -44,13 +44,9 @@ public class Map extends AppCompatActivity implements AdapterView.OnItemSelected
 
         if(locations.isEmpty())
         {
-            if(HomeScreen.user.getTasksList().size() > 0){
-                ArrayList<Task> taskArrayList = HomeScreen.user.getTasksList();
-                for(int i = 0; i < taskArrayList.size(); i++){
-                    Task task = taskArrayList.get(i);
-                    locations.add(new Locations(task.getTaskLocation(), task.getLongitude(), task.getLatitude()));
-                }
-            }
+           locations.add(new Locations("Home", 41.56, -90.48));
+
+
         }
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerViewXX, MainMapFragment.newInstance(false)).commit();
@@ -127,5 +123,8 @@ public class Map extends AppCompatActivity implements AdapterView.OnItemSelected
 
     public static void setLocations(ArrayList<Locations> newLocations) {
         locations = newLocations;
+    }
+    public static void addLocations(Locations newLocations) {
+        locations.add(newLocations);
     }
 }

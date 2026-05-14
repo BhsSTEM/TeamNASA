@@ -129,6 +129,7 @@
                 android:id="@+id/dueDateBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/JohnDeereGreen"
                 android:text="Set Due  Date" />
 
             <View
@@ -173,6 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:backgroundTint="@color/JohnDeereGreen"
                 android:text="Add Task"
                 android:textSize="16sp" />
 

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     static String dueDate = "None";
     static String newTaskStringName = "Enter Task Name";
+    static String newTaskStringDescript = "Enter Task Description";
     private static String[] locationNames = {};
     private static ArrayList<Locations> locationList;
     private static Locations selectedLocation = null;
@@ -45,6 +46,7 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
 
 
         locationList = Map.getLocations();
+        Log.d("location size", locationList.size() + "");
         if(locationList.isEmpty())
         {
             //so there is no null errors if the user currently has no locations
@@ -62,7 +64,6 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
         }
 
 
-
         EditText newTaskName = findViewById(R.id.taskName);
       EditText newTaskDescription = findViewById(R.id.taskDescript);
         Spinner spinner = findViewById(R.id.addLocationSpinner2);
@@ -72,6 +73,7 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
         spinner.setAdapter(adapter);
 
         newTaskName.setText(newTaskStringName);
+        newTaskDescription.setText(newTaskStringDescript);
 
         newTaskName.setOnKeyListener(new View.OnKeyListener() {
 
@@ -182,8 +184,8 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
 
     public static void clearTask(){
        dueDate = "None";
-       locationNames = new String[]{};
-        locationList = new ArrayList<>();
+       newTaskStringName = "Enter Task Name";
+       newTaskStringDescript = "Enter Task Description";
         selectedLocation = null;
         startRange = new int[3];
         endRange  = new int[3];

@@ -109,6 +109,9 @@ public class HomeScreen extends AppCompatActivity {
         }
 
         taskssList = user.getTasksFromCollection(dataBase.collection(userID), this);
+        if(Map.getLocations().size() == 0){
+            Map.addLocations(new Locations("Home", 41.56, -90.48));
+        }
 
 
 
