@@ -169,7 +169,11 @@
                 android:id="@+id/yearlyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Repeat Every Year" />
+                android:backgroundTint="@color/White"
+                android:text="Repeat Every Year"
+                android:textColor="@color/Black"
+                app:strokeColor="#000000"
+                app:strokeWidth="2dp" />
 
             <View
                 android:id="@+id/view32"
@@ -180,7 +184,11 @@
                 android:id="@+id/montlyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Repeat Each Month" />
+                android:backgroundTint="@color/White"
+                android:text="Repeat Each Month"
+                android:textColor="@color/Black"
+                app:strokeColor="#000000"
+                app:strokeWidth="2dp" />
 
             <View
                 android:id="@+id/view30"
@@ -191,7 +199,11 @@
                 android:id="@+id/weeklyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Repeat Each Week" />
+                android:backgroundTint="@color/White"
+                android:text="Repeat Each Week"
+                android:textColor="@color/Black"
+                app:strokeColor="#000000"
+                app:strokeWidth="2dp" />
 
             <View
                 android:id="@+id/view33"
@@ -202,6 +214,7 @@
                 android:id="@+id/backToAddTaskBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/JohnDeereGreen"
                 android:text="Back to Add Task Screen" />
 
         </LinearLayout>

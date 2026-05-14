@@ -166,12 +166,15 @@
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/JohnDeereGreen"
+                android:backgroundTint="@color/White"
                 android:insetLeft="64dp"
                 android:insetRight="64dp"
                 android:text="Just Done"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textColor="@color/Black"
+                android:textSize="20sp"
+                app:strokeColor="@color/Black"
+                app:strokeWidth="2dp" />
 
             <View
                 android:id="@+id/view6"
