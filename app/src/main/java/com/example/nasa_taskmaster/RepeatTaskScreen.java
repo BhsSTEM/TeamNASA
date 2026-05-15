@@ -9,6 +9,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -56,6 +57,13 @@ public class RepeatTaskScreen extends AppCompatActivity {
         weeklyBtn1.setVisibility(View.GONE);
         calendarView3.setVisibility(View.GONE);
         calendarView4.setVisibility(View.GONE);
+        findViewById(R.id.view25).setVisibility(View.GONE);
+        findViewById(R.id.view26).setVisibility(View.GONE);
+        findViewById(R.id.view29).setVisibility(View.GONE);
+        findViewById(R.id.repeatHeader3).setVisibility(View.GONE);
+        findViewById(R.id.repeatHeader).setVisibility(View.GONE);
+        findViewById(R.id.repeatHeader1).setVisibility(View.GONE);
+
 
         switchBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -66,9 +74,12 @@ public class RepeatTaskScreen extends AppCompatActivity {
                     weeklyBtn1.setVisibility(View.VISIBLE);
                     calendarView3.setVisibility(View.VISIBLE);
                     calendarView4.setVisibility(View.VISIBLE);
+                    findViewById(R.id.view25).setVisibility(View.VISIBLE);
+                    findViewById(R.id.view26).setVisibility(View.VISIBLE);
+                    findViewById(R.id.view29).setVisibility(View.VISIBLE);
                     findViewById(R.id.repeatHeader).setVisibility(View.VISIBLE);
                     findViewById(R.id.repeatHeader1).setVisibility(View.VISIBLE);
-                    findViewById(R.id.repeatHeader2).setVisibility(View.VISIBLE);
+                    findViewById(R.id.repeatHeader3).setVisibility(View.VISIBLE);
 
                     calendarView2.setVisibility(View.GONE);
                     findViewById(R.id.repeatHeader5).setVisibility(View.GONE);
@@ -80,9 +91,12 @@ public class RepeatTaskScreen extends AppCompatActivity {
                     weeklyBtn1.setVisibility(View.GONE);
                     calendarView3.setVisibility(View.GONE);
                     calendarView4.setVisibility(View.GONE);
+                    findViewById(R.id.view25).setVisibility(View.GONE);
+                    findViewById(R.id.view26).setVisibility(View.GONE);
+                    findViewById(R.id.view29).setVisibility(View.GONE);
                     findViewById(R.id.repeatHeader).setVisibility(View.GONE);
                     findViewById(R.id.repeatHeader1).setVisibility(View.GONE);
-                    findViewById(R.id.repeatHeader2).setVisibility(View.GONE);
+                    findViewById(R.id.repeatHeader3).setVisibility(View.GONE);
 
                     calendarView2.setVisibility(View.VISIBLE);
                     findViewById(R.id.repeatHeader5).setVisibility(View.VISIBLE);
@@ -96,6 +110,7 @@ public class RepeatTaskScreen extends AppCompatActivity {
                 startRange = new int[] {month, dayOfMonth, year};
                 endRange = new int[] {month, dayOfMonth, year};
                 amount = 0;
+                Log.d(" Calendar2 date: ", month + " - " + dayOfMonth + " - " + year);
             }
         });
 
@@ -104,6 +119,7 @@ public class RepeatTaskScreen extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 startRange = new int[] {month, dayOfMonth, year};
+                Log.d(" Calendar3 date: ", month + " - " + dayOfMonth + " - " + year);
             }
         });
 
@@ -111,6 +127,7 @@ public class RepeatTaskScreen extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 endRange = new int[] {month, dayOfMonth, year};
+                Log.d(" Calendar4 date: ", month + " - " + dayOfMonth + " - " + year);
             }
         });
 
@@ -137,21 +154,33 @@ public class RepeatTaskScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isweekly){
-                    int days = (int)(convertToDays(startRange) - convertToDays(endRange));
+                    Log.d("Start Range: ", startRange[0] + "- "+ startRange[1] + "- " + startRange[2]);
+                    Log.d("End Range: ", endRange[0] + "- "+ endRange[1] + "- " + endRange[2]);
+                    Log.d("Weekly: ", true  + "");
+                    Log.d("Monthly: ", false  + "");
+                    int days = (int)(convertToDays(endRange) - convertToDays(startRange));
                     int weeks = (int)(Math.floor(days/7.0));
                     amount = weeks;
+
                 }else if(isMonthly){
+                    Log.d("Start Range: ", startRange[0] + "- "+ startRange[1] + "- " + startRange[2]);
+                    Log.d("End Range: ", endRange[0] + "- "+ endRange[1] + "- " + endRange[2]);
+                    Log.d("Weekly: ", false + "");
+                    Log.d("Monthly: ", true  + "");
                     LocalDate startLocal1 = LocalDate.of(startRange[2], startRange[0] , startRange[1]);
                     LocalDate endLocal1 = LocalDate.of(startRange[2], startRange[0] , startRange[1]);
-
 
                     int days = (int)(startLocal1.datesUntil(endLocal1).count());
                     int weeks = (int)(Math.floor(days/7.0));
                     amount = weeks;
+
                 }else{
                     amount = 0;
                 }
                 if(startRange != null && endRange != null) {
+                    Log.d("Start Range: ", startRange[0] + " - "+ startRange[1] + " - " + startRange[2]);
+                    Log.d("End Range: ", endRange[0] + " - "+ endRange[1] + " - " + endRange[2]);
+                    Log.d("Amount: ", amount + "");
                     AddTaskScreen.setRange(startRange, endRange, amount);
                     Intent intent = new Intent(RepeatTaskScreen.this, AddTaskScreen.class);
                     startActivity(intent);
@@ -168,7 +197,8 @@ public class RepeatTaskScreen extends AppCompatActivity {
     }
 
     private long convertToDays(int[] date){
-        LocalDate localDate = LocalDate.of(date[2], date[0], date[1]);
+        Log.d("input date: ", date[0] + " - "+ date[1] + " - " + date[2]);
+        LocalDate localDate = LocalDate.of(date[2], date[0]+1, date[1] );
         return (int)(localDate.toEpochDay());
     }
 }

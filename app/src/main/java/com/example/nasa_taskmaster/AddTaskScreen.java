@@ -101,20 +101,13 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
             public void onClick(View v){
 
                 Log.d("DEBUG_ADD_TASK_BTN", "button works" );
-                Intent intent = new Intent(AddTaskScreen.this, HomeScreen.class);
-                intent.putExtra("NEW_TASK_NAME", newTaskName.getText().toString());
-                intent.putExtra("NEW_TASK_DESCRIPTION", newTaskDescription.getText().toString());
-                intent.putExtra("NEW_TASK_LOCATION", "");
-
-
-
 
                 Intent intent1 = new Intent(AddTaskScreen.this, HomeScreen.class);
                 String  taskName = newTaskName.getText().toString();
                 String  taskDescription = newTaskDescription.getText().toString();
-                String  taskLocationName = "";
-                double longitude = 0;
-                double latitude = 0;
+                String  taskLocationName = selectedLocation.getName();
+                double longitude = selectedLocation.getLon();
+                double latitude = selectedLocation.getLat();
                 String  taskDeadLine = dueDate;
                 LocalDate localDate = LocalDate.now();
                 String  taskstartDate = "";
@@ -202,7 +195,9 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
             int days = (int)(convertToDays(start) - convertToDays(end));
             for(int i = 0; i < amount; i++){
                 Task newTask = task;
-                newTask.setTaskDueDate(convertLocalToArray(LocalDate.of(start[2], start[0], start[1]).plusDays(days * (i/amount))));
+                int[] localDateArray = convertLocalToArray(LocalDate.of(start[2], start[0], start[1]).plusDays(days * (i/amount)));
+                newTask.setTaskDueDate(localDateArray);
+                Log.d("Gett Task Deadline: ", newTask.getTaskDeadline());
                 HomeScreen.addTasktoList(newTask);
                 HomeScreen.user.addTask(newTask);
             }
@@ -212,14 +207,14 @@ public class AddTaskScreen extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private long convertToDays(int[] date){
-        LocalDate localDate = LocalDate.of(date[2], date[0], date[1]);
+        LocalDate localDate = LocalDate.of(date[2], date[0]+1, date[1]);
         return (int)(localDate.toEpochDay());
     }
 
     public int[] convertLocalToArray(LocalDate localDate){
         int[] out = new int[3];
-        out[0] = localDate.getMonth().getValue();
-        out[1] = localDate.getDayOfMonth();
+        out[0] = localDate.getMonth().getValue() + 1;
+        out[1] = localDate.getDayOfMonth() + 1;
         out[2] = localDate.getYear();
         return out;
     }
