@@ -22,8 +22,10 @@ public class Settings extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Luqol q = new Luqol();
     Button logoutButton;
+    Button changePassword;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch LDSwitch;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,13 @@ public class Settings extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         ActionBar actionBar = getSupportActionBar();
         LDSwitch = findViewById(R.id.switch1);
+        changePassword = findViewById(R.id.button77);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.this, ChangePassword.class);
+                startActivity(intent);
+            }
+        });
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
